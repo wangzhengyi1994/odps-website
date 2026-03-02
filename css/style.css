@@ -61,6 +61,7 @@ img { max-width: 100%; display: block; }
 .hero::before { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1" fill="rgba(255,255,255,.08)"/><circle cx="70" cy="20" r="1.5" fill="rgba(255,255,255,.06)"/><circle cx="50" cy="70" r="1" fill="rgba(255,255,255,.05)"/><circle cx="85" cy="60" r="1.2" fill="rgba(255,255,255,.07)"/></svg>') repeat; opacity: .6; }
 .hero .container { position: relative; z-index: 1; }
 .hero-content { max-width: 640px; }
+.hero-content-wide { max-width: 780px; }
 .hero-tag { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,.15); border-radius: 20px; font-size: 14px; margin-bottom: 24px; backdrop-filter: blur(4px); }
 .hero h1 { font-size: 48px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
 .hero p { font-size: 18px; line-height: 1.8; opacity: .9; margin-bottom: 36px; }
@@ -175,6 +176,46 @@ img { max-width: 100%; display: block; }
 .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+/* ========== Algorithm Grid ========== */
+.algo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.algo-card { padding: 32px 24px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); text-align: center; transition: transform .3s, box-shadow .3s; }
+.algo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.algo-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--primary-1), var(--primary-2)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); }
+.algo-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+.algo-card p { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
+
+/* ========== Algorithm Page ========== */
+.algo-demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.algo-demo-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; transition: transform .3s, box-shadow .3s; }
+.algo-demo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.algo-demo-preview { height: 220px; background: linear-gradient(135deg, var(--primary-10), var(--primary-8)); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.6); font-size: 14px; position: relative; overflow: hidden; }
+.algo-demo-preview::before { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="20" width="30" height="25" rx="2" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/><rect x="55" y="35" width="20" height="30" rx="2" fill="none" stroke="rgba(100,200,255,.3)" stroke-width="1"/><circle cx="70" cy="15" r="8" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1"/></svg>') center/cover no-repeat; opacity: .5; }
+.algo-demo-info { padding: 24px; }
+.algo-demo-info h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.algo-demo-info p { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; }
+.algo-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.algo-tag { display: inline-block; padding: 4px 12px; background: var(--primary-1); color: var(--primary); font-size: 12px; border-radius: 4px; }
+.algo-scene-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.algo-scene-card { padding: 28px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
+.algo-scene-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.algo-scene-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--primary-1), var(--primary-2)); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--primary); }
+.algo-scene-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.algo-scene-card p { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+.algo-flow { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.algo-flow-step { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); min-width: 160px; text-align: center; }
+.algo-flow-step .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
+.algo-flow-step h5 { font-size: 15px; font-weight: 600; }
+.algo-flow-step p { font-size: 13px; color: var(--text-sub); }
+.algo-flow-arrow { color: var(--primary); font-size: 24px; font-weight: 700; }
+
+/* ========== Trust Page ========== */
+.trust-highlight { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.trust-card { padding: 32px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); text-align: center; transition: transform .3s, box-shadow .3s; }
+.trust-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.trust-card-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--primary-1), var(--primary-2)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); }
+.trust-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+.trust-card p { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
+
 /* ========== About Culture ========== */
 .culture-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .culture-card { padding: 32px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); }
@@ -203,13 +244,17 @@ img { max-width: 100%; display: block; }
   .feature-row, .feature-row.reverse { flex-direction: column; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
+  .algo-grid { grid-template-columns: repeat(2, 1fr); }
+  .algo-demo-grid { grid-template-columns: 1fr; }
+  .algo-scene-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-highlight { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
   .hero h1 { font-size: 32px; }
   .hero { min-height: 480px; }
   .section-title h2 { font-size: 28px; }
-  .card-grid, .case-grid, .solution-grid, .service-grid { grid-template-columns: 1fr; }
+  .card-grid, .case-grid, .solution-grid, .service-grid, .algo-grid, .algo-demo-grid, .algo-scene-grid, .trust-highlight { grid-template-columns: 1fr; }
   .cert-grid { grid-template-columns: repeat(2, 1fr); }
   .partner-grid { grid-template-columns: repeat(2, 1fr); }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
