@@ -184,6 +184,15 @@ img { max-width: 100%; display: block; }
 .algo-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
 .algo-card p { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
 
+/* ========== Algorithm Showcase ========== */
+.algo-showcase { display: flex; flex-direction: column; gap: 32px; }
+.algo-showcase-item { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
+.algo-showcase-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.algo-showcase-item img { width: 100%; height: auto; display: block; }
+.algo-showcase-label { padding: 16px 24px; background: #fff; display: flex; align-items: center; justify-content: space-between; }
+.algo-showcase-label h4 { font-size: 16px; font-weight: 600; }
+.algo-showcase-label .algo-scene-tag { display: inline-block; padding: 4px 14px; background: var(--primary-1); color: var(--primary); font-size: 13px; border-radius: 4px; font-weight: 500; }
+
 /* ========== Algorithm Table ========== */
 .algo-table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
 .algo-table { width: 100%; border-collapse: collapse; min-width: 900px; }
