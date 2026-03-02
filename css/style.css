@@ -100,9 +100,9 @@ img { max-width: 100%; display: block; }
 
 /* ========== Solution Grid ========== */
 .solution-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.solution-item { text-align: center; padding: 36px 20px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); transition: transform .3s, box-shadow .3s, border-color .3s; cursor: pointer; }
+.solution-item { text-align: center; padding: 16px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); transition: transform .3s, box-shadow .3s, border-color .3s; cursor: pointer; overflow: hidden; }
 .solution-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--primary-light); }
-.solution-item .icon { font-size: 40px; margin-bottom: 16px; }
+.solution-img { width: 100%; height: 140px; background-size: cover; background-position: center; border-radius: 8px; margin-bottom: 16px; }
 .solution-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
 .solution-item p { font-size: 13px; color: var(--text-sub); }
 
@@ -114,7 +114,7 @@ img { max-width: 100%; display: block; }
 /* ========== Cert Grid ========== */
 .cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .cert-item { text-align: center; padding: 24px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); }
-.cert-item .icon { font-size: 36px; margin-bottom: 12px; color: var(--primary); }
+.cert-img { width: 100%; height: 160px; background-size: contain; background-position: center; background-repeat: no-repeat; margin-bottom: 12px; border-radius: 4px; }
 .cert-item span { font-size: 13px; color: var(--text-sub); }
 
 /* ========== CTA ========== */
@@ -178,6 +178,7 @@ img { max-width: 100%; display: block; }
 /* ========== About Culture ========== */
 .culture-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .culture-card { padding: 32px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); }
+.culture-icon { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, var(--primary-1), var(--primary-2)); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--primary); }
 .culture-card h4 { font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
 .culture-card p { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
 
