@@ -235,7 +235,7 @@ img { max-width: 100%; display: block; }
 .algo-flow-arrow { color: var(--primary); font-size: 24px; font-weight: 700; }
 
 /* ========== Trust Page ========== */
-.trust-highlight { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.trust-highlight { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; }
 .trust-card { padding: 32px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); text-align: center; transition: transform .3s, box-shadow .3s; }
 .trust-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .trust-card-icon { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--primary-1), var(--primary-2)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); }
@@ -273,7 +273,6 @@ img { max-width: 100%; display: block; }
   .algo-grid { grid-template-columns: repeat(2, 1fr); }
   .algo-demo-grid { grid-template-columns: 1fr; }
   .algo-scene-grid { grid-template-columns: repeat(2, 1fr); }
-  .trust-highlight { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
