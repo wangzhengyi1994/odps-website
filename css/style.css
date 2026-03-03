@@ -109,8 +109,9 @@ img { max-width: 100%; display: block; }
 
 /* ========== Partners ========== */
 .partner-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-.partner-item { display: flex; align-items: center; justify-content: center; padding: 24px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); min-height: 80px; font-size: 14px; color: var(--text-sub); transition: border-color .3s; }
-.partner-item:hover { border-color: var(--primary-light); }
+.partner-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px 16px; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); min-height: 100px; font-size: 13px; color: var(--text-sub); font-weight: 500; transition: border-color .3s, box-shadow .3s; }
+.partner-item:hover { border-color: var(--primary-light); box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+.partner-item .partner-logo { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--primary-1); border-radius: 10px; color: var(--primary); flex-shrink: 0; }
 
 /* ========== Cert Grid ========== */
 .cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -189,9 +190,9 @@ img { max-width: 100%; display: block; }
 .algo-showcase-item { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
 .algo-showcase-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 .algo-showcase-item img { width: 100%; height: auto; display: block; }
-.algo-showcase-label { padding: 16px 24px; background: #fff; display: flex; align-items: center; justify-content: space-between; }
-.algo-showcase-label h4 { font-size: 16px; font-weight: 600; }
-.algo-showcase-label .algo-scene-tag { display: inline-block; padding: 4px 14px; background: var(--primary-1); color: var(--primary); font-size: 13px; border-radius: 4px; font-weight: 500; }
+.algo-showcase-label { padding: 16px 24px; background: var(--primary-9); display: flex; align-items: center; justify-content: space-between; }
+.algo-showcase-label h4 { font-size: 16px; font-weight: 600; color: #fff; }
+.algo-showcase-label .algo-scene-tag { display: inline-block; padding: 4px 14px; background: rgba(255,255,255,.15); color: #fff; font-size: 13px; border-radius: 4px; font-weight: 500; }
 
 /* ========== Algorithm Table ========== */
 .algo-table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
