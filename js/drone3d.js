@@ -200,87 +200,7 @@
     depthWrite: false,
   });
 
-  /* ========== 实体着色器 ========== */
-  var solidShaderMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uProgress: { value: 0 },
-      uColor: { value: new THREE.Color(CONFIG.wireColor) },
-      uEdgeColor: { value: new THREE.Color(CONFIG.edgeColor) },
-      uSliceCount: { value: CONFIG.sliceCount },
-      uSliceGap: { value: CONFIG.sliceGap },
-      uModelHeight: { value: 1.0 },
-      uModelMin: { value: 0.0 },
-      uHover: { value: 0.0 },
-    },
-    vertexShader: [
-      'uniform float uTime;',
-      'uniform float uProgress;',
-      'uniform float uSliceCount;',
-      'uniform float uSliceGap;',
-      'uniform float uModelHeight;',
-      'uniform float uModelMin;',
-      'uniform float uHover;',
-      '',
-      'varying vec3 vPosition;',
-      'varying vec3 vNormal;',
-      '',
-      'void main() {',
-      '  vPosition = position;',
-      '  vNormal = normal;',
-      '',
-      '  float normalized = (position.y - uModelMin) / uModelHeight;',
-      '  float sliceId = floor(normalized * uSliceCount);',
-      '  float offset = (sliceId - uSliceCount * 0.5) * uSliceGap * (1.0 - uProgress);',
-      '',
-      '  vec3 pos = position;',
-      '  pos.y += offset;',
-      '  float jitter = sin(sliceId * 3.14159 + uTime * 2.0) * 0.5 * (1.0 - uProgress);',
-      '  pos.x += jitter;',
-      '  pos.z += jitter * 0.5;',
-      '  pos *= 1.0 + uHover * 0.02;',
-      '',
-      '  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);',
-      '}',
-    ].join('\n'),
-    fragmentShader: [
-      'uniform float uTime;',
-      'uniform float uProgress;',
-      'uniform vec3 uColor;',
-      'uniform vec3 uEdgeColor;',
-      'uniform float uSliceCount;',
-      'uniform float uModelHeight;',
-      'uniform float uModelMin;',
-      'uniform float uHover;',
-      '',
-      'varying vec3 vPosition;',
-      'varying vec3 vNormal;',
-      '',
-      'void main() {',
-      '  float normalized = (vPosition.y - uModelMin) / uModelHeight;',
-      '  float slicePhase = fract(normalized * uSliceCount);',
-      '  float edgeDist = min(slicePhase, 1.0 - slicePhase);',
-      '  float edgeGlow = smoothstep(0.05, 0.0, edgeDist) * (1.0 - uProgress);',
-      '',
-      '  vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));',
-      '  float diffuse = max(dot(normalize(vNormal), lightDir), 0.0) * 0.5 + 0.5;',
-      '',
-      '  vec3 baseColor = mix(uColor, vec3(0.82, 0.89, 1.0), normalized) * diffuse * 0.2;',
-      '  vec3 finalColor = mix(baseColor, uEdgeColor * 0.5, edgeGlow);',
-      '  finalColor += vec3(0.1, 0.12, 0.18) * uHover;',
-      '',
-      '  float alpha = mix(0.06, 0.15, uProgress);',
-      '  alpha += edgeGlow * 0.12;',
-      '  alpha += uHover * 0.05;',
-      '',
-      '  gl_FragColor = vec4(finalColor, alpha);',
-      '}',
-    ].join('\n'),
-    transparent: true,
-    wireframe: false,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-  });
+  /* ========== (实体着色器已移除 - 仅保留线框) ========== */
 
   /* ========== 星河粒子系统 ========== */
   function createStarField(count, spread, baseSize, color, speed) {
@@ -379,6 +299,10 @@
   var droneGroup = new THREE.Group();
   scene.add(droneGroup);
 
+  // 螺旋桨组 - 用于旋转动画
+  var propellerGroups = [];   // [{group, pivotY}]
+  var PROP_XRANGE_THRESHOLD = 80; // OBJ 原始坐标中 X 跨度 > 80 的视为螺旋桨
+
   var modelLoaded = false;
   var animStartTime = 0;
 
@@ -405,25 +329,88 @@
 
       wireShaderMaterial.uniforms.uModelHeight.value = modelHeight;
       wireShaderMaterial.uniforms.uModelMin.value = modelMin;
-      solidShaderMaterial.uniforms.uModelHeight.value = modelHeight;
-      solidShaderMaterial.uniforms.uModelMin.value = modelMin;
+
+      // 第一遍: 收集所有 mesh 并判断是否为螺旋桨
+      var bodyMeshes = [];
+      var propMeshes = [];
 
       obj.traverse(function (child) {
         if (child.isMesh) {
           child.geometry.computeVertexNormals();
+          child.geometry.computeBoundingBox();
+          var bb = child.geometry.boundingBox;
+          var xRange = bb.max.x - bb.min.x;
 
+          if (xRange > PROP_XRANGE_THRESHOLD) {
+            propMeshes.push(child);
+          } else {
+            bodyMeshes.push(child);
+          }
+        }
+      });
+
+      // 添加机身部件 (仅线框 + 边缘线，不再有实体层)
+      bodyMeshes.forEach(function (child) {
+        var wireMesh = new THREE.Mesh(child.geometry, wireShaderMaterial);
+        wireMesh.position.copy(child.position);
+        wireMesh.rotation.copy(child.rotation);
+        wireMesh.scale.copy(child.scale);
+        droneGroup.add(wireMesh);
+
+        var edges = new THREE.EdgesGeometry(child.geometry, 25);
+        var edgeMat = new THREE.LineBasicMaterial({
+          color: CONFIG.glowColor,
+          transparent: true,
+          opacity: 0.3,
+        });
+        var edgeLine = new THREE.LineSegments(edges, edgeMat);
+        edgeLine.position.copy(child.position);
+        edgeLine.rotation.copy(child.rotation);
+        edgeLine.scale.copy(child.scale);
+        droneGroup.add(edgeLine);
+      });
+
+      // 按 Z 坐标聚类螺旋桨到不同旋翼组
+      // OBJ 中有前后两组旋翼 (Z≈-133 和 Z≈-36)
+      var propClusters = {};
+      propMeshes.forEach(function (child) {
+        var bb = child.geometry.boundingBox;
+        var cz = (bb.max.z + bb.min.z) / 2;
+        // 量化到整数 10 以聚类
+        var clusterKey = Math.round(cz / 10) * 10;
+        if (!propClusters[clusterKey]) {
+          propClusters[clusterKey] = [];
+        }
+        propClusters[clusterKey].push(child);
+      });
+
+      // 为每个旋翼组创建一个带 pivot 的 Group
+      Object.keys(propClusters).forEach(function (key) {
+        var cluster = propClusters[key];
+
+        // 计算该组所有顶点的中心 (作为旋转轴心)
+        var clusterBox = new THREE.Box3();
+        cluster.forEach(function (child) {
+          var bb = child.geometry.boundingBox.clone();
+          bb.applyMatrix4(child.matrixWorld);
+          clusterBox.union(bb);
+        });
+        var pivotCenter = clusterBox.getCenter(new THREE.Vector3());
+
+        // 创建 pivot group
+        var pivot = new THREE.Group();
+        pivot.position.copy(pivotCenter);
+
+        cluster.forEach(function (child) {
+          // 线框
           var wireMesh = new THREE.Mesh(child.geometry, wireShaderMaterial);
           wireMesh.position.copy(child.position);
+          wireMesh.position.sub(pivotCenter); // 相对于 pivot 中心
           wireMesh.rotation.copy(child.rotation);
           wireMesh.scale.copy(child.scale);
-          droneGroup.add(wireMesh);
+          pivot.add(wireMesh);
 
-          var solidMesh = new THREE.Mesh(child.geometry, solidShaderMaterial);
-          solidMesh.position.copy(child.position);
-          solidMesh.rotation.copy(child.rotation);
-          solidMesh.scale.copy(child.scale);
-          droneGroup.add(solidMesh);
-
+          // 边缘线
           var edges = new THREE.EdgesGeometry(child.geometry, 25);
           var edgeMat = new THREE.LineBasicMaterial({
             color: CONFIG.glowColor,
@@ -432,10 +419,14 @@
           });
           var edgeLine = new THREE.LineSegments(edges, edgeMat);
           edgeLine.position.copy(child.position);
+          edgeLine.position.sub(pivotCenter);
           edgeLine.rotation.copy(child.rotation);
           edgeLine.scale.copy(child.scale);
-          droneGroup.add(edgeLine);
-        }
+          pivot.add(edgeLine);
+        });
+
+        droneGroup.add(pivot);
+        propellerGroups.push({ group: pivot, speed: 0.15 + Math.random() * 0.03 });
       });
 
       droneGroup.scale.copy(obj.scale);
@@ -525,9 +516,11 @@
       wireShaderMaterial.uniforms.uProgress.value = progress;
       wireShaderMaterial.uniforms.uTime.value = now;
       wireShaderMaterial.uniforms.uHover.value = hoverValue;
-      solidShaderMaterial.uniforms.uProgress.value = progress;
-      solidShaderMaterial.uniforms.uTime.value = now;
-      solidShaderMaterial.uniforms.uHover.value = hoverValue;
+
+      // 螺旋桨旋转 (Y 轴)
+      propellerGroups.forEach(function (pg) {
+        pg.group.rotation.y += pg.speed;
+      });
 
       // 自动旋转
       droneGroup.rotation.y += CONFIG.autoRotateSpeed;
@@ -543,8 +536,8 @@
       droneGroup.position.x = getDroneOffsetX();
       droneGroup.position.y = Math.sin(now * 0.6) * 1.5;
 
-      // 边缘线
-      droneGroup.children.forEach(function (child) {
+      // 边缘线 (包括嵌套在螺旋桨组内的)
+      droneGroup.traverse(function (child) {
         if (child.isLineSegments) {
           child.material.opacity = 0.12 + progress * 0.2 + hoverValue * 0.15;
         }
