@@ -134,7 +134,7 @@ img { max-width: 100%; display: block; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-light); }
 
 /* ========== Page Banner (子页面) ========== */
-.page-banner { min-height: 600px; display: flex; align-items: center; padding: 80px 0; background-size: cover; background-position: center right; background-repeat: no-repeat; text-align: left; }
+.page-banner { height: 600px; display: flex; align-items: center; padding-top: 72px; background-size: cover; background-position: center right; background-repeat: no-repeat; text-align: left; }
 .page-banner h1 { font-size: 44px; font-weight: 700; margin-bottom: 12px; color: #1e293b; }
 .page-banner p { font-size: 17px; max-width: 500px; margin: 0; color: #64748b; }
 
@@ -293,6 +293,6 @@ img { max-width: 100%; display: block; }
   .dropdown { position: static; transform: none; box-shadow: none; border: none; padding: 0 0 0 16px; opacity: 1; visibility: visible; pointer-events: auto; }
   .nav-item:hover .dropdown { transform: none; }
   .hero-btns { flex-direction: column; }
-  .page-banner { min-height: 400px; padding: 100px 0 60px; }
+  .page-banner { height: 400px; padding-top: 72px; }
   .page-banner h1 { font-size: 28px; }
 }
