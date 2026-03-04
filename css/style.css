@@ -134,9 +134,9 @@ img { max-width: 100%; display: block; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-light); }
 
 /* ========== Page Banner (子页面) ========== */
-.page-banner { padding: 180px 0 80px; background-size: cover; background-position: center; background-repeat: no-repeat; color: var(--text); text-align: left; }
-.page-banner h1 { font-size: 44px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
-.page-banner p { font-size: 17px; opacity: .7; max-width: 500px; margin: 0; color: var(--text-sub); }
+.page-banner { padding: 180px 0 80px; background-size: cover; background-position: center right; background-repeat: no-repeat; text-align: left; }
+.page-banner h1 { font-size: 44px; font-weight: 700; margin-bottom: 12px; color: #1e293b; }
+.page-banner p { font-size: 17px; max-width: 500px; margin: 0; color: #64748b; }
 
 /* ========== Feature Row ========== */
 .feature-row { display: flex; align-items: center; gap: 60px; padding: 60px 0; }
