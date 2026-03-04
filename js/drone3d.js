@@ -33,9 +33,10 @@
   var canvas = document.getElementById('drone-3d-canvas');
   if (!canvas) return;
 
-  var container = canvas.parentElement;
-  var width = container.clientWidth;
-  var height = container.clientHeight;
+  // container 用 hero section，因为 canvas-wrap 是 absolute 定位，自身尺寸依赖父级
+  var container = canvas.closest('.hero-3d') || canvas.parentElement;
+  var width = container.clientWidth || window.innerWidth;
+  var height = container.clientHeight || 600;
 
   var renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -570,8 +571,8 @@
 
   /* ========== 响应式 ========== */
   function onResize() {
-    width = container.clientWidth;
-    height = container.clientHeight;
+    width = container.clientWidth || window.innerWidth;
+    height = container.clientHeight || 600;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
