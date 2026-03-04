@@ -1,40 +1,39 @@
 /**
  * 奥德帕斯首页 3D 无人机 Banner
  * 线框切割组装动画 + 粒子效果
+ * 参考科技风格：青蓝色线框 + 黑色背景
  * 基于 Three.js 实现
  */
 (function () {
   'use strict';
 
-  // 确保 THREE 已加载
   if (typeof THREE === 'undefined') return;
 
   /* ========== 配置 ========== */
   const CONFIG = {
     // 切割动画
-    sliceDuration: 2.5,       // 切割组装动画时长(秒)
-    sliceAxis: 'y',           // 切割轴
-    sliceGap: 2.0,            // 切割层间距
-    sliceCount: 30,           // 切割层数
+    sliceDuration: 2.5,
+    sliceGap: 2.0,
+    sliceCount: 30,
 
     // 粒子
-    particleCount: 2000,
-    particleSize: 1.5,
-    particleSpread: 80,
+    particleCount: 1500,
+    particleSize: 1.2,
+    particleSpread: 100,
 
-    // 颜色
-    wireColor: 0x183BFF,       // 主色 --primary-6
-    wireColorSub: 0x6B7FFF,    // 浅色
-    edgeColor: 0x00D4FF,       // 切割边缘发光色
-    particleColor: 0x183BFF,
-    bgColor: 0x0a0e27,         // 深色背景
+    // 科幻配色 - 青蓝色调
+    wireColor: 0x00e5ff,        // 青色 - 主线框色
+    wireColorSub: 0x40c4ff,     // 浅蓝色
+    edgeColor: 0x00bcd4,        // 切割边缘色
+    glowColor: 0x0091ea,        // 深蓝发光
+    particleColor: 0x00e5ff,    // 粒子青色
 
     // 相机
-    cameraFov: 45,
-    cameraZ: 120,
+    cameraFov: 40,
+    cameraZ: 100,
 
     // 旋转
-    autoRotateSpeed: 0.003,
+    autoRotateSpeed: 0.002,
   };
 
   /* ========== 场景初始化 ========== */
@@ -49,47 +48,58 @@
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true,
-    alpha: true,
+    alpha: false,
   });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
+  renderer.setClearColor(0x000000, 1);  // 纯黑背景
 
   // 场景
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);  // 纯黑
 
-  // 相机
+  // 轻微雾效增加深度感
+  scene.fog = new THREE.FogExp2(0x000000, 0.003);
+
+  // 相机 - Y=0 确保垂直居中
   const camera = new THREE.PerspectiveCamera(CONFIG.cameraFov, width / height, 0.1, 1000);
-  camera.position.set(0, 10, CONFIG.cameraZ);
+  camera.position.set(0, 0, CONFIG.cameraZ);
   camera.lookAt(0, 0, 0);
 
-  // 光源
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+  // 光源 - 青蓝色调光照
+  const ambientLight = new THREE.AmbientLight(0x0a1628, 0.5);
   scene.add(ambientLight);
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  dirLight.position.set(50, 50, 50);
+  // 主方向光 - 冷色调
+  const dirLight = new THREE.DirectionalLight(0x40c4ff, 0.6);
+  dirLight.position.set(30, 30, 50);
   scene.add(dirLight);
 
-  const pointLight = new THREE.PointLight(CONFIG.wireColor, 1.5, 200);
-  pointLight.position.set(-30, 20, 40);
-  scene.add(pointLight);
+  // 青色点光源 - 从右上方照射
+  const pointLight1 = new THREE.PointLight(0x00e5ff, 2.0, 250);
+  pointLight1.position.set(40, 20, 40);
+  scene.add(pointLight1);
 
-  const pointLight2 = new THREE.PointLight(CONFIG.edgeColor, 1.0, 200);
-  pointLight2.position.set(30, -10, 30);
+  // 深蓝点光源 - 从左下方
+  const pointLight2 = new THREE.PointLight(0x0091ea, 1.5, 200);
+  pointLight2.position.set(-30, -15, 30);
   scene.add(pointLight2);
+
+  // 背光 - 微弱轮廓光
+  const backLight = new THREE.PointLight(0x00bcd4, 0.8, 150);
+  backLight.position.set(0, 0, -40);
+  scene.add(backLight);
 
   /* ========== 自定义着色器材质 ========== */
 
-  // 线框着色器 - 带切割面发光效果
+  // 线框着色器
   const wireShaderMaterial = new THREE.ShaderMaterial({
     uniforms: {
       uTime: { value: 0 },
-      uProgress: { value: 0 },        // 0 = 完全切开, 1 = 完全合拢
+      uProgress: { value: 0 },
       uColor: { value: new THREE.Color(CONFIG.wireColor) },
       uColorSub: { value: new THREE.Color(CONFIG.wireColorSub) },
       uEdgeColor: { value: new THREE.Color(CONFIG.edgeColor) },
-      uSliceAxis: { value: 1 },        // 0=x, 1=y, 2=z
       uSliceCount: { value: CONFIG.sliceCount },
       uSliceGap: { value: CONFIG.sliceGap },
       uModelHeight: { value: 1.0 },
@@ -102,34 +112,33 @@
       uniform float uSliceGap;
       uniform float uModelHeight;
       uniform float uModelMin;
-      uniform int uSliceAxis;
 
       varying vec3 vPosition;
       varying vec3 vNormal;
+      varying vec3 vWorldPosition;
       varying float vSliceId;
 
       void main() {
         vPosition = position;
         vNormal = normal;
 
-        // 计算归一化位置 (0~1)
         float axisVal = position.y;
         float normalized = (axisVal - uModelMin) / uModelHeight;
-
-        // 计算所在切片ID
         float sliceId = floor(normalized * uSliceCount);
         vSliceId = sliceId;
 
-        // 切割偏移: 每片按ID偏移，进度控制
         float offset = (sliceId - uSliceCount * 0.5) * uSliceGap * (1.0 - uProgress);
 
         vec3 pos = position;
         pos.y += offset;
 
-        // 轻微的随机抖动
+        // 切割抖动
         float jitter = sin(sliceId * 3.14159 + uTime * 2.0) * 0.5 * (1.0 - uProgress);
         pos.x += jitter;
         pos.z += jitter * 0.5;
+
+        vec4 worldPos = modelMatrix * vec4(pos, 1.0);
+        vWorldPosition = worldPos.xyz;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
@@ -146,38 +155,42 @@
 
       varying vec3 vPosition;
       varying vec3 vNormal;
+      varying vec3 vWorldPosition;
       varying float vSliceId;
 
       void main() {
-        // 归一化位置
         float normalized = (vPosition.y - uModelMin) / uModelHeight;
 
-        // 切片边缘检测
+        // 切片边缘发光
         float slicePhase = fract(normalized * uSliceCount);
         float edgeDist = min(slicePhase, 1.0 - slicePhase);
         float edgeGlow = smoothstep(0.05, 0.0, edgeDist) * (1.0 - uProgress);
 
-        // 基础颜色混合
-        float gradient = normalized;
-        vec3 baseColor = mix(uColor, uColorSub, gradient);
+        // 渐变混色 - 从底部青色到顶部浅蓝
+        vec3 baseColor = mix(uColor, uColorSub, normalized);
 
-        // 边缘发光
-        vec3 finalColor = mix(baseColor, uEdgeColor, edgeGlow * 0.8);
+        // 切割边缘高亮
+        vec3 finalColor = mix(baseColor, uEdgeColor * 1.5, edgeGlow * 0.8);
 
-        // 菲涅尔边缘光
-        vec3 viewDir = normalize(cameraPosition - vPosition);
+        // 菲涅尔轮廓光
+        vec3 viewDir = normalize(cameraPosition - vWorldPosition);
         float fresnel = 1.0 - abs(dot(normalize(vNormal), viewDir));
-        fresnel = pow(fresnel, 3.0);
-        finalColor += uEdgeColor * fresnel * 0.3;
+        fresnel = pow(fresnel, 2.5);
+        finalColor += vec3(0.0, 0.9, 1.0) * fresnel * 0.4;
 
-        // 整体脉冲
-        float pulse = 0.9 + 0.1 * sin(uTime * 2.0 + normalized * 6.28);
+        // 能量脉冲扫描
+        float scanLine = sin(normalized * 40.0 - uTime * 3.0) * 0.5 + 0.5;
+        scanLine = pow(scanLine, 8.0) * 0.3;
+        finalColor += vec3(0.0, 1.0, 1.0) * scanLine * uProgress;
+
+        // 整体呼吸
+        float pulse = 0.92 + 0.08 * sin(uTime * 1.5 + normalized * 6.28);
         finalColor *= pulse;
 
-        // 透明度: 合拢后更实，切开时半透
-        float alpha = mix(0.6, 0.85, uProgress);
+        // 透明度
+        float alpha = mix(0.5, 0.9, uProgress);
         alpha += edgeGlow * 0.3;
-        alpha += fresnel * 0.15;
+        alpha += fresnel * 0.2;
 
         gl_FragColor = vec4(finalColor, alpha);
       }
@@ -188,7 +201,7 @@
     depthWrite: false,
   });
 
-  // 实体表面着色器（半透明实体，切割动画同步）
+  // 实体表面着色器
   const solidShaderMaterial = new THREE.ShaderMaterial({
     uniforms: {
       uTime: { value: 0 },
@@ -248,20 +261,18 @@
       void main() {
         float normalized = (vPosition.y - uModelMin) / uModelHeight;
 
-        // 切片边缘
         float slicePhase = fract(normalized * uSliceCount);
         float edgeDist = min(slicePhase, 1.0 - slicePhase);
         float edgeGlow = smoothstep(0.05, 0.0, edgeDist) * (1.0 - uProgress);
 
-        // 法线光照
         vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
         float diffuse = max(dot(normalize(vNormal), lightDir), 0.0) * 0.5 + 0.5;
 
-        vec3 baseColor = uColor * diffuse * 0.3;
-        vec3 finalColor = mix(baseColor, uEdgeColor * 0.5, edgeGlow);
+        vec3 baseColor = uColor * diffuse * 0.15;
+        vec3 finalColor = mix(baseColor, uEdgeColor * 0.6, edgeGlow);
 
-        float alpha = mix(0.08, 0.2, uProgress);
-        alpha += edgeGlow * 0.2;
+        float alpha = mix(0.05, 0.12, uProgress);
+        alpha += edgeGlow * 0.15;
 
         gl_FragColor = vec4(finalColor, alpha);
       }
@@ -274,30 +285,30 @@
 
   /* ========== 粒子系统 ========== */
   function createParticles() {
-    const count = CONFIG.particleCount;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(count * 3);
-    const velocities = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
+    var count = CONFIG.particleCount;
+    var geometry = new THREE.BufferGeometry();
+    var positions = new Float32Array(count * 3);
+    var velocities = new Float32Array(count * 3);
+    var sizes = new Float32Array(count);
 
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
+    for (var i = 0; i < count; i++) {
+      var i3 = i * 3;
       positions[i3] = (Math.random() - 0.5) * CONFIG.particleSpread;
-      positions[i3 + 1] = (Math.random() - 0.5) * CONFIG.particleSpread;
+      positions[i3 + 1] = (Math.random() - 0.5) * CONFIG.particleSpread * 0.6;
       positions[i3 + 2] = (Math.random() - 0.5) * CONFIG.particleSpread;
 
-      velocities[i3] = (Math.random() - 0.5) * 0.02;
-      velocities[i3 + 1] = (Math.random() - 0.5) * 0.02;
-      velocities[i3 + 2] = (Math.random() - 0.5) * 0.02;
+      velocities[i3] = (Math.random() - 0.5) * 0.015;
+      velocities[i3 + 1] = (Math.random() - 0.5) * 0.01;
+      velocities[i3 + 2] = (Math.random() - 0.5) * 0.015;
 
-      sizes[i] = Math.random() * CONFIG.particleSize + 0.5;
+      sizes[i] = Math.random() * CONFIG.particleSize + 0.3;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('aVelocity', new THREE.BufferAttribute(velocities, 3));
     geometry.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
 
-    const material = new THREE.ShaderMaterial({
+    var material = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
         uColor: { value: new THREE.Color(CONFIG.particleColor) },
@@ -312,17 +323,16 @@
 
         void main() {
           vec3 pos = position;
-          pos += aVelocity * uTime * 60.0;
+          pos += aVelocity * uTime * 50.0;
 
-          // 循环
-          float bound = 40.0;
+          float bound = 50.0;
           pos = mod(pos + bound, bound * 2.0) - bound;
 
-          vAlpha = 0.3 + 0.3 * sin(uTime * 1.5 + position.x * 0.1);
+          vAlpha = 0.15 + 0.2 * sin(uTime * 1.0 + position.x * 0.08);
 
           vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
           gl_Position = projectionMatrix * mvPos;
-          gl_PointSize = aSize * uPixelRatio * (80.0 / -mvPos.z);
+          gl_PointSize = aSize * uPixelRatio * (60.0 / -mvPos.z);
         }
       `,
       fragmentShader: `
@@ -332,7 +342,7 @@
         void main() {
           float d = length(gl_PointCoord - 0.5);
           if (d > 0.5) discard;
-          float alpha = smoothstep(0.5, 0.1, d) * vAlpha;
+          float alpha = smoothstep(0.5, 0.05, d) * vAlpha;
           gl_FragColor = vec4(uColor, alpha);
         }
       `,
@@ -341,78 +351,72 @@
       blending: THREE.AdditiveBlending,
     });
 
-    const particles = new THREE.Points(geometry, material);
-    return particles;
+    return new THREE.Points(geometry, material);
   }
 
-  const particles = createParticles();
+  var particles = createParticles();
   scene.add(particles);
 
   /* ========== 加载 OBJ 模型 ========== */
-  let droneGroup = new THREE.Group();
+  var droneGroup = new THREE.Group();
   scene.add(droneGroup);
 
-  let modelLoaded = false;
-  let animStartTime = 0;
+  var modelLoaded = false;
+  var animStartTime = 0;
 
-  const loader = new THREE.OBJLoader();
+  var loader = new THREE.OBJLoader();
   loader.load(
     'models/drone.obj',
     function (obj) {
-      // 计算包围盒
-      const box = new THREE.Box3().setFromObject(obj);
-      const center = box.getCenter(new THREE.Vector3());
-      const size = box.getSize(new THREE.Vector3());
+      var box = new THREE.Box3().setFromObject(obj);
+      var center = box.getCenter(new THREE.Vector3());
+      var size = box.getSize(new THREE.Vector3());
 
-      // 归一化大小
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = 50 / maxDim;
+      // 归一化
+      var maxDim = Math.max(size.x, size.y, size.z);
+      var scale = 45 / maxDim;
 
       obj.position.sub(center);
       obj.scale.setScalar(scale);
 
-      // 重新计算包围盒
-      const box2 = new THREE.Box3().setFromObject(obj);
-      const size2 = box2.getSize(new THREE.Vector3());
-      const min2 = box2.min;
+      var box2 = new THREE.Box3().setFromObject(obj);
+      var size2 = box2.getSize(new THREE.Vector3());
+      var min2 = box2.min;
 
-      // 更新着色器 uniforms
-      const modelHeight = size2.y;
-      const modelMin = min2.y;
+      var modelHeight = size2.y;
+      var modelMin = min2.y;
 
       wireShaderMaterial.uniforms.uModelHeight.value = modelHeight;
       wireShaderMaterial.uniforms.uModelMin.value = modelMin;
       solidShaderMaterial.uniforms.uModelHeight.value = modelHeight;
       solidShaderMaterial.uniforms.uModelMin.value = modelMin;
 
-      // 遍历子对象，应用着色器
       obj.traverse(function (child) {
         if (child.isMesh) {
-          // 计算法线（OBJ 可能没有）
           child.geometry.computeVertexNormals();
 
           // 线框层
-          const wireMesh = new THREE.Mesh(child.geometry, wireShaderMaterial);
+          var wireMesh = new THREE.Mesh(child.geometry, wireShaderMaterial);
           wireMesh.position.copy(child.position);
           wireMesh.rotation.copy(child.rotation);
           wireMesh.scale.copy(child.scale);
           droneGroup.add(wireMesh);
 
-          // 实体半透明层
-          const solidMesh = new THREE.Mesh(child.geometry, solidShaderMaterial);
+          // 半透明实体层
+          var solidMesh = new THREE.Mesh(child.geometry, solidShaderMaterial);
           solidMesh.position.copy(child.position);
           solidMesh.rotation.copy(child.rotation);
           solidMesh.scale.copy(child.scale);
           droneGroup.add(solidMesh);
 
-          // 边缘线条
-          const edges = new THREE.EdgesGeometry(child.geometry, 30);
-          const edgeMat = new THREE.LineBasicMaterial({
-            color: CONFIG.edgeColor,
+          // 边缘高亮线
+          var edges = new THREE.EdgesGeometry(child.geometry, 25);
+          var edgeMat = new THREE.LineBasicMaterial({
+            color: CONFIG.wireColor,
             transparent: true,
-            opacity: 0.15,
+            opacity: 0.25,
           });
-          const edgeLine = new THREE.LineSegments(edges, edgeMat);
+          var edgeLine = new THREE.LineSegments(edges, edgeMat);
           edgeLine.position.copy(child.position);
           edgeLine.rotation.copy(child.rotation);
           edgeLine.scale.copy(child.scale);
@@ -423,16 +427,14 @@
       droneGroup.position.copy(obj.position);
       droneGroup.scale.copy(obj.scale);
 
-      // 轻微倾斜
-      droneGroup.rotation.x = -0.15;
+      // 轻微倾斜 - 给一个科技感角度
+      droneGroup.rotation.x = -0.2;
       droneGroup.rotation.z = 0.05;
 
       modelLoaded = true;
       animStartTime = performance.now() / 1000;
     },
-    function (xhr) {
-      // 加载进度
-    },
+    function () {},
     function (error) {
       console.warn('Drone OBJ load error:', error);
     }
@@ -444,31 +446,30 @@
   }
 
   /* ========== 动画状态 ========== */
-  let animPhase = 'assembling';  // assembling -> idle
-  let mouseX = 0, mouseY = 0;
+  var animPhase = 'assembling';
+  var mouseX = 0, mouseY = 0;
 
-  // 鼠标交互
   container.addEventListener('mousemove', function (e) {
-    const rect = container.getBoundingClientRect();
+    var rect = container.getBoundingClientRect();
     mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
     mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
   });
 
   /* ========== 渲染循环 ========== */
-  let rafId = null;
+  var rafId = null;
 
   function animate() {
     rafId = requestAnimationFrame(animate);
 
-    const now = performance.now() / 1000;
-    const elapsed = modelLoaded ? now - animStartTime : 0;
+    var now = performance.now() / 1000;
+    var elapsed = modelLoaded ? now - animStartTime : 0;
 
-    // 更新粒子
+    // 粒子
     particles.material.uniforms.uTime.value = now;
 
     if (modelLoaded) {
-      // 切割动画进度
-      let progress = 0;
+      // 切割动画
+      var progress = 0;
       if (animPhase === 'assembling') {
         progress = Math.min(elapsed / CONFIG.sliceDuration, 1);
         progress = easeInOutCubic(progress);
@@ -480,7 +481,6 @@
         progress = 1;
       }
 
-      // 更新着色器 uniforms
       wireShaderMaterial.uniforms.uProgress.value = progress;
       wireShaderMaterial.uniforms.uTime.value = now;
       solidShaderMaterial.uniforms.uProgress.value = progress;
@@ -489,26 +489,30 @@
       // 自动旋转
       droneGroup.rotation.y += CONFIG.autoRotateSpeed;
 
-      // 鼠标跟随（轻微）
-      const targetRotX = -0.15 + mouseY * 0.1;
-      const targetRotZ = 0.05 - mouseX * 0.08;
-      droneGroup.rotation.x += (targetRotX - droneGroup.rotation.x) * 0.03;
-      droneGroup.rotation.z += (targetRotZ - droneGroup.rotation.z) * 0.03;
+      // 鼠标跟随（微量）
+      var targetRotX = -0.2 + mouseY * 0.08;
+      var targetRotZ = 0.05 - mouseX * 0.06;
+      droneGroup.rotation.x += (targetRotX - droneGroup.rotation.x) * 0.025;
+      droneGroup.rotation.z += (targetRotZ - droneGroup.rotation.z) * 0.025;
 
-      // 轻微悬浮
-      droneGroup.position.y = Math.sin(now * 0.8) * 1.5;
+      // 悬浮 - Y 方向上下浮动，中心保持在 0
+      droneGroup.position.y = Math.sin(now * 0.6) * 1.2;
 
-      // 边缘线随进度显隐
+      // 边缘线透明度
       droneGroup.children.forEach(function (child) {
         if (child.isLineSegments) {
-          child.material.opacity = 0.05 + progress * 0.15;
+          child.material.opacity = 0.1 + progress * 0.2;
         }
       });
+
+      // 点光源随时间微动
+      pointLight1.position.x = 40 + Math.sin(now * 0.5) * 10;
+      pointLight1.position.y = 20 + Math.cos(now * 0.3) * 8;
     }
 
-    // 相机轻微跟随鼠标
-    camera.position.x += (mouseX * 8 - camera.position.x) * 0.02;
-    camera.position.y += (10 - mouseY * 5 - camera.position.y) * 0.02;
+    // 相机 - 只做微量跟随，Y 始终围绕 0 居中
+    camera.position.x += (mouseX * 5 - camera.position.x) * 0.015;
+    camera.position.y += (mouseY * -3 - camera.position.y) * 0.015;
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);
@@ -528,8 +532,8 @@
 
   window.addEventListener('resize', onResize);
 
-  // 可见性检测 - 不在视口内时暂停渲染
-  const observer = new IntersectionObserver(function (entries) {
+  // 可见性检测
+  var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         if (!rafId) animate();
