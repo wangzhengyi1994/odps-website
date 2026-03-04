@@ -134,9 +134,9 @@ img { max-width: 100%; display: block; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-light); }
 
 /* ========== Page Banner (子页面) ========== */
-.page-banner { padding: 140px 0 60px; background: linear-gradient(135deg, rgba(15,30,56,.7), rgba(30,64,130,.55)); color: #fff; text-align: center; background-size: cover; background-position: center; }
-.page-banner h1 { font-size: 40px; font-weight: 700; margin-bottom: 12px; }
-.page-banner p { font-size: 16px; opacity: .85; max-width: 600px; margin: 0 auto; }
+.page-banner { padding: 180px 0 80px; background-size: cover; background-position: center; background-repeat: no-repeat; color: var(--text); text-align: left; }
+.page-banner h1 { font-size: 44px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+.page-banner p { font-size: 17px; opacity: .7; max-width: 500px; margin: 0; color: var(--text-sub); }
 
 /* ========== Feature Row ========== */
 .feature-row { display: flex; align-items: center; gap: 60px; padding: 60px 0; }
@@ -293,5 +293,6 @@ img { max-width: 100%; display: block; }
   .dropdown { position: static; transform: none; box-shadow: none; border: none; padding: 0 0 0 16px; opacity: 1; visibility: visible; pointer-events: auto; }
   .nav-item:hover .dropdown { transform: none; }
   .hero-btns { flex-direction: column; }
+  .page-banner { padding: 140px 0 60px; }
   .page-banner h1 { font-size: 28px; }
 }
