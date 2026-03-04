@@ -61,10 +61,19 @@
   // 轻微雾效增加深度感
   scene.fog = new THREE.FogExp2(0x000000, 0.003);
 
-  // 相机 - Y=0 确保垂直居中
+  // 相机 - 正对画面中心，无人机通过模型偏移到右侧
   const camera = new THREE.PerspectiveCamera(CONFIG.cameraFov, width / height, 0.1, 1000);
   camera.position.set(0, 0, CONFIG.cameraZ);
   camera.lookAt(0, 0, 0);
+
+  // 计算无人机在右侧的 X 偏移量（基于视口宽高比）
+  function getDroneOffsetX() {
+    var vFov = CONFIG.cameraFov * Math.PI / 180;
+    var visibleHeight = 2 * Math.tan(vFov / 2) * CONFIG.cameraZ;
+    var visibleWidth = visibleHeight * (width / height);
+    // 无人机放在右侧 1/4 处
+    return visibleWidth * 0.2;
+  }
 
   // 光源 - 青蓝色调光照
   const ambientLight = new THREE.AmbientLight(0x0a1628, 0.5);
@@ -424,10 +433,14 @@
         }
       });
 
-      droneGroup.position.copy(obj.position);
       droneGroup.scale.copy(obj.scale);
 
-      // 轻微倾斜 - 给一个科技感角度
+      // 无人机定位到画面右侧居中
+      droneGroup.position.x = getDroneOffsetX();
+      droneGroup.position.y = 0;
+      droneGroup.position.z = 0;
+
+      // 轻微倾斜 - 科技感角度
       droneGroup.rotation.x = -0.2;
       droneGroup.rotation.z = 0.05;
 
@@ -495,7 +508,8 @@
       droneGroup.rotation.x += (targetRotX - droneGroup.rotation.x) * 0.025;
       droneGroup.rotation.z += (targetRotZ - droneGroup.rotation.z) * 0.025;
 
-      // 悬浮 - Y 方向上下浮动，中心保持在 0
+      // 悬浮 - Y 方向微量上下浮动，X 保持右侧
+      droneGroup.position.x = getDroneOffsetX();
       droneGroup.position.y = Math.sin(now * 0.6) * 1.2;
 
       // 边缘线透明度
@@ -528,6 +542,10 @@
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
     particles.material.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+    // 重新计算无人机右侧偏移
+    if (modelLoaded) {
+      droneGroup.position.x = getDroneOffsetX();
+    }
   }
 
   window.addEventListener('resize', onResize);

@@ -67,13 +67,13 @@ img { max-width: 100%; display: block; }
 .hero p { font-size: 18px; line-height: 1.8; opacity: .9; margin-bottom: 36px; }
 .hero-btns { display: flex; gap: 16px; }
 
-/* 3D Hero Layout */
-.hero-3d { background: #000000; }
+/* 3D Hero Layout - Canvas 全屏铺底，文字浮在左侧 */
+.hero-3d { background: #000000; position: relative; overflow: hidden; }
 .hero-3d::before { display: none; }
-.hero-3d-layout { display: flex; align-items: center; gap: 0; min-height: 600px; position: relative; }
-.hero-3d-layout .hero-content { flex: 0 0 40%; max-width: 480px; position: relative; z-index: 2; }
-.hero-3d-canvas-wrap { flex: 1; position: relative; height: 600px; min-width: 0; }
+.hero-3d-canvas-wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 .hero-3d-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
+.hero-3d-text { position: relative; z-index: 2; display: flex; align-items: center; min-height: 600px; padding-top: 72px; }
+.hero-3d-text .hero-content { max-width: 480px; }
 
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: transform .2s, box-shadow .2s; }
 .btn-primary { background: #fff; color: var(--primary); }
@@ -302,9 +302,8 @@ img { max-width: 100%; display: block; }
   .dropdown { position: static; transform: none; box-shadow: none; border: none; padding: 0 0 0 16px; opacity: 1; visibility: visible; pointer-events: auto; }
   .nav-item:hover .dropdown { transform: none; }
   .hero-btns { flex-direction: column; }
-  .hero-3d-layout { flex-direction: column; min-height: auto; }
-  .hero-3d-layout .hero-content { flex: none; max-width: 100%; }
-  .hero-3d-canvas-wrap { height: 300px; width: 100%; margin-top: -20px; }
+  .hero-3d-text { min-height: 480px; }
+  .hero-3d-text .hero-content { max-width: 100%; }
   .page-banner { height: 400px; padding-top: 72px; }
   .page-banner h1 { font-size: 28px; }
 }
