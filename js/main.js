@@ -18,7 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.05 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // ========== Number counter animation ==========
+  // ========== Number counter animation (stats overlay) ==========
+  document.querySelectorAll('.num[data-target]').forEach(el => {
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        const target = +el.dataset.target;
+        const duration = 2000;
+        const start = performance.now();
+        const step = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          el.textContent = Math.floor(p * target).toLocaleString();
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        io.disconnect();
+      }
+    }, { threshold: 0.5 });
+    io.observe(el);
+  });
+
+  // ========== Legacy number counter (.stat-num) for sub-pages ==========
   document.querySelectorAll('.stat-num[data-target]').forEach(el => {
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
@@ -38,6 +57,44 @@ document.addEventListener('DOMContentLoaded', () => {
     io.observe(el);
   });
 
+  // ========== Hero Slide Carousel ==========
+  const slides = document.querySelectorAll('.hero-slide');
+  const indicators = document.querySelectorAll('.hero-indicator');
+  if (slides.length > 1) {
+    let current = 0;
+    let timer = null;
+
+    function goToSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      indicators.forEach(i => i.classList.remove('active'));
+      slides[index].classList.add('active');
+      indicators[index].classList.add('active');
+      current = index;
+    }
+
+    function nextSlide() {
+      goToSlide((current + 1) % slides.length);
+    }
+
+    function startTimer() {
+      stopTimer();
+      timer = setInterval(nextSlide, 5000);
+    }
+
+    function stopTimer() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    indicators.forEach(ind => {
+      ind.addEventListener('click', () => {
+        goToSlide(+ind.dataset.index);
+        startTimer();
+      });
+    });
+
+    startTimer();
+  }
+
   // ========== Image fallback for 404 ==========
   document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function() {
@@ -48,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   // Background-image 404 check for divs
-  document.querySelectorAll('.feature-img, .solution-img, .cert-img, .case-thumb').forEach(el => {
+  document.querySelectorAll('.feature-img, .solution-img, .solution-card-img, .cert-img, .case-thumb').forEach(el => {
     const bg = getComputedStyle(el).backgroundImage;
     if (bg && bg !== 'none') {
       const url = bg.match(/url\(["']?(.*?)["']?\)/);

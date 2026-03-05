@@ -46,6 +46,9 @@
       <a href="pages/about.html" class="nav-item">关于我们</a>
       <a href="pages/contact.html" class="nav-item">联系我们</a>
     </nav>
+    <div class="nav-right">
+      <a href="pages/contact.html" class="btn-nav">系统演示</a>
+    </div>
   </div>
 </header>
 
@@ -98,210 +101,283 @@
   </div>
 </section>
 
-<!-- Stats -->
-<section class="section section-dark">
-  <div class="container">
-    <div class="stats fade-in">
-      <div class="stat-item">
-        <div class="stat-num" data-target="12" data-suffix="人">0</div>
-        <div class="stat-unit">专业飞手团队</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="38600" data-suffix="+小时">0</div>
-        <div class="stat-unit">无人机飞行时长</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="127750" data-suffix="+公里">0</div>
-        <div class="stat-unit">飞行里程数</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="836" data-suffix="km²">0</div>
-        <div class="stat-unit">二三维建模数据</div>
-      </div>
+<!-- Stats Overlay (frosted glass bar) -->
+<section class="stats-overlay">
+  <div class="stat-item">
+    <div class="stat-icon"><img src="images/stats/pilot.png" alt="飞手团队"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="12">0</span><span class="unit">人</span></div>
+      <div class="stat-label">专业飞手团队</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><img src="images/stats/flight-hours.png" alt="飞行时长"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="38600">0</span><span class="unit">+小时</span></div>
+      <div class="stat-label">无人机飞行时长</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><img src="images/stats/flight-km.png" alt="飞行里程"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="127750">0</span><span class="unit">+公里</span></div>
+      <div class="stat-label">飞行里程数</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><img src="images/stats/modeling.png" alt="建模数据"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="836">0</span><span class="unit">km²</span></div>
+      <div class="stat-label">二三维建模数据</div>
     </div>
   </div>
 </section>
 
 <!-- 我们的优势 -->
-<section class="section">
+<section class="advantage-section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>我们的优势</h2>
       <p>深耕行业多年，构建全方位竞争壁垒</p>
     </div>
-    <div class="card-grid" style="grid-template-columns:repeat(4,1fr);">
-      <div class="card fade-in" style="cursor:default;">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>双ISO国际认证</h3>
-        <p>通过ISO9001质量管理体系与ISO27001信息安全管理体系双认证，保障服务质量与数据安全。</p>
+    <div class="advantage-grid fade-in">
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="images/icons/advantage-01.png" alt="双ISO认证"></div>
+        <div class="advantage-title">双ISO国际认证</div>
+        <div class="advantage-desc">通过ISO9001质量管理体系与ISO27001信息安全管理体系双认证，保障服务质量与数据安全。</div>
       </div>
-      <div class="card fade-in" style="cursor:default;">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12L6 8M6 8L12 2L18 8M6 8V20H18V8M22 12L18 8"/><rect x="9" y="14" width="6" height="6"/></svg></div>
-        <h3>大疆生态深度集成</h3>
-        <p>大疆行业授权经销商，深度整合DJI飞行平台、负载与SDK，提供原厂级解决方案。</p>
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="images/icons/advantage-02.png" alt="大疆生态"></div>
+        <div class="advantage-title">大疆生态深度集成</div>
+        <div class="advantage-desc">大疆行业授权经销商，深度整合DJI飞行平台、负载与SDK，提供原厂级解决方案。</div>
       </div>
-      <div class="card fade-in" style="cursor:default;">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg></div>
-        <h3>80+自研AI算法库</h3>
-        <p>九大场景80+算法模型，涵盖公共安全、城管、水利、交通等领域，支持灵活定制与快速部署。</p>
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="images/icons/advantage-03.png" alt="AI算法库"></div>
+        <div class="advantage-title">80+自研AI算法库</div>
+        <div class="advantage-desc">九大场景80+算法模型，涵盖公共安全、城管、水利、交通等领域，支持灵活定制与快速部署。</div>
       </div>
-      <div class="card fade-in" style="cursor:default;">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3>全链路交付能力</h3>
-        <p>从硬件选型、算法开发、平台部署到运维培训，提供端到端一站式项目交付服务。</p>
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="images/icons/advantage-04.png" alt="全链路交付"></div>
+        <div class="advantage-title">全链路交付能力</div>
+        <div class="advantage-desc">从硬件选型、算法开发、平台部署到运维培训，提供端到端一站式项目交付服务。</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Partners (moved up per design doc) -->
-<section class="section">
+<!-- 合作伙伴 (Marquee) -->
+<section class="partner-section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>合作伙伴</h2>
       <p>与行业领军企业深度合作，共建安全生态</p>
     </div>
-    <div class="partner-grid fade-in">
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/dji.png" alt="DJI" style="width:36px;height:36px;object-fit:contain;"></div>
-        大疆创新
+  </div>
+  <div class="partner-track-wrap">
+    <div class="partner-track">
+      <!-- 第一组 -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/dji-logo.png" alt="DJI"></div>
+        <div class="partner-name">大疆创新</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/huawei.png" alt="华为" style="width:36px;height:36px;object-fit:contain;"></div>
-        华为技术
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/huawei-logo.png" alt="华为"></div>
+        <div class="partner-name">华为技术</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/hikvision.png" alt="海康威视" style="width:36px;height:36px;object-fit:contain;"></div>
-        海康威视
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/hikvision-logo.png" alt="海康威视"></div>
+        <div class="partner-name">海康威视</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/dahua.png" alt="大华" style="width:36px;height:36px;object-fit:contain;"></div>
-        大华股份
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/dahua-logo.png" alt="大华"></div>
+        <div class="partner-name">大华股份</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/chinatelecom.png" alt="中国电信" style="width:36px;height:36px;object-fit:contain;"></div>
-        中国电信上海
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/ctyun-logo.png" alt="天翼云"></div>
+        <div class="partner-name">天翼云科技</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/chinaunicom.png" alt="中国联通" style="width:36px;height:36px;object-fit:contain;"></div>
-        中国联通上海
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/chinatelecom-logo.png" alt="中国电信"></div>
+        <div class="partner-name">中国电信上海</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/ctyun.png" alt="天翼云" style="width:36px;height:36px;object-fit:contain;"></div>
-        天翼云科技
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/unicom-logo.png" alt="中国联通"></div>
+        <div class="partner-name">中国联通上海</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo" style="font-size:14px;font-weight:700;color:var(--primary);letter-spacing:-0.5px;">鼎桥</div>
-        鼎桥通信
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/toptech-logo.png" alt="鼎桥通信"></div>
+        <div class="partner-name">鼎桥通信</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo" style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:-0.5px;line-height:1.2;text-align:center;">SH<br>CERT</div>
-        上海互联网应急中心
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/shcert-logo.png" alt="上海互联网应急中心"></div>
+        <div class="partner-name">上海互联网应急中心</div>
       </div>
-      <div class="partner-item">
-        <div class="partner-logo"><img src="images/partners/mps.png" alt="公安部" style="width:36px;height:36px;object-fit:contain;"></div>
-        公安部第一研究所
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/mps-logo.png" alt="公安部第一研究所"></div>
+        <div class="partner-name">公安部第一研究所</div>
+      </div>
+      <!-- 第二组（重复，用于无缝滚动） -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/dji-logo.png" alt="DJI"></div>
+        <div class="partner-name">大疆创新</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/huawei-logo.png" alt="华为"></div>
+        <div class="partner-name">华为技术</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/hikvision-logo.png" alt="海康威视"></div>
+        <div class="partner-name">海康威视</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/dahua-logo.png" alt="大华"></div>
+        <div class="partner-name">大华股份</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/ctyun-logo.png" alt="天翼云"></div>
+        <div class="partner-name">天翼云科技</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/chinatelecom-logo.png" alt="中国电信"></div>
+        <div class="partner-name">中国电信上海</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/unicom-logo.png" alt="中国联通"></div>
+        <div class="partner-name">中国联通上海</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/toptech-logo.png" alt="鼎桥通信"></div>
+        <div class="partner-name">鼎桥通信</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/shcert-logo.png" alt="上海互联网应急中心"></div>
+        <div class="partner-name">上海互联网应急中心</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="images/partners/mps-logo.png" alt="公安部第一研究所"></div>
+        <div class="partner-name">公安部第一研究所</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Products -->
-<section class="section section-light">
+<!-- 产品中心 (带背景图) -->
+<section class="products-section">
+  <div class="products-bg"><img src="images/banners/products-bg.png" alt=""></div>
   <div class="container">
     <div class="section-title fade-in">
       <h2>产品中心</h2>
       <p>覆盖无人机飞行平台、智能负载、无人值守方案、软件平台等全链路产品体系</p>
     </div>
-    <div class="card-grid">
-      <a href="pages/products/drones.html" class="card fade-in">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12L6 8M6 8L12 2L18 8M6 8V20H18V8M22 12L18 8"/><rect x="9" y="14" width="6" height="6"/></svg></div>
-        <h3>无人机飞行平台</h3>
-        <p>一体化旗舰级飞行平台与小型行业无人机，适应复杂环境作业需求，支持多载荷集成。</p>
-      </a>
-      <a href="pages/products/payloads.html" class="card fade-in">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <h3>智能负载</h3>
-        <p>高清变焦双光相机、红外热成像、喊话器、探照灯、气体检测传感器等多种官方及第三方负载。</p>
-      </a>
-      <a href="pages/products/dock.html" class="card fade-in">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/><circle cx="12" cy="14" r="2"/></svg></div>
-        <h3>无人值守方案</h3>
-        <p>大疆机场3无人值守解决方案，实现24小时自动化巡检，一键下发任务，远程接管控制。</p>
-      </a>
-      <a href="pages/products/software.html" class="card fade-in">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <h3>软件平台</h3>
-        <p>一站式任务管理云平台、飞控软件、建模软件，基于大疆生态开放能力开发的应用软件。</p>
-      </a>
-      <a href="pages/products/training.html" class="card fade-in">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
-        <h3>飞行培训</h3>
-        <p>CAAC民航执照培训与UTC/DJI应用技能培训，结合各行业应用特点设立专业认证方向。</p>
-      </a>
-      <a href="pages/support.html" class="card fade-in">
-        <div class="card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-        <h3>售后服务</h3>
-        <p>DJI Care行业无忧、全生命周期保养服务，120+授权服务商，超90%用户满意度。</p>
-      </a>
+    <div class="product-grid fade-in">
+      <div class="product-row">
+        <a href="pages/products/drones.html" class="product-card">
+          <div class="product-card-icon"><img src="images/icons/product-icon-1.svg" alt="无人机"></div>
+          <h3>无人机飞行平台</h3>
+          <p>一体化旗舰级飞行平台与小型行业无人机，适应复杂环境作业需求，支持多载荷集成。</p>
+        </a>
+        <a href="pages/products/payloads.html" class="product-card">
+          <div class="product-card-icon"><img src="images/icons/product-icon-2.svg" alt="负载"></div>
+          <h3>智能负载</h3>
+          <p>高清变焦双光相机、红外热成像、喊话器、探照灯、气体检测传感器等多种官方及第三方负载。</p>
+        </a>
+        <a href="pages/products/dock.html" class="product-card">
+          <div class="product-card-icon"><img src="images/icons/product-icon-1.svg" alt="机场"></div>
+          <h3>无人值守方案</h3>
+          <p>大疆机场3无人值守解决方案，实现24小时自动化巡检，一键下发任务，远程接管控制。</p>
+        </a>
+      </div>
+      <div class="product-row">
+        <a href="pages/products/software.html" class="product-card">
+          <div class="product-card-icon"><img src="images/icons/product-icon-2.svg" alt="软件"></div>
+          <h3>软件平台</h3>
+          <p>一站式任务管理云平台、飞控软件、建模软件，基于大疆生态开放能力开发的应用软件。</p>
+        </a>
+        <a href="pages/products/training.html" class="product-card">
+          <div class="product-card-icon"><img src="images/icons/product-icon-1.svg" alt="培训"></div>
+          <h3>飞行培训</h3>
+          <p>CAAC民航执照培训与UTC/DJI应用技能培训，结合各行业应用特点设立专业认证方向。</p>
+        </a>
+        <a href="pages/support.html" class="product-card">
+          <div class="product-card-icon"><img src="images/icons/product-icon-2.svg" alt="售后"></div>
+          <h3>售后服务</h3>
+          <p>DJI Care行业无忧、全生命周期保养服务，120+授权服务商，超90%用户满意度。</p>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Solutions -->
+<!-- 解决方案 -->
 <section class="section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>解决方案</h2>
       <p>覆盖公共安全、智慧交通、应急消防等八大行业领域</p>
     </div>
-    <div class="solution-grid">
-      <a href="pages/solutions/public-safety.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/public-safety.jpg')"></div>
-        <h4>公共安全</h4>
-        <p>巡逻巡检、人群监测、空地协同</p>
+    <div class="solution-grid-new fade-in">
+      <a href="pages/solutions/public-safety.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/public-safety.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>公共安全</h4>
+          <p>巡逻巡检、人群监测、空地协同</p>
+        </div>
       </a>
-      <a href="pages/solutions/traffic.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/traffic.jpg')"></div>
-        <h4>智慧交通</h4>
-        <p>违停抓拍、酒驾夜查、事故快处</p>
+      <a href="pages/solutions/traffic.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/traffic.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>智慧交通</h4>
+          <p>违停抓拍、酒驾夜查、事故快处</p>
+        </div>
       </a>
-      <a href="pages/solutions/emergency.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/emergency.jpg')"></div>
-        <h4>应急消防</h4>
-        <p>火灾监控、搜救定位、防化侦检</p>
+      <a href="pages/solutions/emergency.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/emergency.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>应急消防</h4>
+          <p>火灾监控、搜救定位、防化侦检</p>
+        </div>
       </a>
-      <a href="pages/solutions/city.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/city.jpg')"></div>
-        <h4>城市管理</h4>
-        <p>违建监测、河道整治、场地管理</p>
+      <a href="pages/solutions/city.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/city.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>城市管理</h4>
+          <p>违建监测、河道整治、场地管理</p>
+        </div>
       </a>
-      <a href="pages/solutions/energy.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/energy.jpg')"></div>
-        <h4>能源巡检</h4>
-        <p>电力巡线、光伏检测、管道巡查</p>
+      <a href="pages/solutions/energy.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/energy.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>能源巡检</h4>
+          <p>电力巡线、光伏检测、管道巡查</p>
+        </div>
       </a>
-      <a href="pages/solutions/surveying.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/surveying.jpg')"></div>
-        <h4>测绘建模</h4>
-        <p>二三维建模、数字孪生、土地测绘</p>
+      <a href="pages/solutions/surveying.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/surveying.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>测绘建模</h4>
+          <p>二三维建模、数字孪生、土地测绘</p>
+        </div>
       </a>
-      <a href="pages/solutions/water.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/water.jpg')"></div>
-        <h4>水利林业</h4>
-        <p>河道巡检、林业监测、生态保护</p>
+      <a href="pages/solutions/water.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/water.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>水利林业</h4>
+          <p>河道巡检、林业监测、生态保护</p>
+        </div>
       </a>
-      <a href="pages/solutions/agriculture.html" class="solution-item fade-in">
-        <div class="solution-img" style="background-image:url('images/solutions/agriculture.jpg')"></div>
-        <h4>智慧农业</h4>
-        <p>病虫害监测、农田巡检、植保作业</p>
+      <a href="pages/solutions/agriculture.html" class="solution-card">
+        <div class="solution-card-img" style="background-image:url('images/solutions/agriculture.jpg')"></div>
+        <div class="solution-card-body">
+          <h4>智慧农业</h4>
+          <p>病虫害监测、农田巡检、植保作业</p>
+        </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Algorithm Service - 业务算法库清单 -->
-<section class="section section-light">
+<!-- 业务算法库清单 -->
+<section class="algo-section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>业务算法库清单</h2>
@@ -320,7 +396,6 @@
           <tr><th>场景</th><th colspan="6">算法能力</th></tr>
         </thead>
         <tbody>
-          <!-- 通用场景 -->
           <tr>
             <td class="scene-label" rowspan="3">通用场景</td>
             <td>人形识别</td><td>车辆识别</td><td>二轮车识别</td><td>三轮车识别</td><td>船只识别</td><td>水库识别</td>
@@ -331,7 +406,6 @@
           <tr>
             <td>红外人形识别</td><td>红外车辆识别</td><td>红外船只识别</td><td colspan="3"></td>
           </tr>
-          <!-- 工地场景 -->
           <tr>
             <td class="scene-label" rowspan="3">工地场景</td>
             <td>安全帽反光衣识别</td><td>工程车辆（七合一）识别</td><td>路面工程设备识别统计</td><td>建筑材料堆放</td><td>挖掘机识别</td><td>渣土车识别</td>
@@ -342,7 +416,6 @@
           <tr>
             <td>火点识别</td><td>渣土车未遮盖篷布识别</td><td>违规施工识别</td><td colspan="3"></td>
           </tr>
-          <!-- 城管场景 -->
           <tr>
             <td class="scene-label" rowspan="3">城管场景</td>
             <td>垃圾包识别</td><td>违规铺设太阳能板识别</td><td>小吃车违规经营识别</td><td>非法垂钓识别</td><td>人群聚集识别</td><td>阳光房违建识别</td>
@@ -353,7 +426,6 @@
           <tr>
             <td>违规摆摊识别</td><td>建筑垃圾乱堆识别</td><td>未戴安全帽识别</td><td>污水排放识别</td><td colspan="2"></td>
           </tr>
-          <!-- 水利场景 -->
           <tr>
             <td class="scene-label" rowspan="3">水利场景</td>
             <td>河道淤积识别</td><td>水面漂浮物识别</td><td>人员涉水识别</td><td>违规放养识别</td><td>堤边绿障识别</td><td>水面违规搭建识别</td>
@@ -364,27 +436,22 @@
           <tr>
             <td>岸边垃圾识别</td><td colspan="5"></td>
           </tr>
-          <!-- 消防场景 -->
           <tr>
             <td class="scene-label">消防场景</td>
             <td>消防登高面标志识别</td><td>消防登高面违法占用识别</td><td>火灾预警—火点识别</td><td>火灾预警—烟雾识别</td><td>秸秆焚烧识别</td><td></td>
           </tr>
-          <!-- 林业场景 -->
           <tr>
             <td class="scene-label">林业场景</td>
             <td>松线虫害识别</td><td>违规露营识别</td><td>绿化病害识别</td><td>林区分割</td><td>垃圾暴露识别</td><td></td>
           </tr>
-          <!-- 交通场景 -->
           <tr>
             <td class="scene-label">交通场景</td>
             <td>区域车辆识别统计</td><td>区域人员识别统计</td><td>违停车辆识别</td><td>交通事故识别</td><td>道路拥堵识别</td><td></td>
           </tr>
-          <!-- 能源场景 -->
           <tr>
             <td class="scene-label">能源场景</td>
             <td>光伏板热斑检测</td><td>电力线路缺陷识别</td><td>管道泄漏检测</td><td>输电塔异物识别</td><td>绝缘子破损识别</td><td></td>
           </tr>
-          <!-- 农业场景 -->
           <tr>
             <td class="scene-label">农业场景</td>
             <td>病虫害识别</td><td>作物长势分析</td><td>农田边界分割</td><td>杂草识别</td><td>灌溉异常识别</td><td></td>
@@ -398,81 +465,132 @@
   </div>
 </section>
 
-<!-- Certifications -->
-<section class="section">
+<!-- 资质认证 (Marquee) -->
+<section class="cert-section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>资质认证</h2>
       <p>多项行业权威认证，专业实力保障</p>
     </div>
-    <div class="cert-grid fade-in">
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/iso9001.jpg')"></div>
+  </div>
+  <div class="cert-track-wrap">
+    <div class="cert-track">
+      <!-- 第一组 -->
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/iso9001.png" alt="ISO9001"></div>
         <span>ISO9001质量管理体系</span>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/iso27001.jpg')"></div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/iso27001.png" alt="ISO27001"></div>
         <span>ISO27001信息安全管理</span>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/aviation-license.jpg')"></div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/aviation-license.png" alt="通用航空许可证"></div>
         <span>通用航空企业经营许可证</span>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/caac-cert.jpg')"></div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/caac-cert.png" alt="运营合格证"></div>
         <span>民用无人机运营合格证</span>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/dji-dealer.jpg')"></div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/dji-dealer.png" alt="大疆授权"></div>
         <span>大疆行业经销商授权</span>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/shcert.jpg')"></div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/shcert.png" alt="网络安全应急"></div>
         <span>网络安全应急服务支撑</span>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('images/certs/uav-association.jpg')"></div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/uav-association.png" alt="无人机协会"></div>
+        <span>上海无人机安全管理协会</span>
+      </div>
+      <!-- 第二组（重复，用于无缝滚动） -->
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/iso9001.png" alt="ISO9001"></div>
+        <span>ISO9001质量管理体系</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/iso27001.png" alt="ISO27001"></div>
+        <span>ISO27001信息安全管理</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/aviation-license.png" alt="通用航空许可证"></div>
+        <span>通用航空企业经营许可证</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/caac-cert.png" alt="运营合格证"></div>
+        <span>民用无人机运营合格证</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/dji-dealer.png" alt="大疆授权"></div>
+        <span>大疆行业经销商授权</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/shcert.png" alt="网络安全应急"></div>
+        <span>网络安全应急服务支撑</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="images/certs/uav-association.png" alt="无人机协会"></div>
         <span>上海无人机安全管理协会</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 全球服务网络 3D地球 -->
-<section class="section section-dark" style="padding:60px 0 80px;">
+<!-- 全球服务网络 (Globe Section) -->
+<section class="globe-section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>全球服务网络</h2>
       <p>以上海为中心，辐射全球10+国家与地区</p>
     </div>
-    <div id="earth-container" style="width:100%;height:520px;margin:0 auto;"></div>
-    <div class="stats fade-in" style="margin-top:40px;">
-      <div class="stat-item">
-        <div class="stat-num">10+</div>
-        <div class="stat-unit">覆盖国家</div>
+    <div class="globe-content fade-in">
+      <div class="globe-stats">
+        <div class="globe-stats-col">
+          <div class="globe-stat-item">
+            <h4>10+覆盖国家</h4>
+            <p>服务网络遍布亚太、欧洲、北美、南美、大洋洲</p>
+          </div>
+          <div class="globe-stat-item">
+            <h4>5大洲布局</h4>
+            <p>全球化战略部署，本地化服务支撑</p>
+          </div>
+          <div class="globe-stat-item">
+            <h4>7×24全球响应</h4>
+            <p>全天候技术支持与服务保障</p>
+          </div>
+        </div>
+        <div class="globe-stats-col">
+          <div class="globe-stat-item">
+            <h4>100+服务客户</h4>
+            <p>覆盖政府、企业、科研等多领域客户</p>
+          </div>
+          <div class="globe-stat-item">
+            <h4>30+解决方案</h4>
+            <p>针对不同行业定制专属方案</p>
+          </div>
+          <div class="globe-stat-item">
+            <h4>99.9%系统可用性</h4>
+            <p>高可靠性平台架构保障业务连续性</p>
+          </div>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">5</div>
-        <div class="stat-unit">大洲布局</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">7&times;24</div>
-        <div class="stat-unit">全球响应</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">100+</div>
-        <div class="stat-unit">服务客户</div>
+      <div class="globe-visual">
+        <div id="earth-container"></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta-section">
+  <div class="cta-bg"><img src="images/banners/cta-bg.png" alt=""></div>
   <div class="container">
-    <h2>科技有界，使命无疆</h2>
-    <p>以安全为基石，以科技守护平安，用创新驱动未来</p>
-    <a href="pages/contact.html" class="btn btn-primary">立即咨询</a>
+    <div class="cta-content">
+      <h2>科技有界，使命无疆</h2>
+      <p>以安全为基石，以科技守护平安，用创新驱动未来</p>
+      <a href="pages/contact.html" class="btn btn-blue">立即咨询</a>
+    </div>
   </div>
 </section>
 
@@ -481,7 +599,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo" style="color:#fff;font-size:18px;">奥德帕斯</div>
+        <div class="footer-logo">奥德帕斯</div>
         <p>奥德帕斯（上海）信息科技有限公司<br>以数智与低空防护驱动行业变革，构建智能化、一体化的数字实战平台。</p>
       </div>
       <div class="footer-col">
