@@ -35,7 +35,7 @@
 
   var container = canvas.closest('.hero-3d') || canvas.parentElement;
   var width = container.clientWidth || window.innerWidth;
-  var height = container.clientHeight || 600;
+  var height = container.clientHeight || 540;
 
   var renderer = new THREE.WebGLRenderer({
     canvas: canvas,
