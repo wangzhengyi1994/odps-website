@@ -1,37 +1,7 @@
-/* ========== OPPOSans Webfont ========== */
-@font-face {
-  font-family: 'OPPOSans';
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://static.mastergo.com/static/font/OPPOSans/OPPOSans-Regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'OPPOSans';
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://static.mastergo.com/static/font/OPPOSans/OPPOSans-Medium.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'OPPOSans';
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://static.mastergo.com/static/font/OPPOSans/OPPOSans-Bold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'OPPOSans';
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://static.mastergo.com/static/font/OPPOSans/OPPOSans-Heavy.woff2') format('woff2');
-}
-
 /* ========== Reset & Base ========== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: 'OPPOSans', -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-weight: 400; color: var(--text-1); line-height: 1.6; background: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif; font-weight: 400; color: var(--text-1); line-height: 1.6; background: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 a { text-decoration: none; color: inherit; transition: color .3s; }
 ul, ol { list-style: none; }
 img { max-width: 100%; display: block; }
