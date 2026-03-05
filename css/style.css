@@ -68,12 +68,21 @@ img { max-width: 100%; display: block; }
 .hero-btns { display: flex; gap: 16px; }
 
 /* 3D Hero Layout - Canvas 全屏铺底，文字浮在左侧 */
-.hero-3d { background: #000000; position: relative; overflow: hidden; }
+.hero-3d { background: #000000; position: relative; overflow: hidden; cursor: pointer; }
 .hero-3d::before { display: none; }
 .hero-3d-canvas-wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 .hero-3d-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
-.hero-3d-text { position: relative; z-index: 2; display: flex; align-items: center; min-height: 600px; padding-top: 72px; }
+.hero-3d-text { position: relative; z-index: 2; min-height: 600px; padding-top: 72px; display: flex; flex-direction: column; justify-content: center; }
 .hero-3d-text .hero-content { max-width: 520px; }
+/* 轮播文字 */
+.hero-slide { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; padding-top: 72px; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; pointer-events: none; }
+.hero-slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; position: relative; }
+.hero-slide h1 { font-size: 44px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; color: #fff; }
+.hero-slide p { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 28px; max-width: 480px; }
+/* 导航指示器 */
+.hero-indicators { position: absolute; bottom: 32px; left: 0; display: flex; gap: 12px; z-index: 3; }
+.hero-indicator { width: 32px; height: 3px; background: rgba(255,255,255,0.25); cursor: pointer; transition: background 0.3s, width 0.3s; }
+.hero-indicator.active { width: 48px; background: #fff; }
 
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 0; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: transform .2s, box-shadow .2s; }
 .btn-primary { background: #fff; color: var(--primary); }
@@ -305,6 +314,9 @@ img { max-width: 100%; display: block; }
   .hero-btns { flex-direction: column; }
   .hero-3d-text { min-height: 480px; }
   .hero-3d-text .hero-content { max-width: 100%; }
+  .hero-slide h1 { font-size: 28px; }
+  .hero-slide { padding-top: 56px; }
+  .hero-indicators { bottom: 20px; }
   .page-banner { height: 400px; padding-top: 72px; }
   .page-banner h1 { font-size: 28px; }
 }

@@ -1,6 +1,6 @@
 /**
- * 奥德帕斯首页 3D 无人机 Banner
- * 蓝白渐变线框 + 星河粒子 + 鼠标交互
+ * 奥德帕斯首页 3D 粒子 Banner
+ * 三模型粒子切换 + 星河背景 + 鼠标交互
  */
 (function () {
   'use strict';
@@ -8,32 +8,31 @@
   if (typeof THREE === 'undefined') return;
 
   /* ========== 配置 ========== */
+  var PARTICLE_COUNT = 25000;
+  var MORPH_DURATION = 1.8;       // 切换动画时长(秒)
+  var AUTO_SWITCH_INTERVAL = 6;   // 自动切换间隔(秒)
+
+  var MODELS = [
+    'models/drone.obj',
+    'models/drone2.obj',
+    'models/drone3.obj'
+  ];
+
   var CONFIG = {
-    sliceDuration: 2.5,
-    sliceGap: 2.0,
-    sliceCount: 30,
-
-    // 蓝白渐变配色
-    wireColor: 0x4d8bff,        // 中蓝 - 底部
-    wireColorTop: 0xd0e4ff,     // 近白浅蓝 - 顶部
-    edgeColor: 0x80b4ff,        // 切割发光蓝
-    glowColor: 0xa8cfff,        // 外发光
-    particleColor1: 0xffffff,   // 白色星点
-    particleColor2: 0x80b4ff,   // 蓝色星点
-
-    // 模型大小
-    droneScale: 65,
-
     cameraFov: 40,
-    cameraZ: 100,
-    autoRotateSpeed: 0.0015,
+    cameraZ: 60,
+    autoRotateSpeed: 0.001,
+    modelScale: 18,
+    // 蓝白配色
+    particleColor1: 0x4d8bff,
+    particleColor2: 0xd0e4ff,
+    glowColor: 0xa8cfff,
   };
 
   /* ========== 场景初始化 ========== */
   var canvas = document.getElementById('drone-3d-canvas');
   if (!canvas) return;
 
-  // container 用 hero section，因为 canvas-wrap 是 absolute 定位，自身尺寸依赖父级
   var container = canvas.closest('.hero-3d') || canvas.parentElement;
   var width = container.clientWidth || window.innerWidth;
   var height = container.clientHeight || 600;
@@ -49,12 +48,13 @@
 
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x000000);
-  scene.fog = new THREE.FogExp2(0x000000, 0.002);
+  scene.fog = new THREE.FogExp2(0x000000, 0.003);
 
   var camera = new THREE.PerspectiveCamera(CONFIG.cameraFov, width / height, 0.1, 1000);
   camera.position.set(0, 0, CONFIG.cameraZ);
   camera.lookAt(0, 0, 0);
 
+  /* ========== 右侧偏移 ========== */
   function getDroneOffsetX() {
     var vFov = CONFIG.cameraFov * Math.PI / 180;
     var visH = 2 * Math.tan(vFov / 2) * CONFIG.cameraZ;
@@ -62,154 +62,25 @@
     return visW * 0.18;
   }
 
-  // 光源 - 蓝白色调
+  /* ========== 光源 ========== */
   scene.add(new THREE.AmbientLight(0x1a2a4a, 0.6));
-
   var dirLight = new THREE.DirectionalLight(0xc8dcff, 0.8);
   dirLight.position.set(30, 40, 50);
   scene.add(dirLight);
-
   var pointLight1 = new THREE.PointLight(0x80b4ff, 2.5, 300);
   pointLight1.position.set(50, 25, 40);
   scene.add(pointLight1);
-
   var pointLight2 = new THREE.PointLight(0x4d8bff, 1.8, 250);
   pointLight2.position.set(-20, -10, 30);
   scene.add(pointLight2);
 
-  var backLight = new THREE.PointLight(0xd0e4ff, 1.0, 200);
-  backLight.position.set(10, 5, -50);
-  scene.add(backLight);
-
-  /* ========== 线框着色器 - 蓝白渐变 ========== */
-  var wireShaderMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uProgress: { value: 0 },
-      uColor: { value: new THREE.Color(CONFIG.wireColor) },
-      uColorTop: { value: new THREE.Color(CONFIG.wireColorTop) },
-      uEdgeColor: { value: new THREE.Color(CONFIG.edgeColor) },
-      uGlowColor: { value: new THREE.Color(CONFIG.glowColor) },
-      uSliceCount: { value: CONFIG.sliceCount },
-      uSliceGap: { value: CONFIG.sliceGap },
-      uModelHeight: { value: 1.0 },
-      uModelMin: { value: 0.0 },
-      uHover: { value: 0.0 },
-    },
-    vertexShader: [
-      'uniform float uTime;',
-      'uniform float uProgress;',
-      'uniform float uSliceCount;',
-      'uniform float uSliceGap;',
-      'uniform float uModelHeight;',
-      'uniform float uModelMin;',
-      'uniform float uHover;',
-      '',
-      'varying vec3 vPosition;',
-      'varying vec3 vNormal;',
-      'varying vec3 vWorldPosition;',
-      'varying float vSliceId;',
-      '',
-      'void main() {',
-      '  vPosition = position;',
-      '  vNormal = normal;',
-      '',
-      '  float normalized = (position.y - uModelMin) / uModelHeight;',
-      '  float sliceId = floor(normalized * uSliceCount);',
-      '  vSliceId = sliceId;',
-      '',
-      '  float offset = (sliceId - uSliceCount * 0.5) * uSliceGap * (1.0 - uProgress);',
-      '',
-      '  vec3 pos = position;',
-      '  pos.y += offset;',
-      '',
-      '  float jitter = sin(sliceId * 3.14159 + uTime * 2.0) * 0.5 * (1.0 - uProgress);',
-      '  pos.x += jitter;',
-      '  pos.z += jitter * 0.5;',
-      '',
-      '  // hover 时微量膨胀',
-      '  pos *= 1.0 + uHover * 0.02;',
-      '',
-      '  vec4 worldPos = modelMatrix * vec4(pos, 1.0);',
-      '  vWorldPosition = worldPos.xyz;',
-      '',
-      '  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);',
-      '}',
-    ].join('\n'),
-    fragmentShader: [
-      'uniform float uTime;',
-      'uniform float uProgress;',
-      'uniform vec3 uColor;',
-      'uniform vec3 uColorTop;',
-      'uniform vec3 uEdgeColor;',
-      'uniform vec3 uGlowColor;',
-      'uniform float uSliceCount;',
-      'uniform float uModelHeight;',
-      'uniform float uModelMin;',
-      'uniform float uHover;',
-      '',
-      'varying vec3 vPosition;',
-      'varying vec3 vNormal;',
-      'varying vec3 vWorldPosition;',
-      'varying float vSliceId;',
-      '',
-      'void main() {',
-      '  float normalized = (vPosition.y - uModelMin) / uModelHeight;',
-      '',
-      '  // 切片边缘',
-      '  float slicePhase = fract(normalized * uSliceCount);',
-      '  float edgeDist = min(slicePhase, 1.0 - slicePhase);',
-      '  float edgeGlow = smoothstep(0.05, 0.0, edgeDist) * (1.0 - uProgress);',
-      '',
-      '  // 蓝白渐变: 底部蓝 -> 顶部白',
-      '  vec3 baseColor = mix(uColor, uColorTop, normalized);',
-      '',
-      '  // 切割高亮',
-      '  vec3 finalColor = mix(baseColor, uEdgeColor * 1.5, edgeGlow * 0.7);',
-      '',
-      '  // 菲涅尔轮廓光 - 蓝白色',
-      '  vec3 viewDir = normalize(cameraPosition - vWorldPosition);',
-      '  float fresnel = 1.0 - abs(dot(normalize(vNormal), viewDir));',
-      '  fresnel = pow(fresnel, 2.0);',
-      '  finalColor += uGlowColor * fresnel * (0.35 + uHover * 0.25);',
-      '',
-      '  // 扫描线',
-      '  float scanLine = sin(normalized * 35.0 - uTime * 2.5) * 0.5 + 0.5;',
-      '  scanLine = pow(scanLine, 10.0) * 0.2;',
-      '  finalColor += vec3(0.7, 0.85, 1.0) * scanLine * uProgress;',
-      '',
-      '  // 呼吸脉冲',
-      '  float pulse = 0.93 + 0.07 * sin(uTime * 1.2 + normalized * 6.28);',
-      '  finalColor *= pulse;',
-      '',
-      '  // hover 提亮',
-      '  finalColor += vec3(0.15, 0.2, 0.3) * uHover;',
-      '',
-      '  // 透明度',
-      '  float alpha = mix(0.55, 0.92, uProgress);',
-      '  alpha += edgeGlow * 0.25;',
-      '  alpha += fresnel * 0.2;',
-      '  alpha += uHover * 0.08;',
-      '',
-      '  gl_FragColor = vec4(finalColor, alpha);',
-      '}',
-    ].join('\n'),
-    transparent: true,
-    wireframe: true,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-  });
-
-  /* ========== (实体着色器已移除 - 仅保留线框) ========== */
-
-  /* ========== 星河粒子系统 ========== */
+  /* ========== 星河粒子 ========== */
   function createStarField(count, spread, baseSize, color, speed) {
     var geo = new THREE.BufferGeometry();
     var pos = new Float32Array(count * 3);
-    var vel = new Float32Array(count * 3);
     var sz = new Float32Array(count);
-    var twinkleOffset = new Float32Array(count);
-
+    var twk = new Float32Array(count);
+    var vel = new Float32Array(count * 3);
     for (var i = 0; i < count; i++) {
       var i3 = i * 3;
       pos[i3] = (Math.random() - 0.5) * spread;
@@ -219,42 +90,32 @@
       vel[i3 + 1] = (Math.random() - 0.5) * speed * 0.6;
       vel[i3 + 2] = (Math.random() - 0.5) * speed;
       sz[i] = Math.random() * baseSize + 0.2;
-      twinkleOffset[i] = Math.random() * 6.28;
+      twk[i] = Math.random() * 6.28;
     }
-
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     geo.setAttribute('aVelocity', new THREE.BufferAttribute(vel, 3));
     geo.setAttribute('aSize', new THREE.BufferAttribute(sz, 1));
-    geo.setAttribute('aTwinkle', new THREE.BufferAttribute(twinkleOffset, 1));
+    geo.setAttribute('aTwinkle', new THREE.BufferAttribute(twk, 1));
 
     var mat = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
         uColor: { value: new THREE.Color(color) },
         uPixelRatio: { value: renderer.getPixelRatio() },
-        uHover: { value: 0.0 },
       },
       vertexShader: [
         'uniform float uTime;',
         'uniform float uPixelRatio;',
-        'uniform float uHover;',
         'attribute vec3 aVelocity;',
         'attribute float aSize;',
         'attribute float aTwinkle;',
         'varying float vAlpha;',
-        '',
         'void main() {',
-        '  vec3 pos = position;',
-        '  pos += aVelocity * uTime * 40.0;',
-        '',
+        '  vec3 pos = position + aVelocity * uTime * 40.0;',
         '  float bound = 55.0;',
         '  pos = mod(pos + bound, bound * 2.0) - bound;',
-        '',
-        '  // 闪烁 - 每颗星不同频率和相位',
         '  float twinkle = sin(uTime * (1.5 + aSize * 0.8) + aTwinkle) * 0.5 + 0.5;',
-        '  twinkle = pow(twinkle, 2.0);',
-        '  vAlpha = 0.1 + 0.5 * twinkle + uHover * 0.15;',
-        '',
+        '  vAlpha = 0.1 + 0.5 * pow(twinkle, 2.0);',
         '  vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);',
         '  gl_Position = projectionMatrix * mvPos;',
         '  gl_PointSize = (aSize + twinkle * 0.5) * uPixelRatio * (55.0 / -mvPos.z);',
@@ -263,19 +124,13 @@
       fragmentShader: [
         'uniform vec3 uColor;',
         'varying float vAlpha;',
-        '',
         'void main() {',
         '  float d = length(gl_PointCoord - 0.5);',
         '  if (d > 0.5) discard;',
-        '',
-        '  // 柔和的星光衰减',
         '  float core = smoothstep(0.5, 0.0, d);',
         '  float glow = smoothstep(0.5, 0.15, d);',
         '  float alpha = (core * 0.7 + glow * 0.3) * vAlpha;',
-        '',
-        '  // 中心偏白',
         '  vec3 color = mix(uColor, vec3(1.0), core * 0.4);',
-        '',
         '  gl_FragColor = vec4(color, alpha);',
         '}',
       ].join('\n'),
@@ -283,11 +138,9 @@
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
-
     return new THREE.Points(geo, mat);
   }
 
-  // 多层星河: 远处小白星 + 近处蓝色星 + 少量亮星
   var starsWhite = createStarField(2000, 130, 1.0, 0xffffff, 0.008);
   var starsBlue = createStarField(800, 100, 1.4, 0x80b4ff, 0.012);
   var starsBright = createStarField(150, 120, 2.8, 0xd0e4ff, 0.005);
@@ -295,261 +148,329 @@
   scene.add(starsBlue);
   scene.add(starsBright);
 
-  /* ========== 加载 OBJ 模型 ========== */
-  var droneGroup = new THREE.Group();
-  scene.add(droneGroup);
+  /* ========== 从 OBJ 提取顶点坐标 ========== */
+  function extractVertices(obj, targetCount) {
+    var allVerts = [];
+    obj.traverse(function (child) {
+      if (child.isMesh) {
+        var posAttr = child.geometry.getAttribute('position');
+        for (var i = 0; i < posAttr.count; i++) {
+          allVerts.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+        }
+      }
+    });
 
-  // 螺旋桨组 - 用于旋转动画
-  var propellerGroups = [];   // [{group, pivotY}]
-  var PROP_XRANGE_THRESHOLD = 80; // OBJ 原始坐标中 X 跨度 > 80 的视为螺旋桨
+    // 居中 & 归一化缩放
+    var minX = Infinity, minY = Infinity, minZ = Infinity;
+    var maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+    for (var i = 0; i < allVerts.length; i += 3) {
+      if (allVerts[i] < minX) minX = allVerts[i];
+      if (allVerts[i] > maxX) maxX = allVerts[i];
+      if (allVerts[i + 1] < minY) minY = allVerts[i + 1];
+      if (allVerts[i + 1] > maxY) maxY = allVerts[i + 1];
+      if (allVerts[i + 2] < minZ) minZ = allVerts[i + 2];
+      if (allVerts[i + 2] > maxZ) maxZ = allVerts[i + 2];
+    }
+    var cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, cz = (minZ + maxZ) / 2;
+    var span = Math.max(maxX - minX, maxY - minY, maxZ - minZ);
+    var scale = CONFIG.modelScale / span;
 
-  var modelLoaded = false;
-  var animStartTime = 0;
+    for (var i = 0; i < allVerts.length; i += 3) {
+      allVerts[i] = (allVerts[i] - cx) * scale;
+      allVerts[i + 1] = (allVerts[i + 1] - cy) * scale;
+      allVerts[i + 2] = (allVerts[i + 2] - cz) * scale;
+    }
+
+    // 填充/裁剪到目标数量
+    var result = new Float32Array(targetCount * 3);
+    var srcCount = allVerts.length / 3;
+    for (var i = 0; i < targetCount; i++) {
+      var si = (i % srcCount) * 3;
+      result[i * 3] = allVerts[si];
+      result[i * 3 + 1] = allVerts[si + 1];
+      result[i * 3 + 2] = allVerts[si + 2];
+    }
+    return result;
+  }
+
+  /* ========== 粒子系统 ========== */
+  var particleGroup = new THREE.Group();
+  scene.add(particleGroup);
+
+  // 当前位置 & 目标位置
+  var currentPositions = new Float32Array(PARTICLE_COUNT * 3);
+  var targetPositions = new Float32Array(PARTICLE_COUNT * 3);
+  var startPositions = new Float32Array(PARTICLE_COUNT * 3);
+
+  // 每个粒子的随机延迟
+  var particleDelays = new Float32Array(PARTICLE_COUNT);
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
+    particleDelays[i] = Math.random();
+    // 初始随机分散
+    currentPositions[i * 3] = (Math.random() - 0.5) * 40;
+    currentPositions[i * 3 + 1] = (Math.random() - 0.5) * 40;
+    currentPositions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+  }
+
+  var particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
+  particleGeo.setAttribute('aDelay', new THREE.BufferAttribute(particleDelays, 1));
+  // 随机大小
+  var particleSizes = new Float32Array(PARTICLE_COUNT);
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
+    particleSizes[i] = 0.5 + Math.random() * 1.5;
+  }
+  particleGeo.setAttribute('aSize', new THREE.BufferAttribute(particleSizes, 1));
+
+  var particleMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uColor1: { value: new THREE.Color(CONFIG.particleColor1) },
+      uColor2: { value: new THREE.Color(CONFIG.particleColor2) },
+      uPixelRatio: { value: renderer.getPixelRatio() },
+      uMorphProgress: { value: 0 },
+    },
+    vertexShader: [
+      'uniform float uTime;',
+      'uniform float uPixelRatio;',
+      'uniform float uMorphProgress;',
+      'attribute float aDelay;',
+      'attribute float aSize;',
+      'varying float vAlpha;',
+      'varying float vHeight;',
+      '',
+      'void main() {',
+      '  vec3 pos = position;',
+      '',
+      '  // 呼吸浮动',
+      '  pos.y += sin(uTime * 0.8 + pos.x * 0.5) * 0.15;',
+      '  pos.x += cos(uTime * 0.6 + pos.z * 0.3) * 0.1;',
+      '',
+      '  vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);',
+      '  gl_Position = projectionMatrix * mvPos;',
+      '',
+      '  // 切换过程中粒子闪烁变大',
+      '  float morphFlash = sin(uMorphProgress * 3.14159) * 0.8;',
+      '  float size = aSize * (1.0 + morphFlash);',
+      '  gl_PointSize = size * uPixelRatio * (40.0 / -mvPos.z);',
+      '',
+      '  // 归一化高度用于着色',
+      '  vHeight = (pos.y + 10.0) / 20.0;',
+      '  vAlpha = 0.6 + 0.4 * sin(uTime * 2.0 + aDelay * 6.28);',
+      '  // 切换时整体更亮',
+      '  vAlpha += morphFlash * 0.3;',
+      '}',
+    ].join('\n'),
+    fragmentShader: [
+      'uniform vec3 uColor1;',
+      'uniform vec3 uColor2;',
+      'varying float vAlpha;',
+      'varying float vHeight;',
+      '',
+      'void main() {',
+      '  float d = length(gl_PointCoord - 0.5);',
+      '  if (d > 0.5) discard;',
+      '',
+      '  float core = smoothstep(0.5, 0.0, d);',
+      '  float glow = smoothstep(0.5, 0.1, d);',
+      '  float alpha = (core * 0.8 + glow * 0.2) * vAlpha;',
+      '',
+      '  // 蓝白渐变: 底部蓝 -> 顶部白',
+      '  vec3 color = mix(uColor1, uColor2, clamp(vHeight, 0.0, 1.0));',
+      '  // 核心偏白',
+      '  color = mix(color, vec3(1.0), core * 0.3);',
+      '',
+      '  gl_FragColor = vec4(color, alpha);',
+      '}',
+    ].join('\n'),
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+
+  var particles = new THREE.Points(particleGeo, particleMat);
+  particleGroup.add(particles);
+
+  /* ========== 模型加载 & 切换逻辑 ========== */
+  var modelVertices = [];  // Float32Array[] 每个模型的目标顶点
+  var modelsLoaded = 0;
+  var currentModelIndex = 0;
+  var morphing = false;
+  var morphStartTime = 0;
+  var allModelsReady = false;
 
   var loader = new THREE.OBJLoader();
-  loader.load(
-    'models/drone.obj',
-    function (obj) {
-      var box = new THREE.Box3().setFromObject(obj);
-      var center = box.getCenter(new THREE.Vector3());
-      var size = box.getSize(new THREE.Vector3());
 
-      var maxDim = Math.max(size.x, size.y, size.z);
-      var scale = CONFIG.droneScale / maxDim;
+  function loadModel(url, index) {
+    loader.load(url, function (obj) {
+      modelVertices[index] = extractVertices(obj, PARTICLE_COUNT);
+      modelsLoaded++;
+      if (modelsLoaded === MODELS.length) {
+        allModelsReady = true;
+        // 初始切换到第一个模型
+        startMorph(0);
+      }
+    }, undefined, function (err) {
+      console.warn('Failed to load model:', url, err);
+    });
+  }
 
-      obj.position.sub(center);
-      obj.scale.setScalar(scale);
-
-      var box2 = new THREE.Box3().setFromObject(obj);
-      var size2 = box2.getSize(new THREE.Vector3());
-      var min2 = box2.min;
-
-      var modelHeight = size2.y;
-      var modelMin = min2.y;
-
-      wireShaderMaterial.uniforms.uModelHeight.value = modelHeight;
-      wireShaderMaterial.uniforms.uModelMin.value = modelMin;
-
-      // 第一遍: 收集所有 mesh 并判断是否为螺旋桨
-      var bodyMeshes = [];
-      var propMeshes = [];
-
-      obj.traverse(function (child) {
-        if (child.isMesh) {
-          child.geometry.computeVertexNormals();
-          child.geometry.computeBoundingBox();
-          var bb = child.geometry.boundingBox;
-          var xRange = bb.max.x - bb.min.x;
-
-          if (xRange > PROP_XRANGE_THRESHOLD) {
-            propMeshes.push(child);
-          } else {
-            bodyMeshes.push(child);
-          }
-        }
-      });
-
-      // 添加机身部件 (仅线框 + 边缘线，不再有实体层)
-      bodyMeshes.forEach(function (child) {
-        var wireMesh = new THREE.Mesh(child.geometry, wireShaderMaterial);
-        wireMesh.position.copy(child.position);
-        wireMesh.rotation.copy(child.rotation);
-        wireMesh.scale.copy(child.scale);
-        droneGroup.add(wireMesh);
-
-        var edges = new THREE.EdgesGeometry(child.geometry, 25);
-        var edgeMat = new THREE.LineBasicMaterial({
-          color: CONFIG.glowColor,
-          transparent: true,
-          opacity: 0.3,
-        });
-        var edgeLine = new THREE.LineSegments(edges, edgeMat);
-        edgeLine.position.copy(child.position);
-        edgeLine.rotation.copy(child.rotation);
-        edgeLine.scale.copy(child.scale);
-        droneGroup.add(edgeLine);
-      });
-
-      // 按 Z 坐标聚类螺旋桨到不同旋翼组
-      // OBJ 中有前后两组旋翼 (Z≈-133 和 Z≈-36)
-      var propClusters = {};
-      propMeshes.forEach(function (child) {
-        var bb = child.geometry.boundingBox;
-        var cz = (bb.max.z + bb.min.z) / 2;
-        // 量化到整数 10 以聚类
-        var clusterKey = Math.round(cz / 10) * 10;
-        if (!propClusters[clusterKey]) {
-          propClusters[clusterKey] = [];
-        }
-        propClusters[clusterKey].push(child);
-      });
-
-      // 为每个旋翼组创建一个带 pivot 的 Group
-      // 螺旋桨需要绕自身几何中心旋转
-      Object.keys(propClusters).forEach(function (key) {
-        var cluster = propClusters[key];
-
-        // 用几何体 boundingBox 计算轴心（局部坐标）
-        var clusterBox = new THREE.Box3();
-        cluster.forEach(function (child) {
-          clusterBox.union(child.geometry.boundingBox);
-        });
-        var pivotCenter = clusterBox.getCenter(new THREE.Vector3());
-
-        // 创建 pivot group，位置设在轴心处
-        var pivot = new THREE.Group();
-        pivot.position.copy(pivotCenter);
-
-        cluster.forEach(function (child) {
-          // 将几何体顶点平移，使轴心在原点
-          var offsetGeo = child.geometry.clone();
-          offsetGeo.translate(-pivotCenter.x, -pivotCenter.y, -pivotCenter.z);
-
-          // 线框
-          var wireMesh = new THREE.Mesh(offsetGeo, wireShaderMaterial);
-          pivot.add(wireMesh);
-
-          // 边缘线
-          var edges = new THREE.EdgesGeometry(offsetGeo, 25);
-          var edgeMat = new THREE.LineBasicMaterial({
-            color: CONFIG.glowColor,
-            transparent: true,
-            opacity: 0.3,
-          });
-          var edgeLine = new THREE.LineSegments(edges, edgeMat);
-          pivot.add(edgeLine);
-        });
-
-        droneGroup.add(pivot);
-        propellerGroups.push({ group: pivot, speed: 0.15 + Math.random() * 0.03 });
-      });
-
-      droneGroup.scale.copy(obj.scale);
-
-      droneGroup.position.x = getDroneOffsetX();
-      droneGroup.position.y = 0;
-      droneGroup.position.z = 0;
-
-      droneGroup.rotation.x = -0.15;
-      droneGroup.rotation.z = 0.05;
-
-      modelLoaded = true;
-      animStartTime = performance.now() / 1000;
-    },
-    function () {},
-    function (error) {
-      console.warn('Drone OBJ load error:', error);
-    }
-  );
+  MODELS.forEach(function (url, i) {
+    loadModel(url, i);
+  });
 
   /* ========== 缓动函数 ========== */
   function easeInOutCubic(t) {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  /* ========== 鼠标交互 ========== */
-  var animPhase = 'assembling';
-  var mouseX = 0, mouseY = 0;
-  var isHovering = false;
-  var hoverValue = 0;       // 0~1 平滑过渡
-  var targetHover = 0;
+  /* ========== 切换控制 ========== */
+  function startMorph(toIndex) {
+    if (morphing) return;
 
-  // 整个 hero 区域监听鼠标
+    currentModelIndex = toIndex;
+    morphing = true;
+    morphStartTime = performance.now() / 1000;
+
+    // 保存当前位置作为起点
+    startPositions.set(currentPositions);
+    // 设置目标
+    targetPositions.set(modelVertices[toIndex]);
+
+    // 切换 banner 文字
+    updateBannerText(toIndex);
+    // 更新导航指示器
+    updateIndicators(toIndex);
+  }
+
+  function switchToNext() {
+    var next = (currentModelIndex + 1) % MODELS.length;
+    startMorph(next);
+  }
+
+  /* ========== banner 文字切换 ========== */
+  function updateBannerText(index) {
+    var slides = document.querySelectorAll('.hero-slide');
+    slides.forEach(function (el, i) {
+      if (i === index) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
+    });
+  }
+
+  function updateIndicators(index) {
+    var dots = document.querySelectorAll('.hero-indicator');
+    dots.forEach(function (el, i) {
+      el.classList.toggle('active', i === index);
+    });
+  }
+
+  /* ========== 导航指示器点击 ========== */
+  document.querySelectorAll('.hero-indicator').forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      if (!allModelsReady || morphing) return;
+      if (i !== currentModelIndex) {
+        startMorph(i);
+        lastSwitchTime = performance.now() / 1000;
+      }
+    });
+  });
+
+  /* ========== 点击 canvas 切换 ========== */
   var heroSection = canvas.closest('.hero-3d') || container;
+  heroSection.addEventListener('click', function (e) {
+    // 排除按钮和链接点击
+    if (e.target.closest('a, button, .hero-indicator')) return;
+    if (!allModelsReady || morphing) return;
+    switchToNext();
+    lastSwitchTime = performance.now() / 1000;
+  });
+
+  /* ========== 鼠标交互 ========== */
+  var mouseX = 0, mouseY = 0;
 
   heroSection.addEventListener('mousemove', function (e) {
     var rect = heroSection.getBoundingClientRect();
     mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
     mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
   });
-
-  heroSection.addEventListener('mouseenter', function () {
-    isHovering = true;
-    targetHover = 1;
-  });
-
   heroSection.addEventListener('mouseleave', function () {
-    isHovering = false;
-    targetHover = 0;
     mouseX = 0;
     mouseY = 0;
   });
 
   /* ========== 渲染循环 ========== */
   var rafId = null;
+  var lastSwitchTime = 0;
 
   function animate() {
     rafId = requestAnimationFrame(animate);
 
     var now = performance.now() / 1000;
-    var elapsed = modelLoaded ? now - animStartTime : 0;
 
-    // hover 平滑过渡
-    hoverValue += (targetHover - hoverValue) * 0.04;
-
-    // 更新所有粒子
+    // 更新星河
     starsWhite.material.uniforms.uTime.value = now;
-    starsWhite.material.uniforms.uHover.value = hoverValue;
     starsBlue.material.uniforms.uTime.value = now;
-    starsBlue.material.uniforms.uHover.value = hoverValue;
     starsBright.material.uniforms.uTime.value = now;
-    starsBright.material.uniforms.uHover.value = hoverValue;
 
-    if (modelLoaded) {
-      var progress = 0;
-      if (animPhase === 'assembling') {
-        progress = Math.min(elapsed / CONFIG.sliceDuration, 1);
-        progress = easeInOutCubic(progress);
-        if (progress >= 1) {
-          animPhase = 'idle';
-          progress = 1;
-        }
-      } else {
-        progress = 1;
+    // 粒子 morph
+    if (morphing) {
+      var elapsed = now - morphStartTime;
+      var rawProgress = Math.min(elapsed / MORPH_DURATION, 1);
+      var progress = easeInOutCubic(rawProgress);
+
+      particleMat.uniforms.uMorphProgress.value = rawProgress;
+
+      var posArr = particleGeo.attributes.position.array;
+      var delayArr = particleDelays;
+
+      for (var i = 0; i < PARTICLE_COUNT; i++) {
+        var i3 = i * 3;
+        // 每个粒子有自己的延迟 => 错落效果
+        var individualProgress = Math.max(0, Math.min(1, (rawProgress - delayArr[i] * 0.3) / 0.7));
+        individualProgress = easeInOutCubic(individualProgress);
+
+        posArr[i3] = startPositions[i3] + (targetPositions[i3] - startPositions[i3]) * individualProgress;
+        posArr[i3 + 1] = startPositions[i3 + 1] + (targetPositions[i3 + 1] - startPositions[i3 + 1]) * individualProgress;
+        posArr[i3 + 2] = startPositions[i3 + 2] + (targetPositions[i3 + 2] - startPositions[i3 + 2]) * individualProgress;
       }
+      particleGeo.attributes.position.needsUpdate = true;
 
-      wireShaderMaterial.uniforms.uProgress.value = progress;
-      wireShaderMaterial.uniforms.uTime.value = now;
-      wireShaderMaterial.uniforms.uHover.value = hoverValue;
-
-      // 螺旋桨旋转 (Y 轴)
-      propellerGroups.forEach(function (pg) {
-        pg.group.rotation.y += pg.speed;
-      });
-
-      // 自动旋转
-      droneGroup.rotation.y += CONFIG.autoRotateSpeed;
-
-      // 鼠标跟随 - hover 时响应更大
-      var followStrength = 0.06 + hoverValue * 0.12;
-      var targetRotX = -0.15 + mouseY * followStrength;
-      var targetRotZ = 0.05 - mouseX * followStrength * 0.8;
-      droneGroup.rotation.x += (targetRotX - droneGroup.rotation.x) * 0.03;
-      droneGroup.rotation.z += (targetRotZ - droneGroup.rotation.z) * 0.03;
-
-      // 悬浮
-      droneGroup.position.x = getDroneOffsetX();
-      droneGroup.position.y = Math.sin(now * 0.6) * 1.5;
-
-      // 边缘线 (包括嵌套在螺旋桨组内的)
-      droneGroup.traverse(function (child) {
-        if (child.isLineSegments) {
-          child.material.opacity = 0.12 + progress * 0.2 + hoverValue * 0.15;
-        }
-      });
-
-      // 光源动态
-      pointLight1.position.x = 50 + Math.sin(now * 0.4) * 12;
-      pointLight1.position.y = 25 + Math.cos(now * 0.3) * 8;
-      pointLight1.intensity = 2.5 + hoverValue * 1.0;
-
-      pointLight2.intensity = 1.8 + hoverValue * 0.8;
+      if (rawProgress >= 1) {
+        morphing = false;
+        currentPositions.set(targetPositions);
+        particleMat.uniforms.uMorphProgress.value = 0;
+        lastSwitchTime = now;
+      }
     }
 
-    // 相机跟随 - hover 时更灵敏
-    var camFollow = 0.015 + hoverValue * 0.01;
-    camera.position.x += (mouseX * (5 + hoverValue * 4) - camera.position.x) * camFollow;
-    camera.position.y += (mouseY * -(3 + hoverValue * 2) - camera.position.y) * camFollow;
+    // 自动切换
+    if (allModelsReady && !morphing && (now - lastSwitchTime) > AUTO_SWITCH_INTERVAL) {
+      switchToNext();
+    }
+
+    // 粒子组旋转和位置
+    particleGroup.rotation.y += CONFIG.autoRotateSpeed;
+    // 鼠标跟随
+    var targetRotX = mouseY * 0.08;
+    var targetRotZ = -mouseX * 0.06;
+    particleGroup.rotation.x += (targetRotX - particleGroup.rotation.x) * 0.03;
+    particleGroup.rotation.z += (targetRotZ - particleGroup.rotation.z) * 0.03;
+    // 右侧偏移 + 悬浮
+    particleGroup.position.x = getDroneOffsetX();
+    particleGroup.position.y = Math.sin(now * 0.6) * 1.0;
+
+    particleMat.uniforms.uTime.value = now;
+
+    // 光源动态
+    pointLight1.position.x = 50 + Math.sin(now * 0.4) * 12;
+    pointLight1.position.y = 25 + Math.cos(now * 0.3) * 8;
+
+    // 相机微动
+    camera.position.x += (mouseX * 3 - camera.position.x) * 0.015;
+    camera.position.y += (-mouseY * 2 - camera.position.y) * 0.015;
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);
@@ -568,13 +489,12 @@
     starsWhite.material.uniforms.uPixelRatio.value = pr;
     starsBlue.material.uniforms.uPixelRatio.value = pr;
     starsBright.material.uniforms.uPixelRatio.value = pr;
-    if (modelLoaded) {
-      droneGroup.position.x = getDroneOffsetX();
-    }
+    particleMat.uniforms.uPixelRatio.value = pr;
+    particleGroup.position.x = getDroneOffsetX();
   }
-
   window.addEventListener('resize', onResize);
 
+  /* ========== 可见性优化 ========== */
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -587,7 +507,6 @@
       }
     });
   }, { threshold: 0.1 });
-
   observer.observe(canvas);
 
 })();
