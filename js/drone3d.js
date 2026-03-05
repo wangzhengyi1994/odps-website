@@ -385,43 +385,38 @@
       });
 
       // 为每个旋翼组创建一个带 pivot 的 Group
+      // 螺旋桨需要绕自身几何中心旋转
       Object.keys(propClusters).forEach(function (key) {
         var cluster = propClusters[key];
 
-        // 计算该组所有顶点的中心 (作为旋转轴心)
+        // 用几何体 boundingBox 计算轴心（局部坐标）
         var clusterBox = new THREE.Box3();
         cluster.forEach(function (child) {
-          var bb = child.geometry.boundingBox.clone();
-          bb.applyMatrix4(child.matrixWorld);
-          clusterBox.union(bb);
+          clusterBox.union(child.geometry.boundingBox);
         });
         var pivotCenter = clusterBox.getCenter(new THREE.Vector3());
 
-        // 创建 pivot group
+        // 创建 pivot group，位置设在轴心处
         var pivot = new THREE.Group();
         pivot.position.copy(pivotCenter);
 
         cluster.forEach(function (child) {
+          // 将几何体顶点平移，使轴心在原点
+          var offsetGeo = child.geometry.clone();
+          offsetGeo.translate(-pivotCenter.x, -pivotCenter.y, -pivotCenter.z);
+
           // 线框
-          var wireMesh = new THREE.Mesh(child.geometry, wireShaderMaterial);
-          wireMesh.position.copy(child.position);
-          wireMesh.position.sub(pivotCenter); // 相对于 pivot 中心
-          wireMesh.rotation.copy(child.rotation);
-          wireMesh.scale.copy(child.scale);
+          var wireMesh = new THREE.Mesh(offsetGeo, wireShaderMaterial);
           pivot.add(wireMesh);
 
           // 边缘线
-          var edges = new THREE.EdgesGeometry(child.geometry, 25);
+          var edges = new THREE.EdgesGeometry(offsetGeo, 25);
           var edgeMat = new THREE.LineBasicMaterial({
             color: CONFIG.glowColor,
             transparent: true,
             opacity: 0.3,
           });
           var edgeLine = new THREE.LineSegments(edges, edgeMat);
-          edgeLine.position.copy(child.position);
-          edgeLine.position.sub(pivotCenter);
-          edgeLine.rotation.copy(child.rotation);
-          edgeLine.scale.copy(child.scale);
           pivot.add(edgeLine);
         });
 
