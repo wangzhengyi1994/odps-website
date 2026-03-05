@@ -5,7 +5,7 @@ body { font-family: 'OPPOSans', -apple-system, BlinkMacSystemFont, "PingFang SC"
 a { text-decoration: none; color: inherit; transition: color .3s; }
 ul, ol { list-style: none; }
 img { max-width: 100%; display: block; }
-.container { max-width: 1440px; margin: 0 auto; padding: 0 240px; }
+.container { max-width: 1440px; margin: 0 auto; padding: 0 20px; }
 
 /* ========== Design Tokens (Light Mode) ========== */
 :root {
@@ -82,9 +82,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ========== Container responsive ========== */
-@media (max-width: 1600px) { .container { padding: 0 120px; } }
-@media (max-width: 1200px) { .container { padding: 0 40px; } }
-@media (max-width: 768px) { .container { padding: 0 20px; } }
+@media (max-width: 768px) { .container { padding: 0 16px; } }
 
 /* ========== Header / Nav ========== */
 .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: var(--white-100); border-bottom: 1px solid var(--border-1); transition: box-shadow .3s; }
