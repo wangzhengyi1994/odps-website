@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== Fade-in on scroll ==========
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.05 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   // ========== Number counter animation ==========
@@ -36,6 +36,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { threshold: 0.5 });
     io.observe(el);
+  });
+
+  // ========== Image fallback for 404 ==========
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', function() {
+      this.style.display = 'none';
+      if (this.parentElement) {
+        this.parentElement.style.background = 'linear-gradient(135deg, var(--primary-2, #D2D7FB), var(--primary-1, #EFF1FD))';
+      }
+    });
+  });
+  // Background-image 404 check for divs
+  document.querySelectorAll('.feature-img, .solution-img, .cert-img, .case-thumb').forEach(el => {
+    const bg = getComputedStyle(el).backgroundImage;
+    if (bg && bg !== 'none') {
+      const url = bg.match(/url\(["']?(.*?)["']?\)/);
+      if (url && url[1]) {
+        const testImg = new Image();
+        testImg.onerror = () => {
+          el.style.backgroundImage = 'none';
+          el.style.background = 'linear-gradient(135deg, #D2D7FB, #EFF1FD)';
+        };
+        testImg.src = url[1];
+      }
+    }
   });
 
   // ========== Case filter ==========

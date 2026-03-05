@@ -8,7 +8,7 @@
   if (typeof THREE === 'undefined') return;
 
   /* ========== 配置 ========== */
-  var PARTICLE_COUNT = 25000;
+  var PARTICLE_COUNT = 30000;
   var MORPH_DURATION = 1.8;       // 切换动画时长(秒)
   var AUTO_SWITCH_INTERVAL = 6;   // 自动切换间隔(秒)
 
@@ -23,10 +23,10 @@
     cameraZ: 60,
     autoRotateSpeed: 0.001,
     modelScale: 18,
-    // 蓝白配色
-    particleColor1: 0x4d8bff,
-    particleColor2: 0xd0e4ff,
-    glowColor: 0xa8cfff,
+    // 蓝白配色 - 更亮更醒目
+    particleColor1: 0x6ea8ff,
+    particleColor2: 0xe8f2ff,
+    glowColor: 0xc0dcff,
   };
 
   /* ========== 场景初始化 ========== */
@@ -44,11 +44,11 @@
   });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 1);
+  renderer.setClearColor(0x050a18, 1);
 
   var scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
-  scene.fog = new THREE.FogExp2(0x000000, 0.003);
+  scene.background = new THREE.Color(0x050a18);
+  scene.fog = new THREE.FogExp2(0x050a18, 0.002);
 
   var camera = new THREE.PerspectiveCamera(CONFIG.cameraFov, width / height, 0.1, 1000);
   camera.position.set(0, 0, CONFIG.cameraZ);
@@ -206,19 +206,19 @@
   var particleDelays = new Float32Array(PARTICLE_COUNT);
   for (var i = 0; i < PARTICLE_COUNT; i++) {
     particleDelays[i] = Math.random();
-    // 初始随机分散
-    currentPositions[i * 3] = (Math.random() - 0.5) * 40;
-    currentPositions[i * 3 + 1] = (Math.random() - 0.5) * 40;
-    currentPositions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+    // 初始随机分散 - 更广范围
+    currentPositions[i * 3] = (Math.random() - 0.5) * 50;
+    currentPositions[i * 3 + 1] = (Math.random() - 0.5) * 50;
+    currentPositions[i * 3 + 2] = (Math.random() - 0.5) * 50;
   }
 
   var particleGeo = new THREE.BufferGeometry();
   particleGeo.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
   particleGeo.setAttribute('aDelay', new THREE.BufferAttribute(particleDelays, 1));
-  // 随机大小
+  // 随机大小 - 更大更亮
   var particleSizes = new Float32Array(PARTICLE_COUNT);
   for (var i = 0; i < PARTICLE_COUNT; i++) {
-    particleSizes[i] = 0.5 + Math.random() * 1.5;
+    particleSizes[i] = 1.0 + Math.random() * 2.5;
   }
   particleGeo.setAttribute('aSize', new THREE.BufferAttribute(particleSizes, 1));
 
@@ -252,11 +252,11 @@
       '  // 切换过程中粒子闪烁变大',
       '  float morphFlash = sin(uMorphProgress * 3.14159) * 0.8;',
       '  float size = aSize * (1.0 + morphFlash);',
-      '  gl_PointSize = size * uPixelRatio * (40.0 / -mvPos.z);',
+      '  gl_PointSize = size * uPixelRatio * (55.0 / -mvPos.z);',
       '',
       '  // 归一化高度用于着色',
       '  vHeight = (pos.y + 10.0) / 20.0;',
-      '  vAlpha = 0.6 + 0.4 * sin(uTime * 2.0 + aDelay * 6.28);',
+      '  vAlpha = 0.75 + 0.25 * sin(uTime * 2.0 + aDelay * 6.28);',
       '  // 切换时整体更亮',
       '  vAlpha += morphFlash * 0.3;',
       '}',
@@ -272,13 +272,13 @@
       '  if (d > 0.5) discard;',
       '',
       '  float core = smoothstep(0.5, 0.0, d);',
-      '  float glow = smoothstep(0.5, 0.1, d);',
-      '  float alpha = (core * 0.8 + glow * 0.2) * vAlpha;',
+      '  float glow = smoothstep(0.5, 0.08, d);',
+      '  float alpha = (core * 0.85 + glow * 0.35) * vAlpha;',
       '',
       '  // 蓝白渐变: 底部蓝 -> 顶部白',
       '  vec3 color = mix(uColor1, uColor2, clamp(vHeight, 0.0, 1.0));',
-      '  // 核心偏白',
-      '  color = mix(color, vec3(1.0), core * 0.3);',
+      '  // 核心偏白 - 更强烈的白色核心',
+      '  color = mix(color, vec3(1.0), core * 0.5);',
       '',
       '  gl_FragColor = vec4(color, alpha);',
       '}',
