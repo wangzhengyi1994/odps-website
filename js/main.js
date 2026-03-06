@@ -57,10 +57,34 @@ document.addEventListener('DOMContentLoaded', () => {
     io.observe(el);
   });
 
+  // ========== Count-up animation (algo stats etc.) ==========
+  document.querySelectorAll('.count-up[data-target]').forEach(el => {
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        const target = +el.dataset.target;
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const start = performance.now();
+        const step = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          // easeOutCubic for a satisfying deceleration
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(ease * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        io.disconnect();
+      }
+    }, { threshold: 0.3 });
+    io.observe(el);
+  });
+
   // ========== Hero Slide Carousel ==========
+  // 如果 drone3d.js 存在（首页3D banner），由 drone3d.js 统一控制切换，避免双计时器冲突
   const slides = document.querySelectorAll('.hero-slide');
   const indicators = document.querySelectorAll('.hero-indicator');
-  if (slides.length > 1) {
+  const hasDrone3d = !!document.getElementById('drone-3d-canvas');
+  if (slides.length > 1 && !hasDrone3d) {
     let current = 0;
     let timer = null;
 

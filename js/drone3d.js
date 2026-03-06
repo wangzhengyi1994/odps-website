@@ -8,7 +8,7 @@
   if (typeof THREE === 'undefined') return;
 
   /* ========== 配置 ========== */
-  var PARTICLE_COUNT = 30000;
+  var PARTICLE_COUNT = 120000;
   var MORPH_DURATION = 1.8;       // 切换动画时长(秒)
   var AUTO_SWITCH_INTERVAL = 6;   // 自动切换间隔(秒)
 
@@ -20,9 +20,9 @@
 
   var CONFIG = {
     cameraFov: 40,
-    cameraZ: 60,
+    cameraZ: 45,
     autoRotateSpeed: 0.001,
-    modelScale: 18,
+    modelScale: 54,
     // 蓝白配色 - 更亮更醒目
     particleColor1: 0x6ea8ff,
     particleColor2: 0xe8f2ff,
@@ -215,10 +215,10 @@
   var particleGeo = new THREE.BufferGeometry();
   particleGeo.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
   particleGeo.setAttribute('aDelay', new THREE.BufferAttribute(particleDelays, 1));
-  // 随机大小 - 更大更亮
+  // 随机大小 - 小粒子保证轮廓清晰
   var particleSizes = new Float32Array(PARTICLE_COUNT);
   for (var i = 0; i < PARTICLE_COUNT; i++) {
-    particleSizes[i] = 1.0 + Math.random() * 2.5;
+    particleSizes[i] = 0.4 + Math.random() * 1.2;
   }
   particleGeo.setAttribute('aSize', new THREE.BufferAttribute(particleSizes, 1));
 
@@ -337,10 +337,7 @@
     // 设置目标
     targetPositions.set(modelVertices[toIndex]);
 
-    // 切换 banner 文字
-    updateBannerText(toIndex);
-    // 更新导航指示器
-    updateIndicators(toIndex);
+    // 模型切换不再联动文字，文字由独立计时器控制
   }
 
   function switchToNext() {
@@ -348,40 +345,9 @@
     startMorph(next);
   }
 
-  /* ========== banner 文字切换 ========== */
-  function updateBannerText(index) {
-    var slides = document.querySelectorAll('.hero-slide');
-    slides.forEach(function (el, i) {
-      if (i === index) {
-        el.classList.add('active');
-      } else {
-        el.classList.remove('active');
-      }
-    });
-  }
-
-  function updateIndicators(index) {
-    var dots = document.querySelectorAll('.hero-indicator');
-    dots.forEach(function (el, i) {
-      el.classList.toggle('active', i === index);
-    });
-  }
-
-  /* ========== 导航指示器点击 ========== */
-  document.querySelectorAll('.hero-indicator').forEach(function (dot, i) {
-    dot.addEventListener('click', function () {
-      if (!allModelsReady || morphing) return;
-      if (i !== currentModelIndex) {
-        startMorph(i);
-        lastSwitchTime = performance.now() / 1000;
-      }
-    });
-  });
-
-  /* ========== 点击 canvas 切换 ========== */
+  /* ========== 点击 canvas 切换模型 ========== */
   var heroSection = canvas.closest('.hero-3d') || container;
   heroSection.addEventListener('click', function (e) {
-    // 排除按钮和链接点击
     if (e.target.closest('a, button, .hero-indicator')) return;
     if (!allModelsReady || morphing) return;
     switchToNext();
@@ -453,11 +419,12 @@
 
     // 粒子组旋转和位置
     particleGroup.rotation.y += CONFIG.autoRotateSpeed;
-    // 鼠标跟随
-    var targetRotX = mouseY * 0.08;
+    // 鼠标跟随 — 视角倾斜交互
+    var targetRotX = mouseY * 0.15;
+    var targetRotY = -mouseX * 0.12;
     var targetRotZ = -mouseX * 0.06;
-    particleGroup.rotation.x += (targetRotX - particleGroup.rotation.x) * 0.03;
-    particleGroup.rotation.z += (targetRotZ - particleGroup.rotation.z) * 0.03;
+    particleGroup.rotation.x += (targetRotX - particleGroup.rotation.x) * 0.05;
+    particleGroup.rotation.z += (targetRotZ - particleGroup.rotation.z) * 0.05;
     // 右侧偏移 + 悬浮
     particleGroup.position.x = getDroneOffsetX();
     particleGroup.position.y = Math.sin(now * 0.6) * 1.0;
@@ -468,9 +435,9 @@
     pointLight1.position.x = 50 + Math.sin(now * 0.4) * 12;
     pointLight1.position.y = 25 + Math.cos(now * 0.3) * 8;
 
-    // 相机微动
-    camera.position.x += (mouseX * 3 - camera.position.x) * 0.015;
-    camera.position.y += (-mouseY * 2 - camera.position.y) * 0.015;
+    // 相机跟随鼠标 — 产生视角倾斜感
+    camera.position.x += (mouseX * 5.0 - camera.position.x) * 0.04;
+    camera.position.y += (-mouseY * 3.5 - camera.position.y) * 0.04;
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);

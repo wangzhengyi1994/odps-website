@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>业务支撑 - 奥德帕斯（上海）信息科技有限公司</title>
-    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/d-din">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/d-din">
+  <link rel="stylesheet" href="../css/style.css?v=4">
 </head>
 <body>
 
 <!-- Header -->
 <header class="header">
   <div class="container">
-    <a href="../index.html" class="logo"><span>奥德帕斯</span></a>
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt="奥德帕斯"><span>奥德帕斯</span></a>
     <div class="menu-toggle"><span></span><span></span><span></span></div>
     <nav class="nav">
       <a href="../index.html" class="nav-item">首页</a>
@@ -43,6 +43,9 @@
       <a href="about.html" class="nav-item">关于我们</a>
       <a href="contact.html" class="nav-item">联系我们</a>
     </nav>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-nav">系统演示</a>
+    </div>
   </div>
 </header>
 
@@ -54,110 +57,192 @@
   </div>
 </section>
 
-<!-- Service Grid -->
-<section class="section">
+<!-- 核心服务 — advantage 卡片风格 -->
+<section class="advantage-section">
   <div class="container">
     <div class="section-title fade-in">
       <h2>核心服务</h2>
       <p>从培训到售后，为您提供全链路专业服务</p>
     </div>
-    <div class="service-grid">
-      <div class="service-card fade-in">
-        <div class="icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
-        </div>
-        <h3>飞行培训服务</h3>
-        <p>CAAC民航执照培训、UTC/DJI应用技能培训，结合电力、测绘、应急消防等行业设立专业认证方向</p>
-        <ul>
-          <li>CAAC民航局无人机驾驶执照培训</li>
-          <li>UTC/DJI行业应用技能培训</li>
-          <li>电力、测绘、应急消防等专业认证</li>
+    <div class="advantage-grid fade-in">
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="../images/icons/advantage-01.png" alt="飞行培训"></div>
+        <div class="advantage-title">飞行培训服务</div>
+        <div class="advantage-desc">CAAC民航执照培训、UTC/DJI应用技能培训，结合电力、测绘、应急消防等行业设立专业认证方向。</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="../images/icons/advantage-04.png" alt="售后维修"></div>
+        <div class="advantage-title">售后维修服务</div>
+        <div class="advantage-desc">覆盖全国的维修服务网络，16个官方维修中心、120+授权服务商，提供便捷高效的设备维护。</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="../images/icons/advantage-03.png" alt="DJI Care"></div>
+        <div class="advantage-title">DJI Care 行业无忧</div>
+        <div class="advantage-desc">灵活便利的置换或免费维修服务，无惧碰撞损坏、设备进水、飞丢失联等飞行意外。</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="../images/icons/advantage-02.png" alt="全周期保养"></div>
+        <div class="advantage-title">全生命周期保养</div>
+        <div class="advantage-desc">从设备启用到退役的全周期专业保养，定期深度保养、固件升级、核心部件预防性更换。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 服务网络数据 — stats-overlay -->
+<section class="stats-overlay">
+  <div class="stat-item">
+    <div class="stat-icon"><img src="../images/stats/pilot.png" alt="维修中心"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="16">0</span><span class="unit">个</span></div>
+      <div class="stat-label">官方维修中心</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><img src="../images/stats/flight-hours.png" alt="服务商"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="120">0</span><span class="unit">+</span></div>
+      <div class="stat-label">授权服务商</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><img src="../images/stats/flight-km.png" alt="满意度"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="90">0</span><span class="unit">%+</span></div>
+      <div class="stat-label">用户满意度</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon"><img src="../images/stats/modeling.png" alt="响应"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span style="font-family:'D-DIN','DIN Alternate',monospace;font-size:36px;font-weight:400;color:var(--primary);line-height:1;">7&times;24</span><span class="unit">h</span></div>
+      <div class="stat-label">服务响应</div>
+    </div>
+  </div>
+</section>
+
+<!-- 飞行培训详情 — feature-row 左右布局 -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>飞行培训体系</h2>
+      <p>多层级专业认证培训，助力职业发展</p>
+    </div>
+    <div class="feature-row fade-in">
+      <div class="feature-img" style="background-image:url('../images/banners/support.jpg')"></div>
+      <div class="feature-text">
+        <h3>CAAC 民航执照培训</h3>
+        <p>中国民航局认证的无人机驾驶执照培训，覆盖多旋翼、固定翼等机型，助力合规飞行。</p>
+        <ul class="feature-list">
+          <li>视距内驾驶员（VLOS）执照培训</li>
+          <li>超视距驾驶员（BVLOS）执照培训</li>
+          <li>教员级别认证与进阶课程</li>
+          <li>理论学习 + 实操飞行训练</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feature-row reverse fade-in">
+      <div class="feature-img" style="background-image:url('../images/banners/trust.jpg')"></div>
+      <div class="feature-text">
+        <h3>UTC / DJI 行业应用技能培训</h3>
+        <p>针对具体行业场景的专项技能培训，让飞手掌握行业实战技巧。</p>
+        <ul class="feature-list">
+          <li>电力巡检专项培训</li>
+          <li>测绘建模专项培训</li>
+          <li>应急消防实战训练</li>
           <li>定制化企业团队培训方案</li>
         </ul>
       </div>
-      <div class="service-card fade-in">
-        <div class="icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-        </div>
-        <h3>售后维修服务</h3>
-        <p>覆盖全国的维修服务网络，提供便捷高效的设备维护与维修保障</p>
-        <ul>
-          <li>16个官方维修中心</li>
-          <li>120+授权服务商</li>
-          <li>便捷自助寄修系统</li>
-          <li>大疆机场上门维修服务</li>
-        </ul>
-      </div>
-      <div class="service-card fade-in">
-        <div class="icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>DJI Care 行业无忧</h3>
-        <p>灵活便利的置换或免费维修服务，无惧碰撞损坏、设备进水、飞丢失联等飞行意外</p>
-        <ul>
-          <li>碰撞损坏快速置换</li>
-          <li>设备进水免费维修</li>
-          <li>飞丢失联保障服务</li>
-          <li>灵活便利的理赔流程</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- Feature Row: 全生命周期保养 -->
-<section class="section section-light">
-  <div class="container">
-    <div class="feature-row fade-in">
-      <div class="feature-img" style="background:linear-gradient(135deg, var(--primary-2), var(--primary-1));display:flex;align-items:center;justify-content:center;"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-      <div class="feature-text">
-        <h3>全生命周期保养服务</h3>
-        <p>从设备启用到退役，提供全周期专业保养方案，让无人机性能始终如一，延长设备使用寿命，降低运营成本。</p>
-        <ul class="feature-list">
-          <li>定期深度保养与性能检测</li>
-          <li>固件升级与系统优化</li>
-          <li>核心部件预防性更换</li>
-          <li>飞行数据分析与健康报告</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Stats -->
-<section class="section section-dark">
+<!-- 售后服务流程 — milestone 时间线 -->
+<section class="section" style="background:var(--fill-1);">
   <div class="container">
     <div class="section-title fade-in">
-      <h2>服务网络</h2>
-      <p>覆盖全国的专业服务体系，为您保驾护航</p>
+      <h2>售后服务流程</h2>
+      <p>标准化服务流程，高效解决每一个问题</p>
     </div>
-    <div class="stats fade-in">
-      <div class="stat-item">
-        <div class="stat-num">16</div>
-        <div class="stat-unit">官方维修中心</div>
+    <div class="milestone-timeline fade-in">
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>问题报修</h4>
+          <p>通过在线平台或电话提交设备故障信息</p>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">120+</div>
-        <div class="stat-unit">授权服务商</div>
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>远程诊断</h4>
+          <p>工程师远程评估，确认故障类型与维修方案</p>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">90%+</div>
-        <div class="stat-unit">用户满意度</div>
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>寄修/上门</h4>
+          <p>自助寄修或预约上门服务，灵活选择</p>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">7&times;24</div>
-        <div class="stat-unit">小时响应</div>
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>专业维修</h4>
+          <p>大疆认证工程师使用原厂配件精修</p>
+        </div>
+      </div>
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>交付验收</h4>
+          <p>全面测试后交付，附检测报告与保养建议</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DJI Care 详情 — product-grid 风格 -->
+<section class="products-section">
+  <div class="products-bg"><img src="../images/banners/products-bg.png" alt=""></div>
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>DJI Care 行业无忧</h2>
+      <p>全方位飞行保障，让您专注业务本身</p>
+    </div>
+    <div class="product-grid fade-in">
+      <div class="product-row">
+        <div class="product-card" style="cursor:default;">
+          <div class="product-card-icon"><img src="../images/icons/product-icon-1.svg" alt="碰撞损坏"></div>
+          <h3>碰撞损坏保障</h3>
+          <p>无论何种原因导致的碰撞损坏，快速置换全新设备，不影响作业进度。</p>
+        </div>
+        <div class="product-card" style="cursor:default;">
+          <div class="product-card-icon"><img src="../images/icons/product-icon-2.svg" alt="设备进水"></div>
+          <h3>设备进水保障</h3>
+          <p>雨天或水域作业场景下设备进水，享受免费维修或整机置换服务。</p>
+        </div>
+        <div class="product-card" style="cursor:default;">
+          <div class="product-card-icon"><img src="../images/icons/product-icon-1.svg" alt="飞丢失联"></div>
+          <h3>飞丢失联保障</h3>
+          <p>信号干扰或极端环境导致飞丢失联，提供全额赔付保障，减少财务损失。</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta-section">
+  <div class="cta-bg"><img src="../images/banners/cta-bg.png" alt=""></div>
   <div class="container">
-    <h2>需要技术支持或售后服务？</h2>
-    <p>联系我们的专业团队，获取一对一服务支持</p>
-    <a href="contact.html" class="btn btn-primary">联系我们</a>
+    <div class="cta-content">
+      <h2>需要技术支持或售后服务？</h2>
+      <p>联系我们的专业团队，获取一对一服务支持</p>
+      <a href="contact.html" class="btn btn-blue">联系我们</a>
+    </div>
   </div>
 </section>
 
@@ -166,8 +251,8 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo" style="color:#fff;font-size:18px;">奥德帕斯</div>
-        <p>奥德帕斯（上海）信息科技有限公司<br>以数智与低空防护驱动行业变革。</p>
+        <div class="footer-logo"><img src="../images/logo.png" alt="奥德帕斯"> 奥德帕斯</div>
+        <p>奥德帕斯（上海）信息科技有限公司<br>以数智与低空防护驱动行业变革，构建智能化、一体化的数字实战平台。</p>
       </div>
       <div class="footer-col">
         <h4>产品中心</h4>

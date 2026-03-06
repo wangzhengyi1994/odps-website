@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>奥德帕斯（上海）信息科技有限公司 - 守护数字疆界，赋能数智未来</title>
   <meta name="description" content="奥德帕斯专注于无人机行业应用与公共安全解决方案，以数智与低空防护驱动行业变革。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/d-din">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -17,6 +14,7 @@
 <header class="header">
   <div class="container">
     <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="奥德帕斯">
       <span>奥德帕斯</span>
     </a>
     <div class="menu-toggle"><span></span><span></span><span></span></div>
@@ -61,8 +59,7 @@
     <canvas id="drone-3d-canvas"></canvas>
   </div>
   <div class="container hero-3d-text">
-    <!-- 三套轮播文字 -->
-    <div class="hero-slide active" data-index="0">
+    <div class="hero-slide active">
       <div class="hero-slide-inner">
         <span class="hero-tag">大疆行业经销商授权 · 双ISO国际认证</span>
         <h1>守护数字疆界 赋能数智未来</h1>
@@ -72,34 +69,6 @@
           <a href="pages/contact.html" class="btn btn-outline">联系我们</a>
         </div>
       </div>
-    </div>
-    <div class="hero-slide" data-index="1">
-      <div class="hero-slide-inner">
-        <span class="hero-tag">九大场景 · 80+AI算法模型</span>
-        <h1>AI算法赋能 低空智能应用</h1>
-        <p>自研九大场景80+算法模型，覆盖公共安全、城市管理、水利林业、交通能源等行业领域。</p>
-        <div class="hero-btns">
-          <a href="pages/algorithm.html" class="btn btn-primary">了解算法</a>
-          <a href="pages/solutions/public-safety.html" class="btn btn-outline">解决方案</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide" data-index="2">
-      <div class="hero-slide-inner">
-        <span class="hero-tag">全链路交付 · 端到端服务</span>
-        <h1>无人机行业应用 一站式解决方案</h1>
-        <p>从硬件选型、算法开发、平台部署到运维培训，提供端到端一站式项目交付服务。</p>
-        <div class="hero-btns">
-          <a href="pages/products/drones.html" class="btn btn-primary">产品中心</a>
-          <a href="pages/support.html" class="btn btn-outline">业务支撑</a>
-        </div>
-      </div>
-    </div>
-    <!-- 导航指示器 -->
-    <div class="hero-indicators">
-      <span class="hero-indicator active" data-index="0"></span>
-      <span class="hero-indicator" data-index="1"></span>
-      <span class="hero-indicator" data-index="2"></span>
     </div>
   </div>
 </section>
@@ -387,10 +356,9 @@
       <p style="font-size:18px;max-width:700px;margin:0 auto;text-align:center;">算法库包括九大类场景80+算法，覆盖多个行业业务领域，支持根据业务场景灵活定制</p>
     </div>
     <div class="algo-table-header fade-in" style="justify-content:center;">
-      <div class="algo-table-stats" style="gap:32px;white-space:nowrap;">
-        <div class="algo-table-stat"><strong>9</strong> 大场景</div>
-        <div class="algo-table-stat"><strong>80+</strong> 算法</div>
-        <div class="algo-table-stat" style="color:var(--primary);font-weight:700;font-size:16px;">灵活定制</div>
+      <div class="algo-table-stats" style="white-space:nowrap;">
+        <div class="algo-table-stat"><strong class="count-up" data-target="9">0</strong> 大场景</div>
+        <div class="algo-table-stat"><strong class="count-up" data-target="80" data-suffix="+">0</strong> 算法</div>
       </div>
     </div>
     <div class="algo-table-wrap fade-in">
@@ -602,7 +570,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">奥德帕斯</div>
+        <div class="footer-logo"><img src="images/logo.png" alt="奥德帕斯"> 奥德帕斯</div>
         <p>奥德帕斯（上海）信息科技有限公司<br>以数智与低空防护驱动行业变革，构建智能化、一体化的数字实战平台。</p>
       </div>
       <div class="footer-col">
@@ -637,11 +605,11 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=4"></script>
 <!-- Three.js 3D Drone Banner -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-<script src="js/drone3d.js"></script>
+<script src="js/drone3d.js?v=4"></script>
 <!-- Earth FlyLine 3D Globe -->
 <script src="https://cdn.jsdelivr.net/npm/earth-flyline@1.6.8/dist/index.umd.js"></script>
 <script src="js/earth-globe.js"></script>
