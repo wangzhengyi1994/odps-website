@@ -1,6 +1,6 @@
 /**
  * 奥德帕斯首页 3D 粒子 Banner
- * 三模型粒子切换 + 星河背景 + 鼠标交互
+ * 单模型粒子 + 星河背景 + 鼠标交互
  */
 (function () {
   'use strict';
@@ -9,21 +9,15 @@
 
   /* ========== 配置 ========== */
   var PARTICLE_COUNT = 120000;
-  var MORPH_DURATION = 1.8;       // 切换动画时长(秒)
-  var AUTO_SWITCH_INTERVAL = 6;   // 自动切换间隔(秒)
+  var MORPH_DURATION = 1.8;
 
-  var MODELS = [
-    'models/drone.obj',
-    'models/drone2.obj',
-    'models/drone3.obj'
-  ];
+  var MODEL_URL = 'models/drone.obj';
 
   var CONFIG = {
     cameraFov: 40,
     cameraZ: 45,
     autoRotateSpeed: 0.001,
     modelScale: 54,
-    // 蓝白配色 - 更亮更醒目
     particleColor1: 0x6ea8ff,
     particleColor2: 0xe8f2ff,
     glowColor: 0xc0dcff,
@@ -160,7 +154,6 @@
       }
     });
 
-    // 居中 & 归一化缩放
     var minX = Infinity, minY = Infinity, minZ = Infinity;
     var maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
     for (var i = 0; i < allVerts.length; i += 3) {
@@ -181,7 +174,6 @@
       allVerts[i + 2] = (allVerts[i + 2] - cz) * scale;
     }
 
-    // 填充/裁剪到目标数量
     var result = new Float32Array(targetCount * 3);
     var srcCount = allVerts.length / 3;
     for (var i = 0; i < targetCount; i++) {
@@ -197,16 +189,13 @@
   var particleGroup = new THREE.Group();
   scene.add(particleGroup);
 
-  // 当前位置 & 目标位置
   var currentPositions = new Float32Array(PARTICLE_COUNT * 3);
   var targetPositions = new Float32Array(PARTICLE_COUNT * 3);
   var startPositions = new Float32Array(PARTICLE_COUNT * 3);
 
-  // 每个粒子的随机延迟
   var particleDelays = new Float32Array(PARTICLE_COUNT);
   for (var i = 0; i < PARTICLE_COUNT; i++) {
     particleDelays[i] = Math.random();
-    // 初始随机分散 - 更广范围
     currentPositions[i * 3] = (Math.random() - 0.5) * 50;
     currentPositions[i * 3 + 1] = (Math.random() - 0.5) * 50;
     currentPositions[i * 3 + 2] = (Math.random() - 0.5) * 50;
@@ -215,7 +204,6 @@
   var particleGeo = new THREE.BufferGeometry();
   particleGeo.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
   particleGeo.setAttribute('aDelay', new THREE.BufferAttribute(particleDelays, 1));
-  // 随机大小 - 小粒子保证轮廓清晰
   var particleSizes = new Float32Array(PARTICLE_COUNT);
   for (var i = 0; i < PARTICLE_COUNT; i++) {
     particleSizes[i] = 0.4 + Math.random() * 1.2;
@@ -249,15 +237,12 @@
       '  vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);',
       '  gl_Position = projectionMatrix * mvPos;',
       '',
-      '  // 切换过程中粒子闪烁变大',
       '  float morphFlash = sin(uMorphProgress * 3.14159) * 0.8;',
       '  float size = aSize * (1.0 + morphFlash);',
       '  gl_PointSize = size * uPixelRatio * (55.0 / -mvPos.z);',
       '',
-      '  // 归一化高度用于着色',
       '  vHeight = (pos.y + 10.0) / 20.0;',
       '  vAlpha = 0.75 + 0.25 * sin(uTime * 2.0 + aDelay * 6.28);',
-      '  // 切换时整体更亮',
       '  vAlpha += morphFlash * 0.3;',
       '}',
     ].join('\n'),
@@ -275,9 +260,7 @@
       '  float glow = smoothstep(0.5, 0.08, d);',
       '  float alpha = (core * 0.85 + glow * 0.35) * vAlpha;',
       '',
-      '  // 蓝白渐变: 底部蓝 -> 顶部白',
       '  vec3 color = mix(uColor1, uColor2, clamp(vHeight, 0.0, 1.0));',
-      '  // 核心偏白 - 更强烈的白色核心',
       '  color = mix(color, vec3(1.0), core * 0.5);',
       '',
       '  gl_FragColor = vec4(color, alpha);',
@@ -291,71 +274,30 @@
   var particles = new THREE.Points(particleGeo, particleMat);
   particleGroup.add(particles);
 
-  /* ========== 模型加载 & 切换逻辑 ========== */
-  var modelVertices = [];  // Float32Array[] 每个模型的目标顶点
-  var modelsLoaded = 0;
-  var currentModelIndex = 0;
+  /* ========== 单模型加载 ========== */
   var morphing = false;
   var morphStartTime = 0;
-  var allModelsReady = false;
+  var modelReady = false;
 
   var loader = new THREE.OBJLoader();
 
-  function loadModel(url, index) {
-    loader.load(url, function (obj) {
-      modelVertices[index] = extractVertices(obj, PARTICLE_COUNT);
-      modelsLoaded++;
-      if (modelsLoaded === MODELS.length) {
-        allModelsReady = true;
-        // 初始切换到第一个模型
-        startMorph(0);
-      }
-    }, undefined, function (err) {
-      console.warn('Failed to load model:', url, err);
-    });
-  }
-
-  MODELS.forEach(function (url, i) {
-    loadModel(url, i);
-  });
-
-  /* ========== 缓动函数 ========== */
   function easeInOutCubic(t) {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  /* ========== 切换控制 ========== */
-  function startMorph(toIndex) {
-    if (morphing) return;
-
-    currentModelIndex = toIndex;
+  loader.load(MODEL_URL, function (obj) {
+    targetPositions = extractVertices(obj, PARTICLE_COUNT);
+    startPositions.set(currentPositions);
     morphing = true;
     morphStartTime = performance.now() / 1000;
-
-    // 保存当前位置作为起点
-    startPositions.set(currentPositions);
-    // 设置目标
-    targetPositions.set(modelVertices[toIndex]);
-
-    // 模型切换不再联动文字，文字由独立计时器控制
-  }
-
-  function switchToNext() {
-    var next = (currentModelIndex + 1) % MODELS.length;
-    startMorph(next);
-  }
-
-  /* ========== 点击 canvas 切换模型 ========== */
-  var heroSection = canvas.closest('.hero-3d') || container;
-  heroSection.addEventListener('click', function (e) {
-    if (e.target.closest('a, button, .hero-indicator')) return;
-    if (!allModelsReady || morphing) return;
-    switchToNext();
-    lastSwitchTime = performance.now() / 1000;
+    modelReady = true;
+  }, undefined, function (err) {
+    console.warn('Failed to load model:', MODEL_URL, err);
   });
 
   /* ========== 鼠标交互 ========== */
   var mouseX = 0, mouseY = 0;
+  var heroSection = canvas.closest('.hero-3d') || container;
 
   heroSection.addEventListener('mousemove', function (e) {
     var rect = heroSection.getBoundingClientRect();
@@ -369,7 +311,6 @@
 
   /* ========== 渲染循环 ========== */
   var rafId = null;
-  var lastSwitchTime = 0;
 
   function animate() {
     rafId = requestAnimationFrame(animate);
@@ -381,11 +322,10 @@
     starsBlue.material.uniforms.uTime.value = now;
     starsBright.material.uniforms.uTime.value = now;
 
-    // 粒子 morph
+    // 粒子 morph（仅初始聚合一次）
     if (morphing) {
       var elapsed = now - morphStartTime;
       var rawProgress = Math.min(elapsed / MORPH_DURATION, 1);
-      var progress = easeInOutCubic(rawProgress);
 
       particleMat.uniforms.uMorphProgress.value = rawProgress;
 
@@ -394,7 +334,6 @@
 
       for (var i = 0; i < PARTICLE_COUNT; i++) {
         var i3 = i * 3;
-        // 每个粒子有自己的延迟 => 错落效果
         var individualProgress = Math.max(0, Math.min(1, (rawProgress - delayArr[i] * 0.3) / 0.7));
         individualProgress = easeInOutCubic(individualProgress);
 
@@ -408,24 +347,15 @@
         morphing = false;
         currentPositions.set(targetPositions);
         particleMat.uniforms.uMorphProgress.value = 0;
-        lastSwitchTime = now;
       }
-    }
-
-    // 自动切换
-    if (allModelsReady && !morphing && (now - lastSwitchTime) > AUTO_SWITCH_INTERVAL) {
-      switchToNext();
     }
 
     // 粒子组旋转和位置
     particleGroup.rotation.y += CONFIG.autoRotateSpeed;
-    // 鼠标跟随 — 视角倾斜交互
     var targetRotX = mouseY * 0.15;
-    var targetRotY = -mouseX * 0.12;
     var targetRotZ = -mouseX * 0.06;
     particleGroup.rotation.x += (targetRotX - particleGroup.rotation.x) * 0.05;
     particleGroup.rotation.z += (targetRotZ - particleGroup.rotation.z) * 0.05;
-    // 右侧偏移 + 悬浮
     particleGroup.position.x = getDroneOffsetX();
     particleGroup.position.y = Math.sin(now * 0.6) * 1.0;
 
@@ -435,7 +365,7 @@
     pointLight1.position.x = 50 + Math.sin(now * 0.4) * 12;
     pointLight1.position.y = 25 + Math.cos(now * 0.3) * 8;
 
-    // 相机跟随鼠标 — 产生视角倾斜感
+    // 相机跟随鼠标
     camera.position.x += (mouseX * 5.0 - camera.position.x) * 0.04;
     camera.position.y += (-mouseY * 3.5 - camera.position.y) * 0.04;
     camera.lookAt(0, 0, 0);
