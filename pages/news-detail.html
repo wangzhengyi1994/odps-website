@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资讯详情 - 奥德帕斯（上海）信息科技有限公司</title>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/d-din">
+  <link rel="stylesheet" href="../css/style.css?v=5">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt="奥德帕斯"><span>奥德帕斯</span></a>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+    <nav class="nav">
+      <a href="../index.html" class="nav-item">首页</a>
+      <div class="nav-item">产品中心 <span class="arrow">▼</span>
+        <div class="dropdown">
+          <a href="products/drones.html">无人机飞行平台</a>
+          <a href="products/payloads.html">智能负载</a>
+          <a href="products/dock.html">无人值守方案</a>
+          <a href="products/software.html">软件平台</a>
+          <a href="products/training.html">飞行培训</a>
+        </div>
+      </div>
+      <div class="nav-item">解决方案 <span class="arrow">▼</span>
+        <div class="dropdown">
+          <a href="solutions/public-safety.html">公共安全</a>
+          <a href="solutions/traffic.html">智慧交通</a>
+          <a href="solutions/emergency.html">应急消防</a>
+          <a href="solutions/city.html">城市管理</a>
+          <a href="solutions/energy.html">能源巡检</a>
+          <a href="solutions/surveying.html">测绘建模</a>
+          <a href="solutions/water.html">水利林业</a>
+          <a href="solutions/agriculture.html">智慧农业</a>
+        </div>
+      </div>
+      <a href="algorithm.html" class="nav-item">算法服务</a>
+      <a href="support.html" class="nav-item">业务支撑</a>
+      <a href="trust.html" class="nav-item">信任背书</a>
+      <a href="news.html" class="nav-item active">行业资讯</a>
+      <a href="about.html" class="nav-item">关于我们</a>
+      <a href="contact.html" class="nav-item">联系我们</a>
+    </nav>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-nav">系统演示</a>
+    </div>
+  </div>
+</header>
+
+<!-- 文章详情 -->
+<section class="section" style="padding-top:100px;padding-bottom:80px;">
+  <div class="container">
+    <div class="news-detail-header fade-in">
+      <a href="news.html" class="news-back">&larr; 返回资讯列表</a>
+      <div class="news-tag-label" id="detail-tag">公司动态</div>
+      <h1 id="detail-title" style="font-size:28px;font-weight:500;margin:16px 0 12px;line-height:1.5;color:var(--text-1);">加载中...</h1>
+      <div style="font-size:14px;color:var(--text-3);margin-bottom:32px;" id="detail-date"></div>
+    </div>
+    <div class="news-detail-content fade-in" id="detail-content" style="font-size:16px;line-height:1.8;color:var(--text-2);">
+    </div>
+
+    <!-- 相关推荐 -->
+    <div class="news-related fade-in" style="margin-top:60px;padding-top:40px;border-top:1px solid var(--border-2);">
+      <h3 style="font-size:18px;font-weight:500;margin-bottom:24px;">相关推荐</h3>
+      <div id="related-list" class="news-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="../images/logo.png" alt="奥德帕斯"> 奥德帕斯</div>
+        <p>奥德帕斯（上海）信息科技有限公司<br>以数智与低空防护驱动行业变革，构建智能化、一体化的数字实战平台。</p>
+      </div>
+      <div class="footer-col">
+        <h4>产品中心</h4>
+        <a href="products/drones.html">无人机飞行平台</a>
+        <a href="products/payloads.html">智能负载</a>
+        <a href="products/dock.html">无人值守方案</a>
+        <a href="products/software.html">软件平台</a>
+        <a href="products/training.html">飞行培训</a>
+      </div>
+      <div class="footer-col">
+        <h4>解决方案</h4>
+        <a href="solutions/public-safety.html">公共安全</a>
+        <a href="solutions/traffic.html">智慧交通</a>
+        <a href="solutions/emergency.html">应急消防</a>
+        <a href="solutions/city.html">城市管理</a>
+        <a href="solutions/energy.html">能源巡检</a>
+      </div>
+      <div class="footer-col">
+        <h4>关于我们</h4>
+        <a href="algorithm.html">算法服务</a>
+        <a href="support.html">业务支撑</a>
+        <a href="trust.html">信任背书</a>
+        <a href="news.html">行业资讯</a>
+        <a href="about.html">企业介绍</a>
+        <a href="contact.html">联系我们</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 奥德帕斯（上海）信息科技有限公司</span>
+      <span>沪ICP备2024058498号</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+var newsData = {
+  1: {
+    tag: '公司动态', date: '2026年3月8日',
+    title: '奥德帕斯获评2025年度上海市"专精特新"企业',
+    content: '<p>2026年3月，上海市经济和信息化委员会公布了2025年度上海市"专精特新"企业名单，奥德帕斯（上海）信息科技有限公司成功入选。</p><p>作为专注于无人机行业应用与AI算法研发的科技企业，奥德帕斯自创立以来始终坚持自主创新路线。公司自研的算法矩阵涵盖九大应用场景、80+算法模型，广泛应用于公共安全、城市管理、水利林业、交通管理等领域。</p><p>此次入选"专精特新"企业，是对奥德帕斯在低空经济领域技术积累与创新能力的充分认可。公司将继续加大研发投入，深耕无人机行业应用赛道，为客户提供更智能、更高效的数字化解决方案。</p><p>"专精特新"是指具有专业化、精细化、特色化、新颖化特征的中小企业，是中国制造业高质量发展的重要力量。上海市每年评选一批符合条件的企业，给予政策扶持与资源倾斜。</p>',
+    related: [2, 5]
+  },
+  2: {
+    tag: '公司动态', date: '2026年2月25日',
+    title: '奥德帕斯与上海市公安局签署战略合作协议',
+    content: '<p>2026年2月25日，奥德帕斯（上海）信息科技有限公司与上海市公安局在上海市公安局指挥中心举行战略合作签约仪式。</p><p>根据协议，双方将在以下领域展开深度合作：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;"><strong>公共安全无人机巡逻</strong>：在重点区域部署无人机常态化巡逻方案，结合AI视觉算法实现智能预警</li><li style="margin-bottom:8px;"><strong>AI视觉算法应用</strong>：将奥德帕斯自研的人群聚集识别、异常行为检测等算法接入公安指挥调度系统</li><li style="margin-bottom:8px;"><strong>空地协同指挥</strong>：建设无人机-地面警力联动指挥平台，提升应急处突效率</li><li style="margin-bottom:8px;"><strong>数据安全保障</strong>：基于ISO27001信息安全管理体系，确保所有数据传输与存储的安全合规</li></ul><p>此次合作标志着奥德帕斯在公共安全领域的布局迈上新台阶，也是公司"以安全为基石"理念的重要实践。</p>',
+    related: [1, 3]
+  },
+  3: {
+    tag: '技术前沿', date: '2026年2月18日',
+    title: '大疆机场3无人值守方案落地浦东新区城管执法',
+    content: '<p>近日，奥德帕斯成功助力上海市浦东新区城市管理行政执法局完成大疆机场3无人值守方案的部署与调试工作。</p><p>该方案在浦东新区核心区域部署了3套大疆机场3，配合奥德帕斯自研的城管AI算法系统，实现了以下功能：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;">24小时自动化区域巡检，覆盖面积超50平方公里</li><li style="margin-bottom:8px;">违建识别准确率达95%以上，误报率低于3%</li><li style="margin-bottom:8px;">日均完成巡检面积较传统人工方式提升20倍</li><li style="margin-bottom:8px;">支持一键下发紧急巡查任务，响应时间缩短至5分钟</li></ul><p>该项目是上海市城市精细化管理的标杆案例，实现了"机器换人"的实质性突破。浦东新区城管执法局表示，该方案大幅提升了巡检效率和执法精准度，计划在更多片区推广应用。</p>',
+    related: [4, 10]
+  },
+  4: {
+    tag: '技术前沿', date: '2026年2月5日',
+    title: '奥德帕斯自研算法矩阵升级至90+，新增农业场景',
+    content: '<p>奥德帕斯正式发布V3.0版本算法矩阵，算法数量从80+提升至90+，同步新增农业场景全系列算法。</p><p>V3.0版本的核心升级包括：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;"><strong>新增农业场景</strong>：包含病虫害识别、作物长势分析、农田边界分割、杂草识别、灌溉异常识别等5项专项算法</li><li style="margin-bottom:8px;"><strong>模型轻量化</strong>：核心算法模型体积压缩40%，支持在边缘计算设备上实时推理</li><li style="margin-bottom:8px;"><strong>端侧部署支持</strong>：适配大疆Matrice系列机载AI模块，实现飞行过程中实时检测分析</li><li style="margin-bottom:8px;"><strong>精度提升</strong>：通用场景算法平均精度提升12%，城管场景违规识别精度达98%</li></ul><p>目前，奥德帕斯算法矩阵已覆盖通用、工地、城管、水利、消防、林业、交通、能源、农业共十大应用场景，是国内覆盖面最广的无人机AI视觉算法平台之一。</p>',
+    related: [3, 10]
+  },
+  5: {
+    tag: '公司动态', date: '2026年1月15日',
+    title: '奥德帕斯完成数千万元A轮融资，加速低空经济布局',
+    content: '<p>奥德帕斯（上海）信息科技有限公司宣布完成数千万元A轮融资，本轮融资由国内某知名产业投资基金领投，老股东跟投。</p><p>本轮融资将重点用于以下方向：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;"><strong>AI算法研发</strong>：扩充算法研发团队，推进大模型在无人机视觉领域的落地应用</li><li style="margin-bottom:8px;"><strong>全国服务网络</strong>：在北京、深圳、成都等地设立区域服务中心</li><li style="margin-bottom:8px;"><strong>海外市场开拓</strong>：布局东南亚和中东市场，将成熟方案复制到海外</li><li style="margin-bottom:8px;"><strong>产品研发</strong>：推出SaaS化的无人机数据管理平台，降低客户使用门槛</li></ul><p>投资方表示，低空经济是国家战略性新兴产业，奥德帕斯在AI算法+无人机行业应用的交叉赛道具有独特优势，团队技术实力强、行业理解深，具备成为细分领域龙头的潜力。</p>',
+    related: [1, 7]
+  },
+  6: {
+    tag: '政策法规', date: '2026年1月10日',
+    title: '《无人驾驶航空器飞行管理暂行条例》实施满一周年回顾',
+    content: '<p>自2024年1月1日起施行的《无人驾驶航空器飞行管理暂行条例》已实施两年整。回顾这两年，该条例为中国无人机行业的规范化发展提供了坚实的法律保障。</p><p>两年来的关键成果：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;">全国无人机实名登记数量突破200万架，较条例实施前增长3倍</li><li style="margin-bottom:8px;">低空空域管理改革在全国28个省份展开试点</li><li style="margin-bottom:8px;">无人机相关企业数量增长至超过3万家</li><li style="margin-bottom:8px;">民用无人机飞行架次年增长率达45%</li></ul><p>业内专家指出，条例的实施有效化解了"黑飞"乱象，建立了分类管理、分级审批的制度框架，为无人机行业的健康发展创造了有利环境。未来随着低空空域进一步开放，预计将催生更多创新应用场景。</p>',
+    related: [9, 7]
+  },
+  7: {
+    tag: '行业趋势', date: '2025年12月28日',
+    title: '2025中国低空经济产业规模突破万亿，无人机应用占比超60%',
+    content: '<p>中国民用航空局近日发布的《2025年中国低空经济发展报告》显示，2025年中国低空经济产业规模首次突破万亿元大关，达到1.05万亿元，同比增长32%。</p><p>报告显示，无人机行业应用是低空经济的绝对主力，占比超过60%。具体构成：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;"><strong>巡检监测</strong>（电力、管道、城市）：占28%</li><li style="margin-bottom:8px;"><strong>测绘建模</strong>（国土、建筑、矿山）：占15%</li><li style="margin-bottom:8px;"><strong>农业植保</strong>（喷洒、监测、播种）：占12%</li><li style="margin-bottom:8px;"><strong>物流配送</strong>（即时、医疗、偏远）：占8%</li><li style="margin-bottom:8px;"><strong>公共安全</strong>（治安、消防、应急）：占6%</li></ul><p>从区域分布看，粤港澳大湾区、长三角、成渝经济圈是低空经济发展最活跃的三大区域，合计贡献了全国60%以上的产值。</p>',
+    related: [8, 6]
+  },
+  8: {
+    tag: '行业趋势', date: '2025年12月15日',
+    title: '上海发布低空经济发展三年行动方案，打造全国标杆城市',
+    content: '<p>上海市人民政府正式印发《上海市低空经济高质量发展行动方案（2025-2027）》，明确提出到2027年将上海打造为全国低空经济标杆城市。</p><p>方案的核心目标包括：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;">建成全国领先的低空飞行服务平台，实现全市低空空域数字化管理</li><li style="margin-bottom:8px;">培育10家以上低空经济头部企业，其中3家以上估值超50亿元</li><li style="margin-bottom:8px;">低空经济产业规模达到1500亿元</li><li style="margin-bottom:8px;">开通50条以上城市低空航线</li></ul><p>方案特别指出，将重点支持无人机在公共安全、城市管理、应急救援等领域的深度应用，鼓励企业开展AI+无人机的融合创新。同时，上海将率先建立低空经济标准体系，为全国提供可复制的经验。</p><p>作为扎根上海的无人机科技企业，奥德帕斯将积极响应政策号召，发挥技术优势，为上海低空经济发展贡献力量。</p>',
+    related: [7, 5]
+  },
+  9: {
+    tag: '政策法规', date: '2025年12月2日',
+    title: '工信部发布《民用无人机产品安全要求》强制性国家标准',
+    content: '<p>工业和信息化部联合国家标准化管理委员会发布了《民用无人机产品安全要求》（GB XXXXX-2025）强制性国家标准，将于2026年7月1日起正式实施。</p><p>该标准的主要内容：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;"><strong>电子围栏</strong>：所有250g以上无人机必须内置电子围栏功能，自动限制禁飞区飞行</li><li style="margin-bottom:8px;"><strong>远程识别</strong>：无人机需支持远程ID广播，便于监管部门实时识别</li><li style="margin-bottom:8px;"><strong>飞行记录</strong>：内置飞行数据记录功能，保留最近30天的飞行轨迹数据</li><li style="margin-bottom:8px;"><strong>紧急制动</strong>：配备一键返航和紧急悬停功能</li></ul><p>业内人士认为，该标准的出台将进一步规范无人机产品质量，淘汰不合规产品，有利于行业集中度提升和头部企业发展。</p>',
+    related: [6, 8]
+  },
+  10: {
+    tag: '技术前沿', date: '2025年11月20日',
+    title: '大疆发布Matrice 4系列，行业无人机进入AI原生时代',
+    content: '<p>2025年11月20日，大疆创新在深圳举办"飞跃未来"行业新品发布会，正式推出Matrice 4系列行业无人机。</p><p>Matrice 4系列的核心升级：</p><ul style="margin:16px 0;padding-left:24px;"><li style="margin-bottom:8px;"><strong>AI视觉处理芯片</strong>：搭载自研AI芯片，算力达40TOPS，支持端侧实时目标检测</li><li style="margin-bottom:8px;"><strong>续航提升</strong>：最大飞行续航55分钟，较上一代提升22%</li><li style="margin-bottom:8px;"><strong>多负载系统</strong>：支持同时搭载3个负载，最大载重3.5kg</li><li style="margin-bottom:8px;"><strong>全向避障</strong>：360度全向感知系统，支持复杂环境自主避障</li><li style="margin-bottom:8px;"><strong>开放SDK</strong>：全新SDK 6.0，支持第三方算法部署至机载AI模块</li></ul><p>大疆行业应用总裁表示，Matrice 4系列标志着行业无人机正式进入"AI原生"时代。奥德帕斯作为大疆行业授权经销商，已率先完成Matrice 4系列的自研算法适配工作，可为客户提供软硬一体的智能化解决方案。</p>',
+    related: [3, 4]
+  }
+};
+
+// 解析URL参数
+var params = new URLSearchParams(window.location.search);
+var id = params.get('id');
+var article = newsData[id];
+
+if (article) {
+  document.getElementById('detail-tag').textContent = article.tag;
+  document.getElementById('detail-title').textContent = article.title;
+  document.getElementById('detail-date').textContent = article.date;
+  document.getElementById('detail-content').innerHTML = article.content;
+  document.title = article.title + ' - 奥德帕斯';
+
+  // 相关推荐
+  var relatedHtml = '';
+  article.related.forEach(function(rid) {
+    var r = newsData[rid];
+    if (r) {
+      relatedHtml += '<a href="news-detail.html?id=' + rid + '" class="news-item">' +
+        '<div class="news-body"><h4>' + r.title + '</h4><p>' + r.date + '</p></div>' +
+        '<span class="news-arrow">&rarr;</span></a>';
+    }
+  });
+  document.getElementById('related-list').innerHTML = relatedHtml;
+} else {
+  document.getElementById('detail-title').textContent = '文章不存在';
+  document.getElementById('detail-content').innerHTML = '<p>抱歉，未找到对应的资讯内容。</p><p><a href="news.html" style="color:var(--primary);">返回资讯列表</a></p>';
+}
+</script>
+</body>
+</html>

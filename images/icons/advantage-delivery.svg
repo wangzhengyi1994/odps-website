@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- 链路背景 -->
+  <circle cx="32" cy="32" r="28" fill="#e6f4ff" stroke="none"/>
+  <!-- 四个节点 -->
+  <circle cx="12" cy="32" r="5" fill="#1677ff"/>
+  <circle cx="26" cy="18" r="5" fill="#4096ff"/>
+  <circle cx="38" cy="46" r="5" fill="#4096ff"/>
+  <circle cx="52" cy="32" r="5" fill="#1677ff"/>
+  <!-- 连接线 -->
+  <line x1="16" y1="30" x2="22" y2="21" stroke="#1677ff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="30" y1="20" x2="35" y2="43" stroke="#4096ff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="42" y1="44" x2="48" y2="35" stroke="#1677ff" stroke-width="2" stroke-linecap="round"/>
+  <!-- 箭头 -->
+  <path d="M52 32l-4-3v6l4-3z" fill="#ff8913"/>
+  <!-- 循环箭头 -->
+  <path d="M20 12a22 22 0 0124 0" fill="none" stroke="#91caff" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M44 52a22 22 0 01-24 0" fill="none" stroke="#91caff" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

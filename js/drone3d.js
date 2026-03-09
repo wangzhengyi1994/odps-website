@@ -8,8 +8,8 @@
   if (typeof THREE === 'undefined') return;
 
   /* ========== 配置 ========== */
-  var PARTICLE_COUNT = 120000;
-  var MORPH_DURATION = 1.8;
+  var PARTICLE_COUNT = 144000;
+  var MORPH_DURATION = 0;
 
   var MODEL_URL = 'models/drone.obj';
 
@@ -196,9 +196,9 @@
   var particleDelays = new Float32Array(PARTICLE_COUNT);
   for (var i = 0; i < PARTICLE_COUNT; i++) {
     particleDelays[i] = Math.random();
-    currentPositions[i * 3] = (Math.random() - 0.5) * 50;
-    currentPositions[i * 3 + 1] = (Math.random() - 0.5) * 50;
-    currentPositions[i * 3 + 2] = (Math.random() - 0.5) * 50;
+    currentPositions[i * 3] = 0;
+    currentPositions[i * 3 + 1] = 0;
+    currentPositions[i * 3 + 2] = 0;
   }
 
   var particleGeo = new THREE.BufferGeometry();
@@ -287,9 +287,9 @@
 
   loader.load(MODEL_URL, function (obj) {
     targetPositions = extractVertices(obj, PARTICLE_COUNT);
-    startPositions.set(currentPositions);
-    morphing = true;
-    morphStartTime = performance.now() / 1000;
+    // 直接设置为无人机形态，跳过变形动画
+    currentPositions.set(targetPositions);
+    particleGeo.attributes.position.needsUpdate = true;
     modelReady = true;
   }, undefined, function (err) {
     console.warn('Failed to load model:', MODEL_URL, err);
