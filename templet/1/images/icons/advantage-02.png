@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group">
+<path id="Vector" d="M0 0H40V10H0V0Z" fill="var(--fill-0, #FF8913)"/>
+<path id="Vector_2" d="M0 10H40V40H0V10Z" fill="var(--fill-0, #85A5FF)"/>
+<path id="Vector_3" d="M3.33594 3.33203H6.66927V6.66536H3.33594V3.33203Z" fill="var(--fill-0, white)"/>
+<path id="Vector_4" d="M10 3.33203H13.3333V6.66536H10V3.33203Z" fill="var(--fill-0, white)"/>
+<path id="Vector_5" d="M16.6641 3.33203H19.9974V6.66536H16.6641V3.33203Z" fill="var(--fill-0, white)"/>
+<path id="Vector_6" d="M0 10H13.3333V40H0V10Z" fill="var(--fill-0, #1D39C4)"/>
+<g id="Group_2">
+<path id="Vector_7" d="M3.34375 15H10.0104V18.3333H3.34375V15Z" fill="var(--fill-0, white)"/>
+<path id="Vector_8" d="M16.6719 15H23.3385V18.3333H16.6719V15Z" fill="var(--fill-0, white)"/>
+<path id="Vector_9" d="M16.6719 31.668H31.6719V35.0013H16.6719V31.668Z" fill="var(--fill-0, white)"/>
+<path id="Vector_10" d="M16.6719 23.332H23.3385V26.6654H16.6719V23.332Z" fill="var(--fill-0, white)"/>
+<path id="Vector_11" d="M26.6719 15H36.6719V18.3333H26.6719V15Z" fill="var(--fill-0, white)"/>
+<path id="Vector_12" d="M3.34375 23.332H10.0104V26.6654H3.34375V23.332Z" fill="var(--fill-0, white)"/>
+<path id="Vector_13" d="M3.34375 31.668H10.0104V35.0013H3.34375V31.668Z" fill="var(--fill-0, white)"/>
+</g>
+</g>
+</svg>

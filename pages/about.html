@@ -66,7 +66,7 @@
       <div class="feature-text">
         <h3>奥德帕斯（上海）信息科技有限公司</h3>
         <p>奥德帕斯是一家以数智与低空防护驱动行业变革的高科技企业。公司构建智能化、一体化的数字实战平台，赋能千行百业，推动社会长治久安。</p>
-        <p>公司具备大疆行业经销商授权资格，为政务、金融、医疗、教育、科创、运营商等领域提供创新、优质、可持续性的解决方案。</p>
+        <p>公司具备行业经销商授权资格，为政务、金融、医疗、教育、科创、运营商等领域提供创新、优质、可持续性的解决方案。</p>
       </div>
     </div>
   </div>
@@ -118,36 +118,52 @@
     <div class="section-title fade-in">
       <h2>资质认证</h2>
     </div>
-    <div class="cert-grid fade-in">
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/iso9001.jpg')"></div>
-        <span>ISO9001质量管理体系</span>
+    <div class="cert-stack-wrap fade-in">
+      <div class="cert-stack" id="certStack">
+        <div class="cert-stack-card" style="--i:0"><img src="../images/certs/iso9001.jpg" alt="ISO9001质量管理体系"></div>
+        <div class="cert-stack-card" style="--i:1"><img src="../images/certs/iso27001.jpg" alt="ISO27001信息安全管理"></div>
+        <div class="cert-stack-card" style="--i:2"><img src="../images/certs/aviation-license.jpg" alt="通用航空企业经营许可证"></div>
+        <div class="cert-stack-card" style="--i:3"><img src="../images/certs/caac-cert.jpg" alt="民用无人机运营合格证"></div>
+        <div class="cert-stack-card" style="--i:4"><img src="../images/certs/dji-dealer.jpg" alt="行业经销商授权"></div>
+        <div class="cert-stack-card" style="--i:5"><img src="../images/certs/shcert.jpg" alt="网络安全应急服务支撑"></div>
+        <div class="cert-stack-card" style="--i:6"><img src="../images/certs/uav-association.jpg" alt="上海无人机安全管理协会"></div>
       </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/iso27001.jpg')"></div>
-        <span>ISO27001信息安全管理</span>
-      </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/aviation-license.jpg')"></div>
-        <span>通用航空企业经营许可证</span>
-      </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/caac-cert.jpg')"></div>
-        <span>民用无人机运营合格证</span>
-      </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/dji-dealer.jpg')"></div>
-        <span>大疆行业经销商授权</span>
-      </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/shcert.jpg')"></div>
-        <span>网络安全应急服务支撑</span>
-      </div>
-      <div class="cert-item">
-        <div class="cert-img" style="background-image:url('../images/certs/uav-association.jpg')"></div>
-        <span>上海无人机安全管理协会</span>
+      <div class="cert-stack-info">
+        <h3>7项权威资质认证</h3>
+        <p>双ISO国际认证 · 行业授权经销 · 民航运营资质</p>
+        <ul id="certList">
+          <li class="active">ISO9001 质量管理体系</li>
+          <li>ISO27001 信息安全管理</li>
+          <li>通用航空企业经营许可证</li>
+          <li>民用无人机运营合格证</li>
+          <li>行业经销商授权</li>
+          <li>网络安全应急服务支撑</li>
+          <li>上海无人机安全管理协会</li>
+        </ul>
       </div>
     </div>
+    <script>
+    (function(){
+      var stack = document.getElementById('certStack');
+      var cards = stack.querySelectorAll('.cert-stack-card');
+      var items = document.querySelectorAll('#certList li');
+      var current = 0;
+      function update(idx){
+        current = idx;
+        var total = cards.length;
+        cards.forEach(function(c, i){
+          var pos = (i - idx + total) % total;
+          c.style.setProperty('--i', pos);
+          c.style.zIndex = total - pos;
+        });
+        items.forEach(function(li, i){ li.classList.toggle('active', i === idx); });
+      }
+      // 点击列表切换
+      items.forEach(function(li, i){ li.addEventListener('click', function(){ update(i); }); });
+      // 点击卡片堆切换到下一张
+      stack.addEventListener('click', function(){ update((current + 1) % cards.length); });
+    })();
+    </script>
   </div>
 </section>
 

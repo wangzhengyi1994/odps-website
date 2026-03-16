@@ -1,0 +1,45 @@
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <a href="{ms:global.host/}" class="logo">
+      <img src="{ms:global.style/}/images/logo.png" alt="{ms:global.title/}">
+      <span>奥德帕斯</span>
+    </a>
+    <div class="menu-toggle"><span></span><span></span><span></span></div>
+    <nav class="nav">
+      <a href="{ms:global.host/}" class="nav-item">首页</a>
+      <div class="nav-item">产品中心 <span class="arrow">▼</span>
+        <div class="dropdown">
+          {ms:channel typeid="2"}
+          <a href="${field.link}">${field.title}</a>
+          {/ms:channel}
+        </div>
+      </div>
+      <div class="nav-item">解决方案 <span class="arrow">▼</span>
+        <div class="dropdown">
+          {ms:channel typeid="3"}
+          <a href="${field.link}">${field.title}</a>
+          {/ms:channel}
+        </div>
+      </div>
+      {ms:channel typeid="4"}
+      <a href="${field.link}" class="nav-item">${field.title}</a>
+      {/ms:channel}
+      {ms:channel typeid="5"}
+      <a href="${field.link}" class="nav-item">${field.title}</a>
+      {/ms:channel}
+      {ms:channel typeid="6"}
+      <a href="${field.link}" class="nav-item">${field.title}</a>
+      {/ms:channel}
+      {ms:channel typeid="7"}
+      <a href="${field.link}" class="nav-item">${field.title}</a>
+      {/ms:channel}
+      {ms:channel typeid="8"}
+      <a href="${field.link}" class="nav-item">${field.title}</a>
+      {/ms:channel}
+    </nav>
+    <div class="nav-right">
+      <a href="{ms:global.host/}/contact.html" class="btn-nav">系统演示</a>
+    </div>
+  </div>
+</header>

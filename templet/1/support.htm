@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('{ms:global.style/}/images/banners/support.jpg')">
+  <div class="container">
+    <h1>业务支撑</h1>
+    <p>专业、可靠、不间断的全方位业务保障服务</p>
+  </div>
+</section>
+
+<!-- 核心服务 -->
+<section class="advantage-section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>核心服务</h2>
+      <p>从培训到售后，为您提供全链路专业服务</p>
+    </div>
+    <div class="advantage-grid fade-in">
+      {ms:arclist typeid="50" size="4" orderby="sort"}
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="${field.litpic}" alt="${field.title}"></div>
+        <div class="advantage-title">${field.title}</div>
+        <div class="advantage-desc">${field.description}</div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- 服务网络数据 -->
+<section class="stats-overlay">
+  {ms:arclist typeid="51" size="4" orderby="sort"}
+  <div class="stat-item">
+    <div class="stat-icon"><img src="${field.litpic}" alt="${field.title}"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="${field.keyword}">0</span><span class="unit">${field.description}</span></div>
+      <div class="stat-label">${field.title}</div>
+    </div>
+  </div>
+  {/ms:arclist}
+</section>
+
+<!-- 飞行培训体系 -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>飞行培训体系</h2>
+      <p>多层级专业认证培训，助力职业发展</p>
+    </div>
+    <#assign tIdx = 0>
+    {ms:arclist typeid="52" size="4" orderby="sort"}
+    <div class="feature-row <#if tIdx % 2 == 1>reverse</#if> fade-in">
+      <div class="feature-img" style="background-image:url('${field.litpic}')"></div>
+      <div class="feature-text">
+        <h3>${field.title}</h3>
+        ${field.content}
+      </div>
+    </div>
+    <#assign tIdx = tIdx + 1>
+    {/ms:arclist}
+  </div>
+</section>
+
+<!-- 售后服务流程 -->
+<section class="section" style="background:var(--fill-1);">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>售后服务流程</h2>
+      <p>标准化服务流程，高效解决每一个问题</p>
+    </div>
+    <div class="milestone-timeline fade-in">
+      {ms:arclist typeid="53" size="5" orderby="sort"}
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>${field.title}</h4>
+          <p>${field.description}</p>
+        </div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- DJI Care -->
+<section class="products-section">
+  <div class="products-bg"><img src="{ms:global.style/}/images/banners/products-bg.png" alt=""></div>
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>DJI Care 行业无忧</h2>
+      <p>全方位飞行保障，让您专注业务本身</p>
+    </div>
+    <div class="product-grid fade-in">
+      <div class="product-row">
+        {ms:arclist typeid="54" size="3" orderby="sort"}
+        <div class="product-card" style="cursor:default;">
+          <div class="product-card-icon"><img src="${field.litpic}" alt="${field.title}"></div>
+          <h3>${field.title}</h3>
+          <p>${field.description}</p>
+        </div>
+        {/ms:arclist}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="{ms:global.style/}/images/banners/cta-bg.png" alt=""></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>需要技术支持或售后服务？</h2>
+      <p>联系我们的专业团队，获取一对一服务支持</p>
+      <a href="{ms:global.host/}/contact.html" class="btn btn-blue">联系我们</a>
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('{ms:global.style/}/images/banners/algorithm.jpg')">
+  <div class="container">
+    <h1>算法服务</h1>
+    <p>基于无人机视觉AI的智能分析算法平台，赋能多场景安全管控</p>
+  </div>
+</section>
+
+<!-- Algorithm Library Table -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>业务算法库清单</h2>
+      <p>算法库包括九大类场景80+算法，覆盖多个行业业务领域，支持根据业务场景灵活定制</p>
+    </div>
+    <div class="algo-table-header fade-in">
+      <div class="algo-table-stats">
+        <div class="algo-table-stat"><strong class="count-up" data-target="9">0</strong>大场景</div>
+        <div class="algo-table-stat"><strong class="count-up" data-target="80" data-suffix="+">0</strong>算法</div>
+      </div>
+    </div>
+    <div class="algo-table-wrap fade-in">
+      <table class="algo-table">
+        <thead>
+          <tr><th>场景</th><th colspan="6">算法能力</th></tr>
+        </thead>
+        <tbody>
+          {ms:arclist typeid="40" size="30" orderby="sort"}
+          <tr>${field.content}</tr>
+          {/ms:arclist}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Algorithm Scene Showcase -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>算法效果展示</h2>
+      <p>无人机视角小模型算法库，覆盖6大业务领域60+算法场景</p>
+    </div>
+    <div class="algo-showcase">
+      {ms:arclist typeid="41" size="6" orderby="sort"}
+      <div class="algo-showcase-item fade-in">
+        <img src="${field.litpic}" alt="${field.title}" loading="lazy">
+        <div class="algo-showcase-label">
+          <h4>${field.title}</h4>
+          <span class="algo-scene-tag">${field.keyword}</span>
+        </div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- Platform Modules -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>平台功能模块</h2>
+      <p>七大核心功能，覆盖检测、识别、分割、推理、对比全链路AI能力</p>
+    </div>
+    <div class="algo-demo-grid">
+      {ms:arclist typeid="42" size="6" orderby="sort"}
+      <div class="algo-demo-card fade-in">
+        <div class="algo-demo-preview">
+          <img src="${field.litpic}" alt="${field.title}" style="width:48px;height:48px;opacity:.7;">
+        </div>
+        <div class="algo-demo-info">
+          <h4>${field.title}</h4>
+          <p>${field.description}</p>
+          <div class="algo-tags">
+            ${field.content}
+          </div>
+        </div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- Multimodal LLM Workflow -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>多模态大模型工作流程</h2>
+      <p>基于司空2虚拟座舱，四步实现自然语言驱动的智能视觉分析</p>
+    </div>
+    <div class="algo-grid" style="margin-bottom:40px;">
+      {ms:arclist typeid="43" size="4" orderby="sort"}
+      <div class="algo-card fade-in">
+        <div class="algo-icon" style="background:linear-gradient(135deg,var(--primary-8),var(--primary-6));color:#fff;">
+          <img src="${field.litpic}" alt="${field.title}" style="width:28px;height:28px;filter:brightness(0) invert(1);">
+        </div>
+        <h4>${field.title}</h4>
+        <p>${field.description}</p>
+      </div>
+      {/ms:arclist}
+    </div>
+    <div class="section-title fade-in" style="margin-bottom:20px;">
+      <h3 style="font-size:18px;">推荐搜索词条示例</h3>
+    </div>
+    <div class="algo-tags fade-in" style="justify-content:center;flex-wrap:wrap;gap:10px;">
+      {ms:arclist typeid="44" size="20" orderby="sort"}
+      <span class="algo-tag">${field.title}</span>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- Service Flow -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>服务流程</h2>
+      <p>从数据采集到智能分析，全链路算法服务交付</p>
+    </div>
+    <div class="algo-flow fade-in">
+      {ms:arclist typeid="45" size="5" orderby="sort"}
+      <div class="algo-flow-step">
+        <div class="step-num">${field.keyword}</div>
+        <h5>${field.title}</h5>
+        <p>${field.description}</p>
+      </div>
+      <#if field_has_next><div class="algo-flow-arrow">&rarr;</div></#if>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stats -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>技术指标</h2>
+      <p>高精度、低延迟、强泛化的算法性能</p>
+    </div>
+    <div class="stats fade-in">
+      {ms:arclist typeid="46" size="4" orderby="sort"}
+      <div class="stat-item">
+        <div class="stat-num">${field.keyword}</div>
+        <div class="stat-unit">${field.title}</div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="{ms:global.style/}/images/banners/cta-bg.png" alt=""></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>定制您的算法解决方案</h2>
+      <p>联系我们获取算法服务演示，或了解定制化开发方案</p>
+      <a href="{ms:global.host/}/contact.html" class="btn btn-blue">联系我们</a>
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>

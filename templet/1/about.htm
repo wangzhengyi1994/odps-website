@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('{ms:global.style/}/images/banners/about.jpg')">
+  <div class="container">
+    <h1>关于我们</h1>
+    <p>以科技赋能行业，以责任守护安全</p>
+  </div>
+</section>
+
+<!-- Company Intro -->
+<section class="section">
+  <div class="container">
+    {ms:arclist typeid="70" size="1" orderby="sort"}
+    <div class="feature-row fade-in">
+      <div class="feature-img" style="background:linear-gradient(135deg, var(--primary-2), var(--primary-1));display:flex;align-items:center;justify-content:center;">
+        <#if field.litpic?? && field.litpic != ''>
+        <img src="${field.litpic}" alt="${field.title}" style="max-width:80%;max-height:80%;object-fit:contain;">
+        <#else>
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4"><path d="M2 12L6 8M6 8L12 2L18 8M6 8V20H18V8M22 12L18 8"/><rect x="9" y="14" width="6" height="6"/></svg>
+        </#if>
+      </div>
+      <div class="feature-text">
+        <h3>${field.title}</h3>
+        ${field.content}
+      </div>
+    </div>
+    {/ms:arclist}
+  </div>
+</section>
+
+<!-- Culture -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>企业文化</h2>
+      <p>忠诚担当、精准高效、创新协作、敬畏责任</p>
+    </div>
+    <div class="culture-grid">
+      {ms:arclist typeid="71" size="4" orderby="sort"}
+      <div class="culture-card fade-in">
+        <div class="culture-icon">
+          <img src="${field.litpic}" alt="${field.title}" style="width:32px;height:32px;">
+        </div>
+        <h4>${field.title}</h4>
+        <p>${field.description}</p>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>资质认证</h2>
+    </div>
+    <div class="cert-grid fade-in">
+      {ms:arclist typeid="72" size="7" orderby="sort"}
+      <div class="cert-item">
+        <div class="cert-img" style="background-image:url('${field.litpic}')"></div>
+        <span>${field.title}</span>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>

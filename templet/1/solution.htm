@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('${column.litpic!}')">
+  <div class="container">
+    <h1>${column.title}解决方案</h1>
+    <p>${column.description!}</p>
+  </div>
+</section>
+
+<!-- Feature Rows: each article = one feature section -->
+<#assign rowIdx = 0>
+{ms:arclist typeid="${column.id}" size="10" orderby="sort" flag="f"}
+<section class="section <#if rowIdx % 2 == 1>section-light</#if>">
+  <div class="container">
+    <div class="feature-row <#if rowIdx % 2 == 1>reverse</#if> fade-in">
+      <div class="feature-img" style="background-image:url('${field.litpic}')"></div>
+      <div class="feature-text">
+        <h3>${field.title}</h3>
+        ${field.content}
+      </div>
+    </div>
+  </div>
+</section>
+<#assign rowIdx = rowIdx + 1>
+{/ms:arclist}
+
+<!-- Related Cases -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>相关案例</h2>
+      <p>${column.title}领域实战应用</p>
+    </div>
+    <div class="card-grid">
+      {ms:arclist typeid="${column.id}" size="3" orderby="sort" flag="c"}
+      <div class="case-card fade-in">
+        <div class="case-thumb" style="background-image:url('${field.litpic}')"></div>
+        <div class="case-info">
+          <h4>${field.title}</h4>
+          <p>${field.description}</p>
+          <span class="case-tag">${column.title}</span>
+        </div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="{ms:global.style/}/images/banners/cta-bg.png" alt=""></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>需要定制${column.title}解决方案？</h2>
+      <p>联系我们获取详细方案资料，或预约现场演示</p>
+      <a href="{ms:global.host/}/contact.html" class="btn btn-blue">联系我们</a>
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>

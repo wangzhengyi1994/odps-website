@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('${column.litpic!}')">
+  <div class="container">
+    <h1>${column.title}</h1>
+    <p>${column.description!}</p>
+  </div>
+</section>
+
+<!-- Feature Rows: each article = one feature section, odd/even alternate layout -->
+<#assign rowIdx = 0>
+{ms:arclist typeid="${column.id}" size="10" orderby="sort"}
+<section class="section <#if rowIdx % 2 == 1>section-light</#if>">
+  <div class="container">
+    <div class="feature-row <#if rowIdx % 2 == 1>reverse</#if> fade-in">
+      <div class="feature-img" style="background-image:url('${field.litpic}')"></div>
+      <div class="feature-text">
+        <h3>${field.title}</h3>
+        ${field.content}
+      </div>
+    </div>
+  </div>
+</section>
+<#assign rowIdx = rowIdx + 1>
+{/ms:arclist}
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="{ms:global.style/}/images/banners/cta-bg.png" alt=""></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>寻找适合您的解决方案</h2>
+      <p>专业团队为您量身推荐，助力高效作业</p>
+      <a href="{ms:global.host/}/contact.html" class="btn btn-blue">立即咨询</a>
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>

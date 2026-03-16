@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('${column.litpic!}')">
+  <div class="container">
+    <h1>${column.title}</h1>
+    <p>${column.description!}</p>
+  </div>
+</section>
+
+<!-- Content from CMS rich text -->
+<section class="section">
+  <div class="container">
+    {ms:arclist typeid="${column.id}" size="1" orderby="sort"}
+    <div class="feature-row fade-in">
+      <div class="feature-text" style="max-width:100%;">
+        <h3>${field.title}</h3>
+        ${field.content}
+      </div>
+    </div>
+    {/ms:arclist}
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="{ms:global.style/}/images/banners/cta-bg.png" alt=""></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>需要了解更多？</h2>
+      <p>联系我们获取详细资料</p>
+      <a href="{ms:global.host/}/contact.html" class="btn btn-blue">联系我们</a>
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>

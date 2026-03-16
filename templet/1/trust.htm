@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <#include "head.htm"/>
+</head>
+<body>
+
+<#include "header.htm"/>
+
+<!-- Banner -->
+<section class="page-banner" style="background-image:url('{ms:global.style/}/images/banners/trust.jpg')">
+  <div class="container">
+    <h1>信任背书</h1>
+    <p>权威认证、行业认可、合作信赖，构建全方位信任体系</p>
+  </div>
+</section>
+
+<!-- 核心信任支撑 -->
+<section class="advantage-section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>核心信任支撑</h2>
+      <p>以专业资质与行业背书，构筑安全可靠的合作基础</p>
+    </div>
+    <div class="advantage-grid fade-in">
+      {ms:arclist typeid="60" size="4" orderby="sort"}
+      <div class="advantage-card">
+        <div class="advantage-icon"><img src="${field.litpic}" alt="${field.title}"></div>
+        <div class="advantage-title">${field.title}</div>
+        <div class="advantage-desc">${field.description}</div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- 实力数据 -->
+<section class="stats-overlay">
+  {ms:arclist typeid="61" size="4" orderby="sort"}
+  <div class="stat-item">
+    <div class="stat-icon"><img src="${field.litpic}" alt="${field.title}"></div>
+    <div class="stat-info">
+      <div class="stat-value"><span class="num" data-target="${field.keyword}">0</span><span class="unit">${field.description}</span></div>
+      <div class="stat-label">${field.title}</div>
+    </div>
+  </div>
+  {/ms:arclist}
+</section>
+
+<!-- 关键里程碑 -->
+<section class="section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>关键里程碑</h2>
+      <p>持续深耕行业，用实绩赢得信赖</p>
+    </div>
+    <div class="milestone-timeline fade-in">
+      {ms:arclist typeid="62" size="5" orderby="sort"}
+      <div class="milestone-item">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <h4>${field.title}</h4>
+          <p>${field.description}</p>
+        </div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- 资质认证 -->
+<section class="cert-section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>资质认证</h2>
+      <p>多项行业权威认证，专业实力保障</p>
+    </div>
+  </div>
+  <div class="cert-track-wrap">
+    <div class="cert-track">
+      {ms:arclist typeid="63" size="10" orderby="sort"}
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="${field.litpic}" alt="${field.title}"></div>
+        <span>${field.title}</span>
+      </div>
+      {/ms:arclist}
+      {ms:arclist typeid="63" size="10" orderby="sort"}
+      <div class="cert-card">
+        <div class="cert-card-img"><img src="${field.litpic}" alt="${field.title}"></div>
+        <span>${field.title}</span>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- 合作伙伴 -->
+<section class="partner-section">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>合作伙伴</h2>
+      <p>与行业领军企业深度合作，共建安全生态</p>
+    </div>
+  </div>
+  <div class="partner-track-wrap">
+    <div class="partner-track">
+      {ms:arclist typeid="64" size="10" orderby="sort"}
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="${field.litpic}" alt="${field.title}"></div>
+        <div class="partner-name">${field.title}</div>
+      </div>
+      {/ms:arclist}
+      {ms:arclist typeid="64" size="10" orderby="sort"}
+      <div class="partner-card">
+        <div class="partner-logo-wrap"><img src="${field.litpic}" alt="${field.title}"></div>
+        <div class="partner-name">${field.title}</div>
+      </div>
+      {/ms:arclist}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="{ms:global.style/}/images/banners/cta-bg.png" alt=""></div>
+  <div class="container">
+    <div class="cta-content">
+      <h2>选择值得信赖的合作伙伴</h2>
+      <p>了解更多资质信息，或预约方案演示</p>
+      <a href="{ms:global.host/}/contact.html" class="btn btn-blue">联系我们</a>
+    </div>
+  </div>
+</section>
+
+<#include "footer.htm"/>
+
+<script src="{ms:global.style/}/js/main.js"></script>
+</body>
+</html>
