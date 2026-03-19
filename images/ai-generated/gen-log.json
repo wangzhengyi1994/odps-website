@@ -1,0 +1,322 @@
+[
+  {
+    "num": 1,
+    "file": "public-safety-feature-1.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 2,
+    "file": "public-safety-feature-2.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 3,
+    "file": "public-safety-feature-3.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 4,
+    "file": "public-safety-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 5,
+    "file": "public-safety-feature-5.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 6,
+    "file": "public-safety-case-1.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 7,
+    "file": "public-safety-case-2.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 8,
+    "file": "public-safety-case-3.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 9,
+    "file": "traffic-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 10,
+    "file": "traffic-feature-2.jpg",
+    "status": "skipped"
+  },
+  {
+    "num": 11,
+    "file": "traffic-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 12,
+    "file": "traffic-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 13,
+    "file": "traffic-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 14,
+    "file": "traffic-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 15,
+    "file": "traffic-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 16,
+    "file": "traffic-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 17,
+    "file": "emergency-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 18,
+    "file": "emergency-feature-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 19,
+    "file": "emergency-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 20,
+    "file": "emergency-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 21,
+    "file": "emergency-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 22,
+    "file": "emergency-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 23,
+    "file": "emergency-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 24,
+    "file": "emergency-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 25,
+    "file": "city-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 26,
+    "file": "city-feature-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 27,
+    "file": "city-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 28,
+    "file": "city-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 29,
+    "file": "city-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 30,
+    "file": "city-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 31,
+    "file": "city-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 32,
+    "file": "city-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 33,
+    "file": "energy-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 34,
+    "file": "energy-feature-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 35,
+    "file": "energy-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 36,
+    "file": "energy-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 37,
+    "file": "energy-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 38,
+    "file": "energy-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 39,
+    "file": "energy-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 40,
+    "file": "energy-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 41,
+    "file": "surveying-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 42,
+    "file": "surveying-feature-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 43,
+    "file": "surveying-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 44,
+    "file": "surveying-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 45,
+    "file": "surveying-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 46,
+    "file": "surveying-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 47,
+    "file": "surveying-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 48,
+    "file": "surveying-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 49,
+    "file": "water-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 50,
+    "file": "water-feature-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 51,
+    "file": "water-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 52,
+    "file": "water-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 53,
+    "file": "water-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 54,
+    "file": "water-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 55,
+    "file": "water-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 56,
+    "file": "water-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 57,
+    "file": "agriculture-feature-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 58,
+    "file": "agriculture-feature-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 59,
+    "file": "agriculture-feature-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 60,
+    "file": "agriculture-feature-4.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 61,
+    "file": "agriculture-feature-5.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 62,
+    "file": "agriculture-case-1.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 63,
+    "file": "agriculture-case-2.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  },
+  {
+    "num": 64,
+    "file": "agriculture-case-3.jpg",
+    "status": "error:HTTP Error 400: Bad Request"
+  }
+]

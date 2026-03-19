@@ -1,0 +1,331 @@
+/* ========== About Page Styles ========== */
+
+/* Banner — uses global .page-banner styles from style.css */
+
+/* 页内Tab导航 */
+.about-tab-nav {
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  z-index: 90;
+  transition: box-shadow .3s;
+}
+.about-tab-nav.sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.about-tab-nav .container {
+  display: flex;
+  gap: 0;
+}
+.about-tab {
+  display: inline-block;
+  padding: 18px 32px;
+  font-size: 15px;
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: all .3s;
+  white-space: nowrap;
+}
+.about-tab:hover { color: var(--primary); }
+.about-tab.active {
+  color: var(--primary);
+  font-weight: 600;
+  border-bottom-color: var(--primary);
+}
+
+/* Section标题 */
+.about-section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 40px;
+}
+
+/* 企业介绍 — uses global .feature-row styles from style.css */
+.about-intro-section { padding: 80px 0 60px; }
+
+/* 使命/愿景/价值观 三卡片 — 参照奇安信底部蓝色粗条 */
+.about-mvv-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.about-mvv-item {
+  background: #f7f8fa;
+  border-radius: 8px;
+  padding: 40px 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.about-mvv-item h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 16px;
+}
+.about-mvv-item p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-2);
+}
+.about-mvv-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary);
+}
+
+/* ========== 发展历程 ========== */
+.about-history-section { padding: 80px 0; }
+
+/* 年份Tab横条 */
+.history-year-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e8e8e8;
+  margin-bottom: 48px;
+  position: relative;
+}
+.history-year-tab {
+  background: none;
+  border: none;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-3);
+  cursor: pointer;
+  position: relative;
+  transition: color .3s;
+}
+.history-year-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: var(--primary);
+  transition: all .3s;
+  transform: translateX(-50%);
+}
+.history-year-tab:hover { color: var(--primary); }
+.history-year-tab.active {
+  color: var(--primary);
+}
+.history-year-tab.active::after {
+  width: 40px;
+}
+/* 年份Tab节点圆点 */
+.history-year-tab::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  border: 2px solid #fff;
+  transition: all .3s;
+  z-index: 1;
+}
+.history-year-tab.active::before {
+  background: var(--primary);
+}
+
+/* 年份内容切换 */
+.history-year-content { display: none; }
+.history-year-content.active { display: block; }
+
+/* 事件卡片网格 */
+.history-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.history-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  border: 1px solid #eee;
+  transition: all .3s;
+}
+.history-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+.history-card-date {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.history-card h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.history-card p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-2);
+}
+
+/* ========== 行业领先 ========== */
+.about-strength-dark {
+  background: linear-gradient(135deg, #0a1628 0%, #0f2040 40%, #0a1830 100%);
+  padding: 80px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.about-strength-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../images/banners/about.jpg') center / cover no-repeat;
+  opacity: .08;
+  pointer-events: none;
+}
+.about-strength-header {
+  position: relative;
+  margin-bottom: 48px;
+}
+.about-strength-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.about-strength-header p {
+  font-size: 15px;
+  color: rgba(255,255,255,.6);
+}
+.about-strength-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+}
+.about-strength-card {
+  padding: 28px 24px;
+  border-left: 1px solid rgba(255,255,255,.15);
+}
+.about-strength-card:first-child,
+.about-strength-card:nth-child(5) {
+  border-left: none;
+}
+.about-strength-card h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.about-strength-card p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255,255,255,.65);
+}
+
+/* 数据统计蓝色条 */
+.about-strength-stats {
+  background: var(--primary);
+  padding: 48px 0;
+}
+.about-stats-row {
+  display: flex;
+  justify-content: space-between;
+}
+.about-stat-item { text-align: center; flex: 1; }
+.about-stat-num {
+  font-family: 'D-DIN', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.about-stat-num em {
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
+  opacity: .8;
+}
+.about-stat-label {
+  font-size: 14px;
+  color: rgba(255,255,255,.8);
+  margin-top: 8px;
+}
+
+/* 资质认证 — uses global .cert-stack styles from style.css */
+.about-certs {
+  padding: 80px 0;
+  background: #fff;
+}
+
+/* ========== 联系我们 ========== */
+.about-contact-section {
+  padding: 80px 0;
+  background: #f7f8fa;
+}
+.about-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  margin-top: 40px;
+}
+.about-contact-form .contact-form { background: #fff; padding: 32px; border-radius: 8px; }
+.about-contact-info { padding-top: 8px; }
+.about-contact-info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 24px;
+}
+.about-contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.about-contact-info-item svg { flex-shrink: 0; margin-top: 2px; }
+.about-contact-info-item p {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 1024px) {
+  .about-intro-layout { flex-direction: column; }
+  .about-intro-img { flex: none; width: 100%; }
+  .about-intro-img img { height: 220px; }
+  .about-strength-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-strength-card:nth-child(odd) { border-left: none; }
+  .about-cert-grid { grid-template-columns: repeat(3, 1fr); }
+  .history-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .about-banner { padding: 80px 0 40px; }
+  .about-banner h1 { font-size: 28px; }
+  .about-tab { padding: 14px 16px; font-size: 14px; }
+  .about-mvv-row { grid-template-columns: 1fr; }
+  .about-strength-grid { grid-template-columns: 1fr; }
+  .about-strength-card { border-left: none; border-top: 1px solid rgba(255,255,255,.1); padding: 20px 0; }
+  .about-strength-card:first-child { border-top: none; }
+  .about-stats-row { flex-wrap: wrap; gap: 24px; }
+  .about-stat-item { flex: 0 0 calc(50% - 12px); }
+  .about-stat-num { font-size: 32px; }
+  .about-cert-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-contact-grid { grid-template-columns: 1fr; }
+  .history-year-tab { padding: 10px 16px; font-size: 15px; }
+  .history-cards { grid-template-columns: 1fr; }
+  .about-section-title { font-size: 26px; }
+}

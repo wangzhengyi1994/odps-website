@@ -8,18 +8,23 @@
   // 上海坐标 (出发点)
   var SHANGHAI = { lon: 121.47, lat: 31.23 };
 
-  // 目标点位
+  // 目标点位 — 全国重点城市（精简，避免过密）
   var TARGETS = [
-    { name: '美国',     city: '洛杉矶',     lon: -118.24, lat: 34.05 },
-    { name: '巴西',     city: '巴西利亚',   lon: -47.93,  lat: -15.78 },
-    { name: '荷兰',     city: '阿姆斯特丹', lon: 4.90,    lat: 52.37 },
-    { name: '匈牙利',   city: '布达佩斯',   lon: 19.04,   lat: 47.50 },
-    { name: '德国',     city: '法兰克福',   lon: 8.68,    lat: 50.11 },
-    { name: '韩国',     city: '首尔',       lon: 126.98,  lat: 37.57 },
-    { name: '日本',     city: '东京',       lon: 139.69,  lat: 35.69 },
-    { name: '中国',     city: '深圳',       lon: 114.06,  lat: 22.54 },
-    { name: '中国',     city: '香港',       lon: 114.17,  lat: 22.32 },
-    { name: '澳洲',    city: 'Burwood',    lon: 151.10,  lat: -33.88 }
+    { name: '北京',     lon: 116.41, lat: 39.90 },
+    { name: '广州',     lon: 113.26, lat: 23.13 },
+    { name: '深圳',     lon: 114.06, lat: 22.54 },
+    { name: '成都',     lon: 104.07, lat: 30.67 },
+    { name: '武汉',     lon: 114.30, lat: 30.59 },
+    { name: '重庆',     lon: 106.55, lat: 29.56 },
+    { name: '西安',     lon: 108.94, lat: 34.26 },
+    { name: '哈尔滨',   lon: 126.63, lat: 45.75 },
+    { name: '沈阳',     lon: 123.43, lat: 41.80 },
+    { name: '昆明',     lon: 102.83, lat: 25.02 },
+    { name: '乌鲁木齐', lon: 87.62,  lat: 43.83 },
+    { name: '拉萨',     lon: 91.11,  lat: 29.65 },
+    { name: '海口',     lon: 110.35, lat: 20.02 },
+    { name: '兰州',     lon: 103.83, lat: 36.06 },
+    { name: '福州',     lon: 119.30, lat: 26.08 }
   ];
 
   var container = document.getElementById('earth-container');
@@ -84,7 +89,8 @@
           },
           spriteStyle: {
             color: '#3553FD',
-            show: true
+            show: true,
+            size: 2
           },
           pathStyle: {
             color: '#3553FD',
@@ -94,18 +100,15 @@
             color: '#6C81FB',
             duration: 3000,
             delay: 0,
-            repeat: Infinity
+            repeat: Infinity,
+            size: 0.8
           },
           scatterStyle: {
-            color: '#6C81FB'
+            color: '#6C81FB',
+            size: 1.5
           },
           hoverRegionStyle: {
-            areaColor: '#2a3a6a'
-          },
-          regions: {
-            China: {
-              areaColor: '#1e3a6e'
-            }
+            areaColor: '#162040'
           },
           enableZoom: false
         }
