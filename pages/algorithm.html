@@ -26,7 +26,7 @@
           <a href="solutions/surveying.html">测绘建模</a>
           <a href="solutions/water.html">水利林业</a>
           <a href="solutions/agriculture.html">智慧农业</a>
-          <a href="solutions/unattended.html">无人值守飞行平台</a>
+          <a href="solutions/unattended.html">无人值守</a>
         </div>
       </div>
       <a href="algorithm.html" class="nav-item">算法平台</a>
@@ -40,7 +40,7 @@
 </header>
 
 <!-- Banner -->
-<section class="page-banner" data-nav-label="顶部" style="background-image:url('../images/banners/algorithm.jpg')">
+<section class="page-banner" data-nav-label="顶部" style="background-image:url('../images/banners/algorithm.png')">
   <div class="container">
     <h1>算法平台</h1>
     <p>无人机AI智慧巡查平台 + 80+自研AI算法库，赋能多场景安全管控</p>
@@ -271,165 +271,150 @@
   <div class="container">
     <div class="section-title fade-in">
       <h2>算法效果展示</h2>
-      <p>无人机视角小模型算法库，覆盖6大业务领域60+算法场景</p>
+      <p>无人机视角小模型算法库，覆盖9大业务领域80+算法场景</p>
     </div>
-    <div class="algo-showcase">
-      <div class="algo-showcase-item fade-in">
-        <img src="../images/algo/algo-city.jpg" alt="城市管理场景算法效果" loading="lazy">
-      </div>
-      <div class="algo-showcase-item fade-in">
-        <img src="../images/algo/algo-enforcement.jpg" alt="城市管理场景算法效果" loading="lazy">
-      </div>
-      <div class="algo-showcase-item fade-in">
-        <img src="../images/algo/algo-water.jpg" alt="农林水利场景算法效果" loading="lazy">
-      </div>
-      <div class="algo-showcase-item fade-in">
-        <img src="../images/algo/algo-fire.jpg" alt="应急消防场景算法效果" loading="lazy">
-      </div>
-      <div class="algo-showcase-item fade-in">
-        <img src="../images/algo/algo-traffic.jpg" alt="智慧交通场景算法效果" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Platform Modules -->
-<section class="section" data-nav-label="功能模块">
-  <div class="container">
-    <div class="section-title fade-in">
-      <h2>平台功能模块</h2>
-      <p>七大核心功能，覆盖检测、识别、分割、推理、对比全链路AI能力</p>
-    </div>
-    <div class="algo-demo-grid">
-      <!-- 1. 算法推理测试 -->
-      <div class="algo-demo-card fade-in">
-        <div class="algo-demo-preview" style="background:url('../images/platform/algo-inference.jpg') center/cover no-repeat;">
-        </div>
-        <div class="algo-demo-info">
-          <h4>算法推理测试</h4>
-          <p>上传无人机航拍图片，选择算法模型，一键运行推理。支持置信度阈值调节，实时输出检测框标注结果与识别报告。</p>
-          <div class="algo-tags">
-            <span class="algo-tag">图片上传</span>
-            <span class="algo-tag">算法选择</span>
-            <span class="algo-tag">置信度调节</span>
-            <span class="algo-tag">结果标注</span>
-          </div>
-        </div>
-      </div>
-      <!-- 2. 多模态大模型 -->
-      <div class="algo-demo-card fade-in">
-        <div class="algo-demo-preview" style="background:url('../images/platform/multimodal.jpg') center/cover no-repeat;">
-        </div>
-        <div class="algo-demo-info">
-          <h4>多模态大模型</h4>
-          <p>融合视觉与自然语言处理，支持图文联合搜索。录入"占道经营""逆行车辆""森林火灾"等自然语言词条，实时检索定位目标，实现智能研判。</p>
-          <div class="algo-tags">
-            <span class="algo-tag">图文联合搜索</span>
-            <span class="algo-tag">自然语言查询</span>
-            <span class="algo-tag">实时检索定位</span>
-            <span class="algo-tag">智能告警</span>
-          </div>
-        </div>
-      </div>
-      <!-- 3. 目标区域分割 -->
-      <div class="algo-demo-card fade-in">
-        <div class="algo-demo-preview" style="background:url('../images/platform/segmentation.jpg') center/cover no-repeat;">
-        </div>
-        <div class="algo-demo-info">
-          <h4>目标区域分割</h4>
-          <p>精准语义分割算法，同时输出分割区域图、分割轮廓图、检测区域图三种结果，支持像素级分类与面积测算。</p>
-          <div class="algo-tags">
-            <span class="algo-tag">分割区域图</span>
-            <span class="algo-tag">分割轮廓图</span>
-            <span class="algo-tag">检测区域图</span>
-            <span class="algo-tag">面积测算</span>
-          </div>
-        </div>
-      </div>
-      <!-- 4. 实时视频推理 -->
-      <div class="algo-demo-card fade-in">
-        <div class="algo-demo-preview" style="background:url('../images/platform/realtime-video.jpg') center/cover no-repeat;">
-        </div>
-        <div class="algo-demo-info">
-          <h4>实时视频推理</h4>
-          <p>接入网络摄像头或无人机视频流，毫秒级响应延迟，支持RTSP/RTMP多协议接入，实现实时在线AI分析与预警。</p>
-          <div class="algo-tags">
-            <span class="algo-tag">实时推理</span>
-            <span class="algo-tag">摄像头接入</span>
-            <span class="algo-tag">RTSP/RTMP</span>
-            <span class="algo-tag">在线预警</span>
-          </div>
-        </div>
-      </div>
-      <!-- 5. 视频文件推理 -->
-      <div class="algo-demo-card fade-in">
-        <div class="algo-demo-preview" style="background:url('../images/platform/video-analysis.jpg') center/cover no-repeat;">
-        </div>
-        <div class="algo-demo-info">
-          <h4>视频文件推理</h4>
-          <p>上传无人机录制的视频文件，离线批量运行AI分析，自动逐帧检测并输出标注视频与统计报告。</p>
-          <div class="algo-tags">
-            <span class="algo-tag">视频上传</span>
-            <span class="algo-tag">逐帧检测</span>
-            <span class="algo-tag">批量分析</span>
-            <span class="algo-tag">统计报告</span>
-          </div>
-        </div>
-      </div>
-      <!-- 6. 图斑对比检测 -->
-      <div class="algo-demo-card fade-in">
-        <div class="algo-demo-preview" style="background:url('../images/platform/comparison.jpg') center/cover no-repeat;">
-        </div>
-        <div class="algo-demo-info">
-          <h4>图斑对比检测</h4>
-          <p>多时相影像自动对比分析，精准发现地物变化，支持违建新增、植被退化、水域变化等场景的量化评估。</p>
-          <div class="algo-tags">
-            <span class="algo-tag">多时相对比</span>
-            <span class="algo-tag">变化检测</span>
-            <span class="algo-tag">违建发现</span>
-            <span class="algo-tag">量化评估</span>
-          </div>
-        </div>
+    <!-- 通用场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">通用场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>人员检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>车辆检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>人群聚集识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>异常行为检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>目标跟踪</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>区域入侵检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>烟火识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>遗留物检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>人脸模糊化</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>车牌模糊化</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Multimodal LLM Detail -->
-<section class="section section-light">
-  <div class="container">
-    <div class="section-title fade-in">
-      <h2>多模态大模型工作流程</h2>
-      <p>基于司空2虚拟座舱，四步实现自然语言驱动的智能视觉分析</p>
+    <!-- 工地场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">工地场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>裸土未覆盖识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>围挡破损识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>施工车辆识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>人员聚集检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>材料堆放识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>安全网缺失识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>塔吊监测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>基坑变形检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>施工进度监测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>扬尘污染识别</span></div>
+      </div>
     </div>
-    <div class="algo-grid" style="margin-bottom:40px;">
-      <div class="algo-card fade-in">
-        <div class="algo-icon" style="background:linear-gradient(135deg,var(--primary-8),var(--primary-6));color:#fff;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h4>1. 登录虚拟座舱</h4>
-        <p>登录司空2虚拟座舱，开启多模态识别功能</p>
+    <!-- 城管场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">城管场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img" style="background-image:url('../images/algo/algo-city.jpg')"></div><span>违建铁皮房识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img" style="background-image:url('../images/algo/algo-enforcement.jpg')"></div><span>建筑垃圾乱堆识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>挖掘机识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>车辆违停识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>违规拉横幅识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>未戴安全帽识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>渣土车未盖篷布识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>工地扬尘识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>违规摆摊识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>街道垃圾堆放识别</span></div>
       </div>
-      <div class="algo-card fade-in">
-        <div class="algo-icon" style="background:linear-gradient(135deg,var(--primary-8),var(--primary-6));color:#fff;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-        <h4>2. 录入检索词条</h4>
-        <p>录入检索目标或场景词条，设置告警方式</p>
+    </div>
+    <!-- 水利场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">水利场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img" style="background-image:url('../images/algo/algo-water.jpg')"></div><span>河道漂浮物识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>排污口检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>非法采砂识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>堤坝裂缝检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>水位监测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>水体颜色异常检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>非法捕捞识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>河道侵占识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>涉水违建识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>水生植物泛滥检测</span></div>
       </div>
-      <div class="algo-card fade-in">
-        <div class="algo-icon" style="background:linear-gradient(135deg,var(--primary-8),var(--primary-6));color:#fff;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <h4>3. 实时检索定位</h4>
-        <p>无人机巡检场景下，实时检索并定位目标</p>
+    </div>
+    <!-- 消防场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">消防场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img" style="background-image:url('../images/algo/algo-fire.jpg')"></div><span>火点识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>烟雾检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>消防通道占用识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>人员搜救定位</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>火场态势分析</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>危化品泄漏识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>热成像异常检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>建筑坍塌识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>应急车辆识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>灾后损失评估</span></div>
       </div>
-      <div class="algo-card fade-in">
-        <div class="algo-icon" style="background:linear-gradient(135deg,var(--primary-8),var(--primary-6));color:#fff;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <h4>4. 查看告警结果</h4>
-        <p>查看告警结果，留存快照，便于后期归档</p>
+    </div>
+    <!-- 林业场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">林业场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>森林火点识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>病虫害检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>非法砍伐识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>林区入侵检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>树种分类识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>植被覆盖率分析</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>枯死木检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>林区道路巡查</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>野生动物监测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>林区边界监测</span></div>
+      </div>
+    </div>
+    <!-- 交通场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">交通场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img" style="background-image:url('../images/algo/algo-traffic.jpg')"></div><span>违停抓拍</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>逆行检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>事故现场识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>拥堵分析</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>车流量统计</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>非机动车违规识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>行人闯红灯识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>道路损坏检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>标线磨损检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>应急车道占用识别</span></div>
+      </div>
+    </div>
+    <!-- 能源场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">能源场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>电力线路缺陷识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>绝缘子破损检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>光伏板热斑检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>管道泄漏检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>风机叶片裂纹检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>变压器异常检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>杆塔倾斜检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>树障隐患识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>鸟巢异物检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>电缆通道巡检</span></div>
+      </div>
+    </div>
+    <!-- 农业场景 -->
+    <div class="algo-scene-group fade-in">
+      <div class="algo-scene-header"><span class="algo-scene-name">农业场景</span></div>
+      <div class="algo-scene-grid">
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>病虫害识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>作物长势分析</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>农田边界分割</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>杂草识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>灌溉异常识别</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>土壤湿度分析</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>作物倒伏检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>播种质量检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>果实成熟度检测</span></div>
+        <div class="algo-scene-card"><div class="algo-scene-img"></div><span>农机作业监测</span></div>
       </div>
     </div>
   </div>
@@ -463,12 +448,18 @@
       <div class="algo-flow-arrow">&rarr;</div>
       <div class="algo-flow-step">
         <div class="step-num">4</div>
-        <h5>部署推理</h5>
+        <h5>部署落地</h5>
         <p>云端/边缘端灵活部署</p>
       </div>
       <div class="algo-flow-arrow">&rarr;</div>
       <div class="algo-flow-step">
         <div class="step-num">5</div>
+        <h5>输出结果</h5>
+        <p>检测报告与告警推送</p>
+      </div>
+      <div class="algo-flow-arrow">&rarr;</div>
+      <div class="algo-flow-step">
+        <div class="step-num">6</div>
         <h5>持续优化</h5>
         <p>反馈闭环迭代升级</p>
       </div>
@@ -521,7 +512,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo"><img src="../images/logo.png" alt="奥德帕斯"> 奥德帕斯</div>
+        <a href="about.html" class="footer-logo" style="text-decoration:none;color:inherit;"><img src="../images/logo.png" alt="奥德帕斯"> 奥德帕斯</a>
         <p>奥德帕斯（上海）信息科技有限公司<br>以数智与低空防护驱动行业变革，构建智能化、一体化的数字实战平台。</p>
       </div>
       <div class="footer-col">
@@ -545,6 +536,7 @@
         <a href="about.html">企业介绍</a>
         <a href="news.html">企业动态</a>
         <a href="about.html#contact">联系我们</a>
+        <a href="news.html?tab=docs">技术文档</a>
       </div>
     </div>
     <div class="footer-bottom">
